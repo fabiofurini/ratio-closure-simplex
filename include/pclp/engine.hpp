@@ -23,7 +23,7 @@ class Engine {
   Real rho=0;
   Engine(const Instance&,const Options&,Statistics&,std::vector<Pivot>&,Clock::time_point);
   std::string run();
-  // Riavvio a caldo sul residuo: riusa la foresta della base finale.
+  // Warm restart on the residual: reuse the forest of the previous final basis.
   std::string run_residual();
   bool warm_restart();
   std::string run_primal();

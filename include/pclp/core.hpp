@@ -87,10 +87,9 @@ struct SolveResult {
 };
 void validate(const Instance&);
 void validate(const Options&);
-// Il metodo si chiama ratio-closure simplex (decisione D18) e "ratio-closure" e
-// il valore canonico dell'opzione. "closure-simplex" e la forma breve; "forest"
-// e il nome storico, accettato in lettura perche i config salvati dalle campagne
-// del 6 settembre 2026 lo contengono e quei record non vanno riscritti.
+// "ratio-closure" is the canonical value; "closure-simplex" is the short form.
+// "forest" is the legacy spelling, accepted on input so that configurations
+// saved before the rename keep resolving to the same algorithm.
 inline bool uses_ratio_closure(const Options& o) {
   return o.algorithm=="ratio-closure"||o.algorithm=="closure-simplex"||o.algorithm=="forest";
 }

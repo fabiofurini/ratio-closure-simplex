@@ -60,11 +60,11 @@ Instance read_instance(const Json& j){
     throw std::invalid_argument("unsupported numeric_type");
   validate(g);return g;
 }
-// Nomi storici accettati in lettura.  I resolved_config.json salvati dalle
-// campagne del 6 settembre 2026 scrivono "forest_update": sono il registro di
-// cosa e stato eseguito e non vengono riscritti, quindi devono restare
-// rileggibili.  La chiave nuova vince solo se quella storica non c'e: se ci
-// sono entrambe la configurazione e ambigua ed e un errore.
+// Legacy option names accepted on input.  Saved configurations may still spell
+// the basis update "forest_update"; they are a record of what was run and are
+// not rewritten, so they have to stay readable.  The current key wins only when
+// the legacy one is absent: a configuration carrying both is ambiguous, and
+// that is an error rather than a silent choice.
 Json migrate_options(Json j){
   if(!j.is_object())return j;
   if(j.contains("forest_update")){

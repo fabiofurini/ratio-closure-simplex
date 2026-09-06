@@ -58,9 +58,9 @@ int main(int argc,char** argv){
     if(task!="solve"&&(has_capacity||!capacities.is_null()))throw std::invalid_argument("capacity options apply to solve only");
     Json config=config_path.empty()?Json::object():read_json(config_path);
     if(!config.is_object())throw std::invalid_argument("configuration must be an object");
-    // I nomi storici del file vengono normalizzati prima di fondere gli override,
-    // che sono gia canonici: senza questo un config storico piu un flag storico
-    // produrrebbero le due chiavi insieme e l'ambiguita sarebbe un falso errore.
+    // Legacy names in the file are normalised before the command-line overrides,
+    // which are already canonical, are merged in: otherwise a legacy file plus a
+    // legacy flag would produce both keys and the ambiguity would be spurious.
     config=migrate_options(std::move(config));
     config.update(overrides);Options opt=read_options(config);config=opt;
     auto begin=Clock::now();Json source=read_json(instance_path);Instance g=read_instance(source);

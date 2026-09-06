@@ -268,16 +268,16 @@ void Engine::check(bool feasible) {
   if(unanchored!=1||nonbasic+1!=nodes.size()||nb.size()!=nonbasic||!close(weight,1,opt))throw std::logic_error("invalid forest basis count or normalization");
   if(feasible)for(auto e:edges)if(y[g.arcs[e].tail]>y[g.arcs[e].head])throw std::runtime_error("primal forest support is not closed");
 }
-// Riavvio a caldo sul residuo (opt.warm_start=residual).  Il blocco appena
-// estratto e la componente positiva, cioe un albero della foresta di base: gli
-// altri alberi sopravvivono intatti e restano ancorati a zero.  Si riusa quella
-// foresta invece di ripartire dalla base vuota.
+// Warm restart on the residual (opt.warm_start=residual).  The block just
+// extracted is the positive component, that is one tree of the basis forest, so
+// the other trees survive untouched and stay anchored at zero: one tree detaches
+// at a time.  That forest is reused instead of restarting from the empty basis.
 //
-// Vincolo di ammissibilita: i valori valgono 1/w(T) sull'albero positivo T e
-// zero altrove, quindi ogni arco attivo che esce da T violerebbe y_tail<=y_head
-// se la testa fosse fuori.  L'albero positivo deve percio essere *chiuso* nel
-// residuo.  Si sceglie il migliore per rapporto fra gli alberi chiusi; se non
-// ne esiste nessuno la funzione fallisce e il chiamante riparte a freddo.
+// Feasibility condition: the values are 1/w(T) on the positive tree T and zero
+// elsewhere, so any active arc leaving T would violate y_tail<=y_head.  The
+// positive tree must therefore be *closed* in the residual.  The best closed
+// surviving tree by ratio is chosen; when none is closed this returns false and
+// the caller restarts cold.
 bool Engine::warm_restart() {
   for(Index e=0;e<m;++e)
     if(forest.contains(e)&&(!active[g.arcs[e].tail]||!active[g.arcs[e].head]))forest.cut(e);
@@ -288,10 +288,10 @@ bool Engine::warm_restart() {
   for(Index i=0;i<n;++i)if(active[i])nodes.push_back(i);
   if(nodes.empty())return false;
   for(Index e=0;e<m;++e)if(active[g.arcs[e].tail]&&active[g.arcs[e].head])edges.push_back(e);
-  // Componenti della foresta superstite: parent porta l'indice+1 dell'albero.
-  // Serve un intero, non un char: gli alberi possono essere migliaia, e inset e
-  // un vector<char> che andrebbe in overflow silenzioso.  parent viene comunque
-  // ricostruito da rebuild() subito dopo.
+  // Components of the surviving forest: parent holds the tree index plus one.
+  // This needs an integer, not a char: there can be thousands of trees, and
+  // inset is a vector<char> that would overflow silently.  parent is rebuilt by
+  // rebuild() immediately afterwards anyway.
   for(auto i:nodes)parent[i]=0;
   std::vector<Index>& members=collect;
   Index trees=0;Index best=n;Real best_ratio=0;bool found=false;
@@ -308,12 +308,12 @@ bool Engine::warm_restart() {
         if(!parent[v]){parent[v]=trees;stack.push_back(v);}
       }
     }
-    // Un solo ancoraggio per albero: si tiene quello di indice minimo.
+    // One anchor per tree: keep the one with the smallest index.
     for(auto u:members)anchor[u]=(u==low);
     roots.push_back(low);tp.push_back(profit);tw.push_back(weight);closed.push_back(1);
     if(weight<=0)closed.back()=0;
   }
-  // Chiusura: nessun arco attivo puo uscire dall'albero positivo.
+  // Closedness: no active arc may leave the positive tree.
   for(auto e:edges){
     Index a=parent[g.arcs[e].tail],b=parent[g.arcs[e].head];
     if(a!=b)closed[a-1]=0;
@@ -325,8 +325,8 @@ bool Engine::warm_restart() {
   if(!found)return false;
   anchor[roots[best]]=false;
   affected=nodes;rebuild(true);
-  // Le non basiche sono i vertici ancorati piu gli slack degli archi di
-  // foresta: insieme fanno |nodes|-1, come pretende check().
+  // The nonbasic variables are the anchored vertices plus the slacks of the
+  // forest arcs: together |nodes|-1 of them, which is what check() requires.
   for(auto i:nodes)if(anchor[i])nb.push_back(i);
   for(auto e:edges)if(forest.contains(e))nb.push_back(n+e);
   return true;
