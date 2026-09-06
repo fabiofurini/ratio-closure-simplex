@@ -1,0 +1,70 @@
+\section{Methods}
+\label{sec:methods}
+
+\subsection{Problem and required output}
+
+All backends solve the same linear program: maximise $\sum_i p_i x_i$ subject to
+$\sum_i w_i x_i \le c$, $x_i \le x_j$ for every arc $(i,j)$ meaning ``$i$
+requires $j$'', and $0 \le x_i \le 1$. Profits carry either sign, weights are
+strictly positive, and there is a single capacity row. Cyclic digraphs are
+accepted and condensed; solutions and multipliers are expanded back to the
+original variables and arcs.
+
+The required output of a \texttt{solve} task is a primal solution, the
+multipliers $\lambda$, $\mu$ and $\alpha$, and the canonical blocks of the
+positive path. Comparisons are therefore between runs that produce the same
+object: whenever a configuration answers several capacities from one path, the
+report says so explicitly and section~\ref{sec:scalability} treats it separately.
+
+\subsection{Compared methods}
+
+A note on the labels. The method developed by this project is the \FS{}, and
+the configuration labels in the current suites are named after it,
+\texttt{ratio-closure-*}. The labels below instead read \texttt{forest-*},
+because that is what the campaigns reported here actually recorded: they were
+measured on 6 September 2026, before decision~D18 was applied to the code, and a
+run identifier is derived from the instance, the task, the capacity, the
+configuration \emph{content} and the hash of the sources. The manifests are a
+record of what was executed and are not rewritten, so this report quotes the
+labels as measured. The divergence is cosmetic and disappears with the first
+campaign measured under the current suites; the analysis script recognises both
+spellings.
+
+\begin{description}[leftmargin=2.4em,style=nextline]
+  \item[\texttt{forest-reference}] \FS{} with full pricing, Bland's entering
+    rule, complete forest rebuilds and sequential canonicalisation. This is the
+    verifiable reference implementation, not a configuration meant to be fast.
+  \item[\texttt{forest-tuned}] the configuration frozen by the random search of
+    section~\ref{sec:tuning}, chosen on training and validation data only.
+  \item[\texttt{dinkelbach}] Newton iteration on
+    $\max\{p(S)-\lambda w(S)\}$ over closures, started from a strict lower bound
+    on the ratio so that negative ratios need no special case. Each iterate is a
+    maximum-closure minimum cut.
+  \item[\texttt{parametric}] divide and conquer on the interval of ratios: the
+    mean ratio of an interval is either a breakpoint or splits it in two. Each
+    subproblem is an independent maximum flow.
+\end{description}
+
+The maximum-flow routine is a Dinic implementation written for this project
+(level graphs, current arc, iterative augmentation). It is correct and
+reasonable, but it is \emph{not} a state-of-the-art flow code: no pseudoflow, no
+highest-label push-relabel with gap and global relabelling, no reuse of flow
+across parametric subproblems. Any statement about the flow backends in this
+report is a statement about this implementation, and
+section~\ref{sec:discussion} says what that does and does not license.
+
+\subsection{Accuracy is fixed before speed}
+
+All configurations use the same tolerances, and tolerances are not part of the
+tuning space. Every run must pass, in the original units, the primal checks
+($0 \le x \le 1$, every original arc, the capacity row), the dual sign
+conditions, the reduced-cost inequality
+$w_i\lambda + \mu_i + \divg_i(\alpha) \ge p_i$, complementarity on $\mu$, on
+$\alpha$ and on the capacity row, and equality between the primal objective and
+the dual bound. A result that fails any of these is reported as
+\texttt{numerical\_failure} and never counted as a success.
+
+Verification is a separate process: after each run, \texttt{pclp verify} reloads
+the instance and the saved result and re-checks the certificate without
+re-optimising. Only runs that pass this second, independent check enter the
+analysis.

@@ -1,0 +1,115 @@
+\section{Where the time goes}
+\label{sec:analysis}
+
+\generated{table_main_breakdown}
+
+\generated{table_ablation}
+
+\generated{table_ablation_speedup}
+
+The breakdown separates the cost of one pivot from the number of pivots. The
+first is bounded by the structures: full pricing scans the $n-1$ non-basic
+variables of the residual, the direction visits the entering subtree and the
+positive component, and the ratio test examines every basic slack of the
+residual, so a pivot costs $O(n+m)$ regardless of how small the change to the
+forest is. The second is a property of the instance and of the entering rule,
+and it is the quantity the ablation is designed to expose.
+
+The ablation switches off one implementation choice at a time with respect to the
+frozen configuration, on the validation manifest, with the same data and the same
+acceptance thresholds as the main campaign.
+
+\subsection{What separates the easy families from the hard ones}
+
+It is tempting to attribute the cost to the number of blocks, since each one
+costs a fresh oracle with a fresh basis. The measurements do not support that.
+Across generated instances of two thousand vertices, all with the frozen
+configuration: a chain produces $11$ blocks and $4\,640$ pivots in $0.116$\,s;
+a sparse DAG of out-degree three produces $282$ blocks and $134\,830$ pivots in
+$1.311$\,s; a layered DAG of twenty levels produces $232$ blocks and
+$348\,205$ pivots in $6.079$\,s; and a layered DAG of eight levels with dense
+connections between them produces only $85$ blocks --- fewer than either sparse
+instance --- yet $528\,841$ pivots, and does not finish within the limit. More
+blocks is not more work.
+
+The quantity that separates them is pivots \emph{per oracle}, expressed as a
+multiple of $n$: about $0.21n$ on the chain, $0.24n$ on the sparse DAG,
+$0.75n$ on the twenty-level instance and $3.1n$ on the eight-level dense one.
+The layered structure gives every entering variable many precedence slacks
+between vertices that are all at zero, so each oracle spends thousands of
+zero-step pivots walking to its optimum.
+
+Two consequences follow for where effort should go. Reusing the basis across
+residual calls, which would save one initialization per oracle, cannot help the
+hard case: a hundred initializations against six hundred thousand pivots. What
+can help is either making each pivot cheaper --- incremental pricing and updates
+confined to the modified paths, since pricing and rebuilding are together four
+fifths of the solver's time on this family --- or attacking the number of
+degenerate pivots directly with a lexicographic or perturbed ratio test. Only the
+second changes the multiplier, and it is the one with no implementation here.
+
+This also explains the shape of the comparison with the parametric backend. That
+backend pays nothing for degeneracy: it solves one maximum flow per subproblem on
+disjoint vertex sets. Its advantage is largest exactly on the family where the
+forest's pivot count per oracle is largest, which is not a coincidence of
+constants but a difference in what each method spends its work on.
+
+\subsection{The dual simplex}
+\label{sec:dual-results}
+
+\generated{table_dual}
+\generated{table_dual_speedup}
+
+The measurements above say that the primal loop is dominated by zero-step
+pivots. Primal degeneracy and dual degeneracy are different defects, and here
+they are wildly asymmetric: the primal kind is a per-pivot phenomenon, at a
+median of $99.3\%$ of pivots over the whole dual campaign, while the only source
+of the dual kind is a tie between block ratios, which is a per-block event and
+therefore bounded by the number of blocks. That asymmetry is the standard
+indication for the dual method, and it was implemented and measured.
+
+Two structural facts make it unusually clean on this problem. The vertex variables
+are never primal infeasible, since their value is $1/w(P)$ on the positive
+component and zero elsewhere, so every primal infeasibility is a precedence
+slack, that is an arc leaving $P$; and the basis is primal feasible exactly when
+$P$ is closed, which is therefore the stopping rule. The starting basis --- every
+vertex its own tree, $P$ the vertex of maximum ratio --- is dual feasible by
+construction and costs $O(n)$.
+
+
+
+The prediction is confirmed on the quantity it was made about, and refuted on
+every other. Table~\ref{tab:dual} and table~\ref{tab:dual-speedup} report the
+dedicated campaign on the frozen validation split, $31$ instances in two
+replicas under the same protocol as every other campaign.
+
+Degeneracy collapses: the primal sits at a median of $99.3\%$ of pivots with
+zero step, the dual at $0.0\%$. Nothing else improves. The dual performs
+\emph{more} pivots, not fewer --- a median of $7\,813$ against the primal's
+$3\,253$ on the instances both solve --- and it is slower: the paired speedup
+against the primal has a median of $0.90$, ranging from $0.34$ to $2.47$. It
+also solves less: $56$ of $62$ runs against $62$ of $62$, losing all three
+replicas of a dense DAG of two thousand vertices that the primal solves in
+about eleven seconds. The variant that picks the largest tree is worse again,
+median $0.78$ and $54$ of $62$.
+
+So the reduction of degeneracy was real and worth nothing. The dual traded null
+steps for a longer path, which is the outcome that the primal's own diagnosis
+should have predicted: the cost was never the null steps as such, it was the
+number of pivots needed to walk to the optimum, and the dual walks farther. On
+the same instances the parametric backend is $3.89$ times the primal at the
+median and up to $135$ times on one of them.
+
+Choosing the leaving arc by a structural criterion instead of by smallest index
+does not help either, and there is a structural reason: every violated slack has
+the same value $-1/w(P)$, so a most-infeasible rule has nothing to discriminate.
+The largest-tree rule is the one carried into the campaign, and it is the slowest
+of the three settings measured.
+
+Correctness is not at stake in any of this. The dual returns the same canonical
+blocks as the primal on the whole exhaustive suite and on fifteen hundred
+random instances checked with the diagnostics enabled at every pivot, and it
+produces its certificate through the same verified code. If dual feasibility is
+lost to rounding, the solver restarts from the primal initialization rather than
+inheriting an infeasible basis, so the answer is certified either way.
+

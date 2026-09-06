@@ -1,0 +1,92 @@
+\section{Main results on the frozen test set}
+\label{sec:results}
+
+\generated{table_main}
+
+\generated{table_main_speedup}
+
+\generated{table_agreement}
+
+The comparison is between runs that produce the same object: a certified primal
+solution, the multipliers, and the canonical blocks of the positive path at
+the instance's own capacity. Instances that no configuration solved within the
+limit are still counted in PAR-2 and in the solved column; they are not removed
+from the sample.
+
+\begin{figure}[tbp]
+  \centering
+  \IfFileExists{generated/profile_main.dat}{%
+    \begin{tikzpicture}
+      \begin{axis}[xlabel={$\tau$ (factor over the best time on the instance)},
+                   ylabel={fraction of instances}, xmode=log, ymin=0, ymax=1.02,
+                   legend pos=south east, width=0.62\textwidth, height=0.42\textwidth]
+        \addplot table[x=tau, y index=1] {generated/profile_main.dat};
+        \addplot table[x=tau, y index=2] {generated/profile_main.dat};
+        \addplot table[x=tau, y index=3] {generated/profile_main.dat};
+        \addplot table[x=tau, y index=4] {generated/profile_main.dat};
+        \legend{\texttt{dinkelbach},\texttt{forest-reference},\texttt{forest-tuned},\texttt{parametric}}
+      \end{axis}
+    \end{tikzpicture}}{\small\itshape Performance profile not available: the main
+    campaign has not been analysed in this build of the report.}
+  \caption{Performance profile on the frozen test set. A configuration is
+  counted at $\tau$ when its median time on an instance is within a factor
+  $\tau$ of the best median time recorded on that instance; unsolved instances
+  never enter the numerator. The compared set is the instances at least one
+  configuration solved and verified.}
+  \label{fig:profile-main}
+\end{figure}
+
+\subsection{Against the 2023 prototype}
+\label{sec:legacy}
+
+The group's 2023 \FS{} prototype was imported into this project under
+\file{legacy/forest2023/} and measured on the same maximum-ratio oracle, which is
+the task it implements. Three patches were needed to run it at all and are
+recorded in that directory: an absolute CPLEX include replaced by opaque
+typedefs, four interactive \texttt{cin.get()} pauses removed, and the append to a
+file in the working directory removed. No line of the algorithm was changed.
+
+Running it exposed limits that belong to the prototype, not to the comparison.
+It stores profits and weights as \texttt{int}, so instances with fractional data
+cannot be represented and are refused instead of rounded. It allocates two
+$n\times n$ adjacency matrices, so its memory is quadratic in the number of
+vertices. Its initial basis assumes a spanning tree of $n-1$ edges, so it requires a
+connected graph. Finally, the feasibility shortcut added in the 2023-05-11
+version recurses without termination on a generic, non-bipartite DAG --- it
+overflows the stack already on the eight-node example --- so the measurements use
+it disabled, which reproduces the behaviour of the 2023-05-05 version of the same
+file.
+
+\paragraph{The outcome.} On the eighteen instances measured, the prototype
+completed \emph{none}, so there is no time to compare it on and no table worth
+printing. Four times it hit the time limit --- including a chain of two hundred
+vertices, which the current solver certifies in nine milliseconds --- once it
+crashed, once it exceeded the memory budget, and the remaining twelve it refused
+outright, either because the data are not integral or because the graph is
+disconnected and no spanning tree of $n-1$ edges exists. The current solver
+returned a certified optimal ratio on every one of the eighteen, in times between
+seven milliseconds and thirty-two seconds. The per-instance record is in
+\file{experiments/analysis/legacy\_baseline*.json}.
+
+That is a wide gap, and it should be read for what it is. Most of it is not a
+difference in pivot rules: it is that the prototype rebuilds the whole forest and
+reallocates two arrays at every iteration, recurses instead of iterating, and
+carries data structures quadratic in the number of vertices. Those are the costs of
+a research prototype that was never asked to run outside the bipartite instances
+it was written for, and the current solver inherits none of them. The comparison
+therefore measures engineering, not the merit of the underlying method --- which
+is the same method in both.
+
+What the prototype did contribute is two ideas that survived measurement and are
+in the current solver: the early exit of the ratio test on a zero-step blocker,
+which it implemented as an explicit feasibility check during the forest
+traversal, and the absence of a permanently engaged anti-cycling rule, which the
+ablation of section~\ref{sec:analysis} confirms was costing a factor in pivots. A
+third idea is still on the table and not yet implemented: the Euler-tour
+intervals it maintained, which give subtree membership in constant time and would
+attack the rebuild cost that now dominates.
+
+Where both solvers return an optimal ratio, they return the same one. On this
+instance set that condition never held, so the cross-check rests on the
+eight-node example of the tutorial, where both return the ratio $2$.
+

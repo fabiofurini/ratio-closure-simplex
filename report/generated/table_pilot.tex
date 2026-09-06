@@ -1,0 +1,26 @@
+\begin{table}[tbp]
+\centering
+\caption{Pilot campaign: median wall time in seconds of one solve per instance and backend. A status word replaces the time when the run did not finish within the pilot limit.}
+\label{tab:pilot}
+\small
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{lrrrrrr}
+\toprule
+instance & $n$ & $m$ & dinkelbach & forest-reference & forest-tuned & parametric \\
+\midrule
+pckp\_L\_349\_2101 & 349 & 2101 & 0.008 & 0.212 & 0.030 & 0.007 \\
+dense\_density0.1\_n800\_neg30\_r0 & 800 & 31979 & 0.652 & time\_limit & 0.597 & 0.120 \\
+pckp\_A\_972\_1661 & 972 & 1661 & 0.098 & 0.489 & 0.074 & 0.019 \\
+minelib\_newman1 & 1060 & 3922 & 0.187 & 6.292 & 1.015 & 0.023 \\
+chain\_plain\_n2000\_neg30\_r0 & 2000 & 1999 & 0.231 & 0.663 & 0.074 & 0.048 \\
+cyclic\_components10\_n2000\_neg30\_r0 & 2000 & 2009 & 0.007 & 0.008 & 0.007 & 0.007 \\
+disconnected\_components6\_n2000\_ne~ & 2000 & 1993 & 0.906 & 4.365 & 1.063 & 0.062 \\
+empty\_plain\_n2000\_neg30\_r0 & 2000 & 0 & 0.243 & 0.337 & 0.055 & 0.033 \\
+layered\_levels8-density0.05\_n2000~ & 2000 & 21972 & 2.405 & time\_limit & time\_limit & 0.100 \\
+sparse\_degree3\_n2000\_neg30\_r0 & 2000 & 5976 & 0.686 & time\_limit & 1.024 & 0.061 \\
+transitive\_degree2-extra3.0\_n2000~ & 2000 & 15972 & 1.528 & time\_limit & 1.847 & 0.114 \\
+sparse\_degree3\_n20000\_neg30\_r0 & 20000 & 59964 & time\_limit & time\_limit & time\_limit & 3.313 \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\end{table}

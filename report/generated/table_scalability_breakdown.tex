@@ -1,0 +1,18 @@
+\begin{table}[tbp]
+\centering
+\caption{Campaign scalability: share of the solver's own measured time per phase, summed over the verified runs of each configuration.}
+\label{tab:scalability-breakdown}
+\small
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{lrrrrrrr}
+\toprule
+configuration & runs & prep. & pricing & direction & ratio & update & certif. \\
+\midrule
+dinkelbach & 168 & 0.1 & 0.0 & 0.0 & 0.0 & 0.0 & 0.0 \\
+forest-tuned & 146 & 0.1 & 4.3 & 11.2 & 7.3 & 61.9 & 0.0 \\
+parametric & 204 & 0.5 & 0.0 & 0.0 & 0.0 & 0.0 & 0.2 \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\par\vspace{2pt}\footnotesize Percentages of the solver's internal accounting; the flow backends spend their time outside these ratio-closure phases and therefore show near-zero shares.
+\end{table}

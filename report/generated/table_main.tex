@@ -1,0 +1,63 @@
+{\small
+\begin{longtable}{lrrrrrr}
+\caption{Campaign main: instances solved and verified, median and worst median wall time in seconds, PAR-2 with a 60\,s limit, and peak resident memory in MiB.}\label{tab:main}\\
+\toprule
+family & configuration & solved & median & worst & PAR-2 & MiB \\
+\midrule
+\endfirsthead
+\multicolumn{7}{@{}l}{\footnotesize\itshape continua dalla pagina precedente}\\
+\toprule
+family & configuration & solved & median & worst & PAR-2 & MiB \\
+\midrule
+\endhead
+\midrule
+\multicolumn{7}{r@{}}{\footnotesize\itshape continua}\\
+\endfoot
+\bottomrule
+\endlastfoot
+MineLib (derived) & dinkelbach & 1/2 & 0.168 & 0.168 & 60.08 & 364 \\
+MineLib (derived) & forest-reference & 1/2 & 5.889 & 5.889 & 62.94 & 320 \\
+MineLib (derived) & forest-tuned & 1/2 & 1.109 & 1.109 & 60.55 & 320 \\
+MineLib (derived) & parametric & 2/2 & 13.192 & 26.362 & 13.19 & 384 \\
+PCKP (historical) & dinkelbach & 5/5 & 0.087 & 18.265 & 0.09 & 34 \\
+PCKP (historical) & forest-reference & 3/5 & 5.326 & 10.967 & 10.97 & 34 \\
+PCKP (historical) & forest-tuned & 5/5 & 0.655 & 24.711 & 0.66 & 34 \\
+PCKP (historical) & parametric & 5/5 & 0.027 & 0.690 & 0.03 & 34 \\
+SCCs & dinkelbach & 6/6 & 0.006 & 0.008 & 0.01 & 27 \\
+SCCs & forest-reference & 6/6 & 0.006 & 0.010 & 0.01 & 27 \\
+SCCs & forest-tuned & 6/6 & 0.006 & 0.008 & 0.01 & 27 \\
+SCCs & parametric & 6/6 & 0.006 & 0.009 & 0.01 & 27 \\
+chains & dinkelbach & 3/3 & 0.007 & 0.007 & 0.01 & 22 \\
+chains & forest-reference & 3/3 & 0.007 & 0.007 & 0.01 & 22 \\
+chains & forest-tuned & 3/3 & 0.005 & 0.006 & 0.00 & 22 \\
+chains & parametric & 3/3 & 0.005 & 0.005 & 0.00 & 22 \\
+dense DAGs & dinkelbach & 3/3 & 0.674 & 0.684 & 0.67 & 27 \\
+dense DAGs & forest-reference & 0/3 & -- & -- & 120.00 & 27 \\
+dense DAGs & forest-tuned & 3/3 & 0.746 & 0.751 & 0.75 & 27 \\
+dense DAGs & parametric & 3/3 & 0.105 & 0.122 & 0.10 & 27 \\
+diamonds & dinkelbach & 3/3 & 0.237 & 0.315 & 0.24 & 27 \\
+diamonds & forest-reference & 3/3 & 0.875 & 1.328 & 0.87 & 27 \\
+diamonds & forest-tuned & 3/3 & 0.110 & 0.161 & 0.11 & 27 \\
+diamonds & parametric & 3/3 & 0.041 & 0.054 & 0.04 & 27 \\
+disconnected & dinkelbach & 0/3 & -- & -- & 120.00 & 35 \\
+disconnected & forest-reference & 0/3 & -- & -- & 120.00 & 35 \\
+disconnected & forest-tuned & 0/3 & -- & -- & 120.00 & 35 \\
+disconnected & parametric & 3/3 & 2.804 & 4.231 & 2.80 & 35 \\
+layered DAGs & dinkelbach & 8/9 & 1.926 & 23.383 & 1.93 & 34 \\
+layered DAGs & forest-reference & 3/9 & 0.011 & 0.013 & 120.00 & 34 \\
+layered DAGs & forest-tuned & 3/9 & 0.018 & 0.021 & 120.00 & 34 \\
+layered DAGs & parametric & 9/9 & 0.089 & 0.771 & 0.09 & 34 \\
+no arcs & dinkelbach & 5/6 & 0.688 & 3.036 & 1.83 & 39 \\
+no arcs & forest-reference & 4/6 & 0.353 & 29.433 & 14.90 & 39 \\
+no arcs & forest-tuned & 6/6 & 0.324 & 8.496 & 0.32 & 39 \\
+no arcs & parametric & 6/6 & 0.227 & 6.095 & 0.23 & 39 \\
+precedence forests & dinkelbach & 3/3 & 1.568 & 1.577 & 1.57 & 27 \\
+precedence forests & forest-reference & 3/3 & 6.239 & 8.263 & 6.24 & 27 \\
+precedence forests & forest-tuned & 3/3 & 1.171 & 1.787 & 1.17 & 27 \\
+precedence forests & parametric & 3/3 & 0.053 & 0.066 & 0.05 & 27 \\
+sparse DAGs & dinkelbach & 3/3 & 0.782 & 1.092 & 0.78 & 27 \\
+sparse DAGs & forest-reference & 1/3 & 25.855 & 25.855 & 120.00 & 27 \\
+sparse DAGs & forest-tuned & 3/3 & 1.873 & 2.121 & 1.87 & 27 \\
+sparse DAGs & parametric & 3/3 & 0.064 & 0.068 & 0.06 & 27 \\
+\end{longtable}
+}

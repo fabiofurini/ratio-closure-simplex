@@ -1,0 +1,19 @@
+\section{Complete tables and campaign details}
+\label{sec:appendix}
+
+\generated{table_pilot}
+
+The pilot campaign fixed the sizes, the time limit and the number of replicas of
+the later campaigns. It also exposed a protocol defect that was corrected before
+any measurement was kept: the time limit was enforced by the \FS{} pivot loop but
+not by the flow backends, so a single run had exceeded the budget. The limit is
+now checked before every maximum flow, and the pilot was rerun from scratch with
+the corrected build. Since a run's identity includes the build hash, the earlier
+results could not be silently reused.
+
+Per-run records, including failed and timed-out runs, are in
+\file{experiments/analysis/*.csv}; the campaign manifests in
+\file{experiments/runs/*/manifest.json} additionally store the resolved
+configuration of every run, its statistics counters and the outcome of its
+verification. The completeness report that gates the generation of every table
+in this document is \file{experiments/analysis/completeness.json}.

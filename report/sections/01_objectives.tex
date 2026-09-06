@@ -1,0 +1,42 @@
+\section{Objectives and hypotheses}
+\label{sec:objectives}
+
+The object of the evaluation is the \FS{} solver: a combinatorial simplex whose
+basis is represented by a forest on the precedence graph, applied to the
+normalised maximum-ratio subproblem and iterated on the residual to build the
+canonical sequence of blocks that yields the LP value at any capacity.
+
+Two further backends were implemented for this report and are used as
+references, not as contributions: a Dinkelbach iteration whose ratio oracle is a
+maximum-closure minimum cut, and a divide-and-conquer parametric decomposition
+of the same closure family. All three produce the same certified structures and
+are checked by the same verifiers.
+
+The campaigns answer the following questions.
+
+\begin{description}[leftmargin=2.4em,style=nextline]
+  \item[E1 Correctness] Does the solver produce certified optimal solutions on
+    generic DAGs, with negative profits, ties and degeneracy? Do the three
+    backends and an independent LP solver agree?
+  \item[E2 Overall performance] How do the reference \FS{} configuration, the
+    tuned one and the two combinatorial baselines compare on a frozen test set,
+    per family rather than only in aggregate?
+  \item[E3 Scalability] How do time and memory grow with $n$ and $m$, and how
+    much of the growth is the cost of a pivot rather than the number of pivots?
+  \item[E4 Ablation] What does each implementation choice contribute: local
+    forest updates, dual canonicalisation, partial pricing, transitive
+    reduction, vertex ordering?
+  \item[E5 Tuning] Does the search produce a default that transfers from
+    training and validation to instances never used to choose it?
+  \item[E6 One capacity against many] When does building the whole positive path
+    pay for itself against a single solve, once the cost of the queries and of
+    materialising the solution is included?
+  \item[E7 Degeneracy and numerics] What is the cost of ties, exact and
+    near-exact, and of the anti-cycling fallback?
+  \item[E8 Applied instances] What happens on the historical PCKP instances and
+    on the open-pit instances derived from MineLib?
+\end{description}
+
+No question is posed so that a particular answer is the only admissible one. In
+particular, the report states plainly where the \FS{} implementation is slower
+than the baselines, and section~\ref{sec:discussion} discusses why.

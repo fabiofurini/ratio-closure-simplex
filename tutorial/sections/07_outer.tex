@@ -1,0 +1,168 @@
+\section{From the forest oracle to the capacitated LP}\label{sec:outer}
+
+The \FS{} returns an optimal \emph{connected support} of the normalized
+oracle. We now explain how repeated calls solve the original LP, how equal
+ratios are handled, and why this outer construction is valid on general
+precedence graphs.
+
+\subsection{Residual extraction and decreasing ratios}
+Start with $M=\emptyset$. Call the oracle on the residual graph, obtain its
+positive tree $B$, append $B$ to the sequence and replace $M$ by $M\cup B$.
+The set $B$ is closed on the residual graph, so every accumulated prefix
+remains closed on the original graph. Each call removes at least one vertex.
+Thus at most $n$ calls partition the vertex set, even if some ratios are zero
+or negative. Denote the raw blocks by $B_1,\ldots,B_\ell$ and their ratios
+by $\rho_1,\ldots,\rho_\ell$.
+
+\begin{lemma}[Nonincreasing raw ratios]\label{lem:ratios}
+The residual extraction procedure satisfies $\rho_{r+1}\le\rho_r$.
+\end{lemma}
+\begin{proof}
+The union $B_r\cup B_{r+1}$ is closed in the residual graph before call r.
+Its ratio is the weighted average of $\rho_r$ and $\rho_{r+1}$, with strictly
+positive weights. A value $\rho_{r+1}>\rho_r$ would make this union better
+than the closure returned at call r, contradicting its certified optimality.
+\end{proof}
+
+\subsection{Why a single basis may miss a canonical block}
+For two independent vertices with $p_1=w_1=p_2=w_2=1$, either singleton is a
+valid optimal positive tree. However, the maximum-weight optimal closure
+is $\{1,2\}$. A single basic support need not equal a canonical block.
+Merge consecutive raw blocks with the same ratio. Write the resulting blocks
+as $\Kset_1,\ldots,\Kset_k$, their closed prefixes as $\mathcal M_r$, and
+their strictly decreasing ratios as $\lambda_r$.
+
+The following proof establishes both the LP connection and the maximal tie
+convention directly. It is consistent with the classical parametric closure
+interpretation reviewed in \citet{DoseFuriniLocatelli2026} and
+\citet{GalloEtAl1989}.
+
+\begin{lemma}[Blockwise closure bound]\label{lem:blockbound}
+For any original closure $C$ and every raw block $B_r$,
+\[
+ p(C\cap B_r)\le\rho_r w(C\cap B_r).
+\]
+Consequently, for every real $\lambda$,
+\begin{equation}\label{eq:parametric-sum}
+ u(\lambda):=\max_{C\in\Cset}\{p(C)-\lambda w(C)\}
+ =\sum_{r=1}^\ell w(B_r)\max\{\rho_r-\lambda,0\}.
+\end{equation}
+\end{lemma}
+\begin{proof}
+Both $C$ restricted to the residual graph and $B_r$ are residual closures,
+and their intersection is one too. If it is nonempty, the oracle certificate
+at call r bounds its ratio by $\rho_r$; otherwise both sums vanish. Hence
+\[
+ p(C)-\lambda w(C)
+ \le\sum_r(\rho_r-\lambda)w(C\cap B_r)
+ \le\sum_r w(B_r)\max\{\rho_r-\lambda,0\}.
+\]
+The union of all raw blocks with $\rho_r>\lambda$ is a prefix by
+\cref{lem:ratios}; it is a closure and attains this bound.
+\end{proof}
+
+\begin{corollary}[Canonical merging]\label{cor:canonical}
+Merging all consecutive equal-ratio raw blocks produces exactly the
+maximum-weight tie convention of the supplied manuscript.
+\end{corollary}
+\begin{proof}
+At any $\lambda$, equality in the second inequality of the preceding proof
+forces an optimal closure to contain every vertex of a block with
+$\rho_r>\lambda$ and no vertex of a block with $\rho_r<\lambda$; positivity
+of each vertex weight is used here. The prefix including every block with
+$\rho_r=\lambda$ is feasible, attains the same value and contains every
+optimal closure. It is the unique maximum-weight one. At each distinct
+ratio, its increment is precisely the group merged by the procedure.
+\end{proof}
+
+This proof also explains why canonical merging is not an optional heuristic.
+Equal-ratio blocks may be disconnected. A solver asked for a complete
+canonical block must finish collecting its ties, even if a requested
+capacity has already been reached.
+
+\subsection{The canonical LP solution}
+Let $q$ be the last index for which $\lambda_q>0$, with $q=0$ when no such
+index exists. If
+$w(\mathcal M_{h-1})\le c<w(\mathcal M_h)$ for some $h\le q$, set
+\begin{equation}\label{eq:theta}
+ \theta=\frac{c-w(\mathcal M_{h-1})}{w(\Kset_h)},\qquad
+ \vect{x}^c=\ind^{\mathcal M_{h-1}}+\theta\ind^{\Kset_h}.
+\end{equation}
+If $c\ge w(\mathcal M_q)$, set $\vect{x}^c=\ind^{\mathcal M_q}$, including the
+empty solution when $q=0$.
+
+\begin{theorem}[Forest-based solution of the original LP]\label{thm:outer}
+The vector $\vect{x}^c$ above is optimal for \eqref{eq:lp}. Within a positive
+block interval,
+\begin{equation}\label{eq:value}
+ z(c)=p(\mathcal M_{h-1})+
+              \lambda_h\bigl(c-w(\mathcal M_{h-1})\bigr).
+\end{equation}
+For $c\ge w(\mathcal M_q)$, $z(c)=p(\mathcal M_q)$.
+\end{theorem}
+\begin{proof}
+The vector in \eqref{eq:theta} is a convex combination of two closure
+indicators, so it respects precedences and box constraints; it uses capacity
+c. For any feasible x, its threshold sets $C_t=\{i:x_i\ge t\}$,
+$0<t\le1$, are closures. Thus for any $\lambda\ge0$,
+\[
+ \vect{p}^T\vect{x}-\lambda \vect{w}^T\vect{x}
+   =\int_0^1[p(C_t)-\lambda w(C_t)]\,dt\le u(\lambda),
+ \qquad \vect{p}^T\vect{x}\le u(\lambda)+\lambda c.
+\]
+Choose $\lambda=\lambda_h$ and use \eqref{eq:parametric-sum}. Both adjacent
+prefixes attain $u(\lambda_h)$, so $\vect{x}^c$ attains the bound. For abundant
+capacity choose $\lambda=0$; the positive prefix attains $u(0)$.
+\end{proof}
+
+The theorem guarantees a canonical optimum with at most one fractional
+level; it does not claim that every optimal point has that form. A zero-ratio
+block may be included without changing the objective if capacity allows.
+Negative-ratio blocks must not be added merely to fill unused capacity.
+
+\begin{algorithm}[htbp]
+\caption{Block extraction using only \FS{} oracles}
+\label{alg:outer}
+\begin{algorithmic}[1]
+\Require General precedence instance after SCC contraction
+\Ensure Complete canonical sequence, or its positive part as requested
+\State $R\gets\Vset$; sequence $\gets$ empty
+\While{$R\ne\emptyset$}
+  \State $(\rho,B,\text{certificate})\gets\FS(R)$ using \cref{alg:forest}
+  \If{only the positive path is requested and $\rho\le0$}
+    \State \textbf{break}
+  \EndIf
+  \If{last block has ratio $\rho$}
+    \State Merge B into the last block
+  \Else
+    \State Append B with ratio $\rho$
+  \EndIf
+  \State $R\gets R\setminus B$
+\EndWhile
+\State Use \eqref{eq:theta} to answer a prescribed capacity, if requested
+\end{algorithmic}
+\end{algorithm}
+
+\subsection{Finishing the eight-node example}
+Successive calls and canonical merging give \cref{tab:blocks}.
+\begin{table}[htbp]
+\centering\input{../build/tutorial/generated/blocks_table.tex}
+\caption{Canonical blocks produced by residual \FS{} calls,
+checked against exhaustive closure enumeration.}\label{tab:blocks}
+\end{table}
+At $c=4$, the first block has weight 2, so half the second block is selected:
+\[
+ \theta=\frac{4-2}{4}=\frac12,\qquad
+ x^c=(\tfrac12,\tfrac12,1,0,\tfrac12,1,0,0),\qquad z(4)=4+\tfrac12\,6=7.
+\]
+A full dual certificate for \eqref{eq:lpdual} is
+\begin{align*}
+ \lambda&=\tfrac32,\quad\mu_6=1,\quad\mu_i=0\ (i\ne6),\\
+ \alpha_{5,1}&=\tfrac12,\quad\alpha_{5,2}=\tfrac52,\quad
+ \alpha_{6,3}=\tfrac52,\quad\alpha_{7,4}=2,\quad\alpha_{8,7}=\tfrac32,
+\end{align*}
+with all remaining arc multipliers zero. Its objective is
+$4\cdot(3/2)+1=7$. Direct substitution verifies feasibility and complementary
+slackness. This certificate differs from the normalized certificate
+\eqref{eq:ratio-example-cert}: the original LP has capacity and upper-bound
+prices, while the ratio oracle has only a free normalization price.

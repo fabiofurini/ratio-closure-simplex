@@ -1,0 +1,9 @@
+{
+  "id": "paper_long_example8",
+  "source": "PAPER_LONG/paper_v1.tex, sec:running-example",
+  "node_ids": [1, 2, 3, 4, 5, 6, 7, 8],
+  "profit": [1, -1, -1, -1, 6, 5, 2, 3],
+  "weight": [1, 1, 1, 2, 2, 1, 1, 1],
+  "arcs": [[5, 1], [5, 2], [5, 6], [6, 3], [7, 3], [7, 4], [8, 5], [8, 6], [8, 7]],
+  "capacity": 4
+}

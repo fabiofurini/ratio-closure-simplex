@@ -1,0 +1,10 @@
+{
+  "basis_update": "full",
+  "pricing": "full",
+  "entering_rule": "bland",
+  "canonicalization": "sequential",
+  "ratio_test": "full",
+  "initial_basis": "sink",
+  "degeneracy_trigger": 32,
+  "verify_every": 1
+}

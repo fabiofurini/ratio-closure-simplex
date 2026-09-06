@@ -1,0 +1,93 @@
+\section{Discussion}
+\label{sec:discussion}
+
+\subsection{What the measurements support}
+
+The three backends agree on every instance of the exact suite and on every
+instance of the campaigns they both solved: same canonical blocks, same LP
+values, each with its own certificate produced by code that shares nothing with
+the others. Together with the independent LP solver and the exhaustive rational
+oracle, this supports the correctness of the implementation on the domain it
+claims: generic DAGs, profits of either sign, strictly positive weights, one
+capacity, cyclic digraphs by condensation.
+
+On performance the picture is uneven, and it is given per family because a
+single number would hide the shape of it. The parametric backend solves the whole
+test set; Dinkelbach solves $40$ of $46$, the tuned \FS{} $36$ and the reference
+\FSC{} $27$. The tuned \FS{} is not the fastest even where it finishes: its
+median over solved instances, $0.142$\,s, is above the parametric backend's
+$0.057$\,s, and it is taken over the smaller set it can finish.
+
+Per family, the tuned \FS{} finishes everything on chains, diamonds, strongly
+connected components, empty graphs, precedence forests, dense and sparse DAGs,
+and the historical precedence-knapsack set; the parametric backend matches or
+beats it on time in every one of those families --- a tie on the trivial ones,
+a factor of $6$ on the historical instances and a factor of $29$ on the sparse
+DAGs. It solves $3$ of $9$ layered
+DAGs where the parametric backend solves all nine and Dinkelbach eight. On
+disconnected graphs and on the MineLib-derived instances it solves nothing
+within the limit, and neither does Dinkelbach; only the parametric backend does.
+The claim that the \FS{} and Dinkelbach are comparable on the applied instances,
+which an earlier reading of a handful of cases suggested, is not supported by
+the frozen test set: on the historical precedence-knapsack family both finish
+everything, and the medians are $0.087$\,s for Dinkelbach against $0.655$\,s.
+
+One further correction belongs here rather than in a footnote. The ablation
+shows two settings that the parameter search rejected and that are faster than
+the frozen configuration on the paired comparison: the sink initial basis
+($3.33$ against $2.83$) and transitive reduction enabled ($3.46$). The search
+was run and frozen honestly, on training and validation data, but its choice is
+not the best one available in the space it searched, and a second search with a
+larger budget is the obvious next step.
+
+\subsection{What changed, and why it matters more than the parameters}
+
+The first measurements of this project had the \FS{} implementation one to three
+orders of magnitude behind both baselines, with time-outs on medium instances.
+The gap was not closed by tuning the pricing rule, which barely moves the
+result, but by three structural corrections identified from the degeneracy
+analysis of section~\ref{sec:robustness}: releasing the anti-cycling fallback
+instead of letting it become the operating policy, restricting the ratio-test
+scan to the arcs that can actually block, and stopping that scan at the first
+zero-step blocker. The last two reproduce techniques already present in the
+group's historical prototype, which had no anti-cycling rule at all and carried
+an explicit feasibility shortcut for exactly this purpose.
+
+The lesson recorded here is that in this problem class the entering rule is
+close to irrelevant while the treatment of degeneracy dominates. Parameter
+search over pricing schemes, block sizes and candidate limits produced
+differences within a few per cent; the degeneracy-related settings produced
+factors.
+
+\subsection{What the measurements do not support}
+
+They do not license any statement about the state of the art in maximum flow.
+The flow backends use a Dinic implementation written for this project; they do
+not use pseudoflow, highest-label push-relabel with gap and global relabelling,
+or the amortised flow reuse of a proper parametric algorithm. A comparison
+against a competitive flow code would very likely widen the gap on the families
+where \FS{} already loses, and could also narrow the cases where it currently
+wins.
+
+They also do not support any claim of novelty. The audit of the literature has
+not been carried out in this phase, by explicit decision, and
+\file{docs/claims.md} keeps every novelty row in the \emph{to be verified}
+state.
+
+\subsection{What follows}
+
+Two directions are supported by the measurements rather than by preference.
+First, pricing and forest rebuilding are the dominant costs of a pivot, together
+about four fifths of the solver's time on the hardest family, and both are
+recomputed in full where only a small part of the graph changed: incremental
+pricing and updates confined to the modified paths are the natural next step.
+Second, and more important, the length of the pivot path is what actually
+separates this method from the parametric backend, and neither the dual
+formulation nor the leaving rules touched it.
+
+A third direction is now ruled out rather than recommended. The dual simplex was
+implemented and measured on a dedicated campaign precisely because the primal is
+so degenerate, and it does remove the degeneracy it was predicted to remove; but
+on the validation split it does not beat the primal, and the encouraging factors
+observed on three hard instances did not survive the larger sample. That is the
+reason the split exists.

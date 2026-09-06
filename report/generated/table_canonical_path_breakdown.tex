@@ -1,0 +1,21 @@
+\begin{table}[tbp]
+\centering
+\caption{Campaign canonical\_path: share of the solver's own measured time per phase, summed over the verified runs of each configuration.}
+\label{tab:canonical_path-breakdown}
+\small
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{lrrrrrrr}
+\toprule
+configuration & runs & prep. & pricing & direction & ratio & update & certif. \\
+\midrule
+dinkelbach & 22 & 0.1 & 0.0 & 0.0 & 0.0 & 0.0 & 0.1 \\
+parametric & 24 & 0.3 & 0.0 & 0.0 & 0.0 & 0.0 & 0.2 \\
+ratio-closure-dual & 22 & 0.0 & 28.7 & 12.1 & 22.3 & 34.0 & 0.0 \\
+ratio-closure-tuned & 20 & 0.1 & 9.8 & 18.8 & 15.9 & 44.7 & 0.1 \\
+ratio-closure-warm & 20 & 0.3 & 5.5 & 9.8 & 11.7 & 57.6 & 0.1 \\
+ratio-closure-warm-dual & 22 & 0.0 & 18.8 & 9.6 & 27.8 & 40.4 & 0.0 \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\par\vspace{2pt}\footnotesize Percentages of the solver's internal accounting; the flow backends spend their time outside these ratio-closure phases and therefore show near-zero shares.
+\end{table}

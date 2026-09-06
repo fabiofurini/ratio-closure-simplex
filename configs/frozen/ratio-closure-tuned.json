@@ -1,0 +1,34 @@
+{
+  "configuration": {
+    "algorithm": "ratio-closure",
+    "canonicalization": "dual",
+    "rebuild_interval": 256,
+    "transitive_reduction": "off",
+    "node_order": "input",
+    "pricing": "candidate-list",
+    "candidate_limit": 64,
+    "entering_rule": "best-improving",
+    "basis_update": "local",
+    "degeneracy_trigger": 32768,
+    "ratio_test": "early",
+    "initial_basis": "full"
+  },
+  "frozen_on": "2026-09-06",
+  "search": "experiments/tuning/forest-v2",
+  "space": "configs/tuning/ratio_closure_space.json",
+  "split": "data/splits/train.json",
+  "budget": 12,
+  "sampled_instances": 16,
+  "per_run_time_limit_seconds": 6.0,
+  "total_tuning_seconds": 559.9,
+  "attempt": "cfg002_4ba55896",
+  "score_on_training": {
+    "solved": 11,
+    "failures": 0,
+    "par2": 67.71376096901076,
+    "seconds": 7.713760969010764,
+    "peak_rss_bytes": 96657408,
+    "instances": 16
+  },
+  "rationale": "Best of the recorded search under the lexicographic criterion: no incorrect result, instances solved and verified, PAR-2, peak memory. Frozen before the test manifest was measured; the test set was never used to adjust it."
+}

@@ -1,0 +1,59 @@
+{
+ "campaign": "ci",
+ "task": "solve",
+ "capacity": "instance",
+ "note": "Suite della CI: solo istanze generate, incluse nel repository pubblico. Le suite di misura usano anche le istanze storiche, che non sono ridistribuibili.",
+ "replicas": 1,
+ "time_limit": 30,
+ "wall_limit": 120,
+ "instances": {
+  "index": [
+   "data/generated/index.json"
+  ],
+  "names": [
+   "gen_bilevel_density0.02_n200_uniform_neg30_r0",
+   "gen_chain_plain_n200_uniform_neg0_r0",
+   "gen_cyclic_components10_n200_uniform_neg30_r0",
+   "gen_dense_density0.1_n200_uniform_neg30_r0",
+   "gen_diamonds_module4_n200_uniform_neg30_r0",
+   "gen_disconnected_components6_n200_uniform_neg30_r0"
+  ]
+ },
+ "configurations": {
+  "ratio-closure-tuned": {
+   "algorithm": "ratio-closure",
+   "canonicalization": "dual",
+   "rebuild_interval": 256,
+   "transitive_reduction": "off",
+   "node_order": "input",
+   "pricing": "candidate-list",
+   "candidate_limit": 64,
+   "entering_rule": "best-improving",
+   "basis_update": "local",
+   "degeneracy_trigger": 32768,
+   "ratio_test": "early",
+   "initial_basis": "full"
+  },
+  "ratio-closure-warm": {
+   "algorithm": "ratio-closure",
+   "canonicalization": "dual",
+   "rebuild_interval": 256,
+   "transitive_reduction": "off",
+   "node_order": "input",
+   "pricing": "candidate-list",
+   "candidate_limit": 64,
+   "entering_rule": "best-improving",
+   "basis_update": "local",
+   "degeneracy_trigger": 32768,
+   "ratio_test": "early",
+   "initial_basis": "full",
+   "warm_start": "residual"
+  },
+  "dinkelbach": {
+   "algorithm": "dinkelbach"
+  },
+  "parametric": {
+   "algorithm": "parametric"
+  }
+ }
+}

@@ -1,0 +1,49 @@
+{
+ "campaign": "main",
+ "note": "E2: frozen test split, one solve per instance at the instance capacity, four backends/configurations, three replicas, 30 s limit.",
+ "task": "solve",
+ "capacity": "instance",
+ "replicas": 3,
+ "time_limit": 30,
+ "wall_limit": 300,
+ "instances": {
+  "index": [
+   "data/splits/test.json"
+  ]
+ },
+ "configurations": {
+  "ratio-closure-reference": {
+   "algorithm": "ratio-closure",
+   "basis_update": "full",
+   "pricing": "full",
+   "entering_rule": "bland",
+   "canonicalization": "sequential",
+   "ratio_test": "full",
+   "initial_basis": "sink",
+   "degeneracy_trigger": 32,
+   "rebuild_interval": 256,
+   "transitive_reduction": "off",
+   "node_order": "input"
+  },
+  "ratio-closure-tuned": {
+   "algorithm": "ratio-closure",
+   "canonicalization": "dual",
+   "rebuild_interval": 256,
+   "transitive_reduction": "off",
+   "node_order": "input",
+   "pricing": "candidate-list",
+   "candidate_limit": 64,
+   "entering_rule": "best-improving",
+   "basis_update": "local",
+   "degeneracy_trigger": 32768,
+   "ratio_test": "early",
+   "initial_basis": "full"
+  },
+  "dinkelbach": {
+   "algorithm": "dinkelbach"
+  },
+  "parametric": {
+   "algorithm": "parametric"
+  }
+ }
+}

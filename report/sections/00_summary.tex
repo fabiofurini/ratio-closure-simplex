@@ -1,0 +1,72 @@
+\section*{Summary of findings}
+\addcontentsline{toc}{section}{Summary of findings}
+
+\paragraph{What was measured.} One linear program, three independent solvers.
+The \FS{} of this project, a Dinkelbach iteration whose ratio oracle is a
+minimum cut, and a divide-and-conquer parametric decomposition. All three return
+the same object --- an optimal LP solution, its multipliers and the canonical
+sequence of blocks --- and every result is re-checked by a separate process
+before it is counted.
+
+\paragraph{Correctness.} The three backends agree everywhere they were compared,
+and agree with an exhaustive rational oracle on small instances and with an
+independent LP solver on larger ones. Nothing in the campaigns contradicts the
+correctness of any backend.
+
+\generated{table_summary}
+
+\paragraph{Speed.} The parametric backend is the only configuration that solves
+the whole test set: $46$ of $46$. Dinkelbach solves $40$, the tuned \FS{} $36$
+and the reference \FS{} $27$. Two families are solved by the parametric backend
+alone --- disconnected graphs and the instances derived from MineLib --- where
+the other three finish nothing within the limit.
+
+The medians do not rescue the counts. Over the instances it solves, the tuned
+\FS{} has a median of $0.142$\,s against the parametric backend's $0.057$\,s,
+and that median is taken over the smaller subset it can finish; Dinkelbach sits
+between them at $0.234$\,s but solves four more instances. On the historical
+precedence-knapsack instances all four configurations except the reference
+finish everything, and the ordering there is unambiguous: $0.027$\,s median for
+the parametric backend, $0.087$\,s for Dinkelbach, $0.655$\,s for the tuned
+\FS{}. The honest summary is that this implementation is neither the fastest
+where it finishes nor able to finish everywhere.
+
+\paragraph{What made the difference.} Not the pricing rule. The first
+measurements had \FS{} one to three orders of magnitude behind, and parameter
+search over pricing schemes moved the result by a few per cent. What moved it by
+factors was the handling of degeneracy: the primal spends a median of $99.3\%$
+of its pivots on zero steps, and three changes follow from that ---
+releasing the anti-cycling fallback instead of letting it become the operating
+rule, restricting the ratio-test scan to the arcs that can actually block, and
+stopping that scan at the first zero-step blocker. The last two reproduce
+techniques already present in the group's historical prototype.
+
+The ablation confirms the ranking and corrects two of the search's choices.
+Measured as paired speedups against the setting that forces Bland's rule,
+the frozen configuration is $2.83$ times faster at the median and up to $18.8$
+times on individual instances, so the anti-cycling release is worth a factor
+rather than a percentage; moving the degeneracy trigger back to its old value
+gives up most of that, $1.25$ instead of $2.83$. The ratio-test refinements are
+worth about a factor of two each, $2.17$ and $2.20$.
+
+Two settings the search did \emph{not} choose are faster than the one it did:
+starting from the sink basis scores $3.33$ and enabling transitive reduction
+$3.46$, against the frozen configuration's $2.83$. The frozen configuration is
+reported as it was frozen, on training and validation data only, and not
+silently improved after the fact --- but the ablation says plainly that the
+search left something on the table, and \cref{sec:discussion} treats it as a
+finding rather than a footnote.
+
+\paragraph{How to read the tables.} Times are wall-clock medians over replicas of
+the same instance and configuration. \emph{PAR-2} charges twice the time limit
+for every instance a configuration did not solve, so it mixes speed and
+robustness into one number; it is always reported next to the plain count of
+solved instances so that a time-out is never hidden inside an average. Paired
+speedups are computed only on the instances both settings solved and verified.
+Performance profiles state the compared set and never count an unsolved instance
+as covered.
+
+\paragraph{What this report does not claim.} It does not claim novelty: the
+audit of the literature was deliberately not carried out in this phase. It does
+not claim anything about the state of the art in maximum flow: the flow backends
+use a Dinic implementation written for this project, not a competitive flow code.

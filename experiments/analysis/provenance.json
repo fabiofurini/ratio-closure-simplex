@@ -1,0 +1,227 @@
+{
+ "script": "tools/report/analyze.py",
+ "campaigns": {
+  "ablation": {
+   "build": {
+    "source_hash": "493f6f942eca3576ac0253ad50581fbe0469e8e417d3f97011c676f7789871fd",
+    "type": "Release",
+    "compiler": "GNU 15.2.0",
+    "flags": " -O3 -DNDEBUG;sanitizers=OFF;LTO=OFF;native=OFF",
+    "machine": "x86_64"
+   },
+   "planned": 620,
+   "stored": 620,
+   "complete": true,
+   "verified": 560,
+   "statuses": {
+    "optimal": 560,
+    "time_limit": 60
+   },
+   "manifest_sha256": "c5865827b751dea3a1cdad6706e7ebc81bc878620a591031299b75106d858e44"
+  },
+  "canonical_path": {
+   "build": {
+    "source_hash": "6dfe704442d77ff3e0928eabb496128468318197b56a8125c9c1f3b4bb963c17",
+    "type": "Release",
+    "compiler": "GNU 15.2.0",
+    "flags": " -O3 -DNDEBUG;sanitizers=OFF;LTO=OFF;native=OFF",
+    "machine": "x86_64"
+   },
+   "planned": 144,
+   "stored": 144,
+   "complete": true,
+   "verified": 130,
+   "statuses": {
+    "optimal": 130,
+    "time_limit": 14
+   },
+   "manifest_sha256": "db678d9ad4eaa82605442ac3aba5989c8b5e23dcf714248cd7e490be4e78dbf6"
+  },
+  "capacities": {
+   "build": {
+    "source_hash": "493f6f942eca3576ac0253ad50581fbe0469e8e417d3f97011c676f7789871fd",
+    "type": "Release",
+    "compiler": "GNU 15.2.0",
+    "flags": " -O3 -DNDEBUG;sanitizers=OFF;LTO=OFF;native=OFF",
+    "machine": "x86_64"
+   },
+   "planned": 372,
+   "stored": 372,
+   "complete": true,
+   "verified": 372,
+   "statuses": {
+    "optimal": 372
+   },
+   "manifest_sha256": "e0eff9c9de8c5720a9168088323ca677b2a7a87be859dcc1e34e7468e81eb79b"
+  },
+  "dual": {
+   "build": {
+    "source_hash": "493f6f942eca3576ac0253ad50581fbe0469e8e417d3f97011c676f7789871fd",
+    "type": "Release",
+    "compiler": "GNU 15.2.0",
+    "flags": " -O3 -DNDEBUG;sanitizers=OFF;LTO=OFF;native=OFF",
+    "machine": "x86_64"
+   },
+   "planned": 248,
+   "stored": 248,
+   "complete": true,
+   "verified": 234,
+   "statuses": {
+    "optimal": 234,
+    "time_limit": 14
+   },
+   "manifest_sha256": "c96300645d37eb7e988c079726922e378be89386dc62e62add6b170612d89740"
+  },
+  "main": {
+   "build": {
+    "source_hash": "493f6f942eca3576ac0253ad50581fbe0469e8e417d3f97011c676f7789871fd",
+    "type": "Release",
+    "compiler": "GNU 15.2.0",
+    "flags": " -O3 -DNDEBUG;sanitizers=OFF;LTO=OFF;native=OFF",
+    "machine": "x86_64"
+   },
+   "planned": 552,
+   "stored": 552,
+   "complete": true,
+   "verified": 447,
+   "statuses": {
+    "optimal": 447,
+    "time_limit": 105
+   },
+   "manifest_sha256": "a043f9fda7de444a8de43cc40f937b2ffb012321ac3bbbcb41f2c1f62e6632c8"
+  },
+  "pilot": {
+   "build": {
+    "source_hash": "493f6f942eca3576ac0253ad50581fbe0469e8e417d3f97011c676f7789871fd",
+    "type": "Release",
+    "compiler": "GNU 15.2.0",
+    "flags": " -O3 -DNDEBUG;sanitizers=OFF;LTO=OFF;native=OFF",
+    "machine": "x86_64"
+   },
+   "planned": 48,
+   "stored": 48,
+   "complete": true,
+   "verified": 40,
+   "statuses": {
+    "optimal": 40,
+    "time_limit": 8
+   },
+   "manifest_sha256": "1f79c3222d2c704cd14ca3d0dfe9e2c0dd161ba154f166fe9351fbf1cab7bf0f"
+  },
+  "scalability": {
+   "build": {
+    "source_hash": "493f6f942eca3576ac0253ad50581fbe0469e8e417d3f97011c676f7789871fd",
+    "type": "Release",
+    "compiler": "GNU 15.2.0",
+    "flags": " -O3 -DNDEBUG;sanitizers=OFF;LTO=OFF;native=OFF",
+    "machine": "x86_64"
+   },
+   "planned": 612,
+   "stored": 612,
+   "complete": true,
+   "verified": 518,
+   "statuses": {
+    "optimal": 518,
+    "time_limit": 94
+   },
+   "manifest_sha256": "faed15905182638d94cb93cb515a9b742563e6f0338b608f920e1bb3ab920d17"
+  },
+  "smoke": {
+   "build": {
+    "source_hash": "493f6f942eca3576ac0253ad50581fbe0469e8e417d3f97011c676f7789871fd",
+    "type": "Release",
+    "compiler": "GNU 15.2.0",
+    "flags": " -O3 -DNDEBUG;sanitizers=OFF;LTO=OFF;native=OFF",
+    "machine": "x86_64"
+   },
+   "planned": 16,
+   "stored": 16,
+   "complete": true,
+   "verified": 16,
+   "statuses": {
+    "optimal": 16
+   },
+   "manifest_sha256": "2248c36e037b7353bf239d1292e089e5fcc57ada605ac517eb149c1855e2ec5c"
+  }
+ },
+ "artifacts": [
+  "experiments/analysis/ablation.csv",
+  "experiments/analysis/canonical_path.csv",
+  "experiments/analysis/capacities.csv",
+  "experiments/analysis/dual.csv",
+  "experiments/analysis/main.csv",
+  "experiments/analysis/pilot.csv",
+  "experiments/analysis/scalability.csv",
+  "experiments/analysis/smoke.csv",
+  "report/generated/table_environment.tex",
+  "report/generated/table_instances.tex",
+  "report/generated/table_validation.tex",
+  "report/generated/table_summary.tex",
+  "report/generated/table_agreement.tex",
+  "report/generated/table_pilot.tex",
+  "experiments/analysis/main_aggregated.csv",
+  "report/generated/table_main.tex",
+  "report/generated/table_main_speedup.tex",
+  "report/generated/profile_main.dat",
+  "report/generated/scaling_main_dinkelbach.dat",
+  "report/generated/scaling_main_forest-reference.dat",
+  "report/generated/scaling_main_forest-tuned.dat",
+  "report/generated/scaling_main_parametric.dat",
+  "report/generated/table_main_breakdown.tex",
+  "experiments/analysis/ablation_aggregated.csv",
+  "report/generated/table_ablation.tex",
+  "report/generated/table_ablation_speedup.tex",
+  "report/generated/profile_ablation.dat",
+  "report/generated/scaling_ablation_bland-entering.dat",
+  "report/generated/scaling_ablation_close-degeneracy-trigger.dat",
+  "report/generated/scaling_ablation_forest-tuned.dat",
+  "report/generated/scaling_ablation_full-pricing.dat",
+  "report/generated/scaling_ablation_no-early-ratio-test.dat",
+  "report/generated/scaling_ablation_no-local-update.dat",
+  "report/generated/scaling_ablation_no-restricted-ratio-test.dat",
+  "report/generated/scaling_ablation_sequential-canonicalization.dat",
+  "report/generated/scaling_ablation_sink-initial-basis.dat",
+  "report/generated/scaling_ablation_with-transitive-reduction.dat",
+  "report/generated/table_ablation_breakdown.tex",
+  "experiments/analysis/scalability_aggregated.csv",
+  "report/generated/table_scalability.tex",
+  "report/generated/table_scalability_speedup.tex",
+  "report/generated/profile_scalability.dat",
+  "report/generated/scaling_scalability_dinkelbach.dat",
+  "report/generated/scaling_scalability_forest-tuned.dat",
+  "report/generated/scaling_scalability_parametric.dat",
+  "report/generated/table_scalability_breakdown.tex",
+  "experiments/analysis/capacities_aggregated.csv",
+  "report/generated/table_capacities.tex",
+  "report/generated/table_capacities_speedup.tex",
+  "report/generated/profile_capacities.dat",
+  "report/generated/scaling_capacities_forest-q1.dat",
+  "report/generated/scaling_capacities_forest-q100.dat",
+  "report/generated/scaling_capacities_forest-q20.dat",
+  "report/generated/scaling_capacities_forest-q5.dat",
+  "report/generated/scaling_capacities_parametric-q1.dat",
+  "report/generated/scaling_capacities_parametric-q100.dat",
+  "report/generated/table_capacities_breakdown.tex",
+  "experiments/analysis/dual_aggregated.csv",
+  "report/generated/table_dual.tex",
+  "report/generated/table_dual_speedup.tex",
+  "report/generated/profile_dual.dat",
+  "report/generated/scaling_dual_forest-dual.dat",
+  "report/generated/scaling_dual_forest-dual-largest-tree.dat",
+  "report/generated/scaling_dual_forest-primal.dat",
+  "report/generated/scaling_dual_parametric.dat",
+  "report/generated/table_dual_breakdown.tex",
+  "experiments/analysis/canonical_path_aggregated.csv",
+  "report/generated/table_canonical_path.tex",
+  "report/generated/table_canonical_path_speedup.tex",
+  "report/generated/profile_canonical_path.dat",
+  "report/generated/scaling_canonical_path_dinkelbach.dat",
+  "report/generated/scaling_canonical_path_parametric.dat",
+  "report/generated/scaling_canonical_path_ratio-closure-dual.dat",
+  "report/generated/scaling_canonical_path_ratio-closure-tuned.dat",
+  "report/generated/scaling_canonical_path_ratio-closure-warm.dat",
+  "report/generated/scaling_canonical_path_ratio-closure-warm-dual.dat",
+  "report/generated/table_canonical_path_breakdown.tex",
+  "report/generated/table_tuning_forest-v2.tex"
+ ]
+}

@@ -1,0 +1,44 @@
+name: C++ validation
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install toolchain
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake g++-14 ninja-build
+
+      - name: Configure
+        env:
+          CXX: g++-14
+        run: cmake -S . -B build/release -DCMAKE_BUILD_TYPE=Release -DPCLP_BUILD_LEGACY=OFF
+
+      - name: Build
+        run: cmake --build build/release -j"$(nproc)"
+
+      - name: Test
+        # paper_example8, random_differential, basis_forest, engine_invariants
+        # and the acceptance suite: 308 exact instances checked against an
+        # independent rational enumeration oracle, every configuration of the
+        # rotation with the invariants verified at every pivot.
+        run: ctest --test-dir build/release --output-on-failure
+
+      - name: Reproduce the CI campaign
+        run: |
+          python3 tools/benchmark/run.py configs/suites/ci.json --root /tmp/runs
+          python3 - <<'PY'
+          import json
+          m = json.load(open('/tmp/runs/ci/manifest.json'))
+          bad = [k for k, v in m['records'].items() if not v.get('verified')]
+          assert not bad, f"unverified runs: {bad}"
+          print(f"ci: {len(m['records'])} runs, all verified")
+          PY

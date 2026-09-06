@@ -1,0 +1,26 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it and the accompanying manuscript once it is public."
+title: "ratio-closure-simplex: a primal and dual simplex specialised to maximum-ratio closure and its canonical decomposition"
+type: software
+authors:
+  - family-names: Furini
+    given-names: Fabio
+license: MIT
+repository-code: "https://github.com/fabiofurini/ratio-closure-simplex"
+version: "0.1.0"
+date-released: "2026-09-06"
+abstract: >
+  C++20 implementation of the ratio-closure simplex: the ordinary primal and
+  dual simplex specialised to the normalised maximum-ratio closure linear
+  program on an arbitrary precedence DAG, used to produce the entire canonical
+  sequence of closure layers and not only the maximum-ratio one. Ships two
+  independent certified reference backends (Dinkelbach with minimum cuts, and a
+  parametric divide-and-conquer decomposition), an exhaustive rational oracle,
+  a synthetic instance generator, frozen data splits, a reproducible campaign
+  runner and the experimental report generated from the stored campaigns.
+keywords:
+  - maximum closure
+  - fractional programming
+  - network simplex
+  - precedence constraints
+  - parametric optimisation

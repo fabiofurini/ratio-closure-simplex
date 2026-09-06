@@ -1,0 +1,85 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[margin=25mm]{geometry}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,amsthm,mathtools,mathrsfs}
+\usepackage{booktabs,array,longtable}
+\usepackage{adjustbox}
+\usepackage{url}
+% File paths may break across lines instead of running into the margin.
+\newcommand{\file}[1]{\path{#1}}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepgfplotslibrary{groupplots}
+\usepackage[round,authoryear]{natbib}
+\usepackage[colorlinks=true,linkcolor=blue!50!black,citecolor=blue!50!black,urlcolor=blue!60!black]{hyperref}
+\usepackage[capitalise,noabbrev]{cleveref}
+\input{../latex/common/notation}
+
+% Generated artefacts are produced by tools/report/analyze.py from the stored
+% campaigns.  A campaign that has not been run yet must not break the build:
+% the document then states which artefact is missing instead of showing numbers.
+\newcommand{\generated}[1]{%
+  \IfFileExists{generated/#1.tex}{\input{generated/#1}}%
+  {\begin{center}\small\itshape Artefact \texttt{\detokenize{generated/#1.tex}} not present:
+   the corresponding campaign has not been analysed in this build of the report.\end{center}}}
+\newcommand{\generateddata}[1]{generated/#1.dat}
+
+\pgfplotsset{
+  every axis/.append style={
+    width=0.46\textwidth, height=0.34\textwidth,
+    tick label style={font=\footnotesize}, label style={font=\small},
+    legend style={font=\footnotesize, draw=none, fill=none},
+    grid=both, grid style={line width=0.2pt, draw=gray!25},
+  },
+}
+
+\title{A ratio-closure simplex for maximum-ratio closure\\ and its canonical decomposition:\\ implementation and experimental report}
+\author{Experimental report generated from the stored campaigns}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+
+
+\begin{abstract}
+This report documents the measurement campaigns run on the \FS{} solver of this
+project and on the two independent combinatorial backends built as references.
+It states the questions asked, the instances and protocol used, the validation
+performed on every result, how the solver's parameters were tuned on data
+disjoint from the test set, and what the measurements do and do not support.
+Every table and figure is regenerated from the stored run manifests by
+\texttt{tools/report/analyze.py}. The figures quoted in the running text are
+taken from those same tables and from the stored manifests, and were re-checked
+against them after the instance library was regenerated deterministically and
+every campaign re-run (\file{docs/decisions.md}, D16).
+\end{abstract}
+
+\tableofcontents
+
+\input{sections/00_summary}
+\input{sections/01_objectives}
+\input{sections/02_methods}
+\input{sections/03_environment}
+\input{sections/04_instances}
+\input{sections/05_validation}
+\input{sections/06_tuning}
+\input{sections/07_results}
+\input{sections/07b_canonical}
+\input{sections/08_analysis}
+\input{sections/09_scalability}
+\input{sections/10_robustness}
+\input{sections/11_discussion}
+\input{sections/12_reproducibility}
+\appendix
+\input{sections/13_appendix}
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+\end{document}

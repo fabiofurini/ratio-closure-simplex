@@ -1,0 +1,120 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[margin=27mm]{geometry}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,amsthm,mathtools,mathrsfs}
+\usepackage{booktabs,array,longtable}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage[round,authoryear]{natbib}
+\usepackage{aliascnt}
+\usepackage[colorlinks=true,linkcolor=blue!50!black,citecolor=blue!50!black,urlcolor=blue!60!black]{hyperref}
+\usepackage[capitalise,noabbrev]{cleveref}
+\usepackage{fancyhdr}
+\input{../latex/common/notation}
+\numberwithin{equation}{section}
+\newtheorem{theorem}{Theorem}[section]
+\newaliascnt{proposition}{theorem}
+\newtheorem{proposition}[proposition]{Proposition}
+\aliascntresetthe{proposition}
+\newaliascnt{lemma}{theorem}
+\newtheorem{lemma}[lemma]{Lemma}
+\aliascntresetthe{lemma}
+\newaliascnt{corollary}{theorem}
+\newtheorem{corollary}[corollary]{Corollary}
+\aliascntresetthe{corollary}
+\crefname{proposition}{Proposition}{Propositions}
+\crefname{lemma}{Lemma}{Lemmas}
+\crefname{corollary}{Corollary}{Corollaries}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\setlist{topsep=4pt,itemsep=2pt,parsep=0pt}
+\setlength{\emergencystretch}{2em}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small A ratio-closure simplex on general precedence graphs}
+\fancyhead[R]{\small Review draft}
+\fancyfoot[C]{\thepage}
+\setlength{\headheight}{14pt}
+\title{A Ratio-Closure Simplex\\ for Maximum-Ratio Closure and its Canonical Decomposition\\[5pt]
+\large A didactic derivation on general directed acyclic graphs}
+\author{Working document for mathematical review}
+\date{5 September 2026}
+\hypersetup{
+  pdftitle={A Ratio-Closure Simplex for Maximum-Ratio Closure on Precedence Graphs},
+  pdfauthor={Working document for mathematical review},
+  pdfsubject={A didactic derivation on general directed acyclic graphs},
+  pdfkeywords={ratio-closure simplex, maximum-ratio closure, precedence graph, linear programming}
+}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+This tutorial develops the \FS{} for the maximum-ratio closure
+subproblem underlying a linear program with arbitrary precedence constraints,
+positive weights, profits of either sign, unit upper bounds, and one capacity
+constraint. The central object is a spanning forest of \emph{nonbasic slack
+variables}, together with roots for its zero components. We derive the basis
+representation, oriented subtree formulas for reduced costs and directions,
+the ratio test, all four structural pivot updates, and an exact-arithmetic
+termination argument. This representation supports specialized computation
+of both entering-variable prices and the pivot column: all reduced costs
+take $O(n)$ arithmetic operations after the forest is available, and a full
+pivot takes $O(n+m)$ with a complete arc scan. Repeated ratio optimization recovers the block
+decomposition and an optimum of the capacitated LP. A complete eight-pivot
+trace includes six degenerate pivots and is checked independently with rational
+linear algebra. This is a mathematical and didactic draft, not a performance
+report or a claim that the optimized C++ solver has already been implemented.
+\end{abstract}
+
+\paragraph{The three structural ingredients.}
+A basis is encoded by a forest and its roots, with exactly one rootless
+tree. This combinatorial object gives both the reduced costs used to choose
+an entering variable and the corresponding pivot column through subtree
+sums and signed component movements. These are specialized solutions of
+the two basis systems of the revised simplex method. Sections~\ref{sec:forest} and
+\ref{sec:directions} establish these three ingredients; Section~\ref{sec:implementation}
+summarizes the arithmetic cost of each operation. The input precedence graph
+may be any DAG: the forest represents the current basis.
+
+\paragraph{Status and reading guide.}
+The notation and general LP follow the supplied manuscript
+\citet{DoseFuriniLocatelli2026}. The forest viewpoint starts from the internal
+notes \citet{ForestNotes}; here its formulas are derived for arbitrary arc
+orientations. Sections~\ref{sec:model}--\ref{sec:ratio} introduce only the
+background needed by the algorithm. Sections~\ref{sec:forest}--\ref{sec:trace}
+are the core: basis, pricing, directions, pivots, and a worked execution.
+Section~\ref{sec:outer} returns to the original LP.
+The proofs concern exact arithmetic. The numerical and performance variants
+in Section~\ref{sec:implementation} are implementation proposals, not measured
+results. The checks in Section~\ref{sec:verification} support review of the
+formulas; they do not replace the proofs or constitute a production solver.
+No novelty claim is made before comparison with the relevant simplex and
+closure literature.
+
+\tableofcontents
+\clearpage
+\input{sections/01_model}
+\input{sections/02_ratio}
+\input{sections/03_forest}
+\input{sections/04_directions}
+\input{sections/05_pivots}
+\input{sections/06_trace}
+\input{sections/07_outer}
+\input{sections/08_implementation}
+\input{sections/09_verification}
+\appendix
+\input{sections/10_flow_context}
+\bibliographystyle{plainnat}
+\bibliography{references}
+\end{document}

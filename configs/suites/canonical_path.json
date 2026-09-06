@@ -1,0 +1,97 @@
+{
+ "campaign": "canonical_path",
+ "task": "full-path",
+ "note": "E2: decomposizione canonica completa, tutti i blocchi. Confronta il riavvio a freddo di ogni oracolo con il riavvio a caldo dalla base finale del precedente.",
+ "replicas": 2,
+ "time_limit": 60,
+ "wall_limit": 300,
+ "instances": {
+  "index": [
+   "data/generated/index.json",
+   "data/processed/index.json"
+  ],
+  "max_nodes": 20000,
+  "names": [
+   "gen_empty_plain_n2000_uniform_neg30_r0",
+   "gen_chain_plain_n2000_uniform_neg30_r0",
+   "gen_layered_levels8-density0.05_n2000_uniform_neg30_r0",
+   "gen_sparse_degree3_n2000_uniform_neg30_r0",
+   "gen_sparse_degree3_n20000_uniform_neg30_r0",
+   "gen_dense_density0.1_n800_uniform_neg30_r0",
+   "gen_disconnected_components6_n2000_uniform_neg30_r0",
+   "gen_transitive_degree2-extra3.0_n2000_uniform_neg30_r0",
+   "gen_cyclic_components10_n2000_uniform_neg30_r0",
+   "pckp_A_972_1661",
+   "pckp_L_349_2101",
+   "minelib_newman1"
+  ]
+ },
+ "configurations": {
+  "ratio-closure-tuned": {
+   "algorithm": "ratio-closure",
+   "canonicalization": "dual",
+   "rebuild_interval": 256,
+   "transitive_reduction": "off",
+   "node_order": "input",
+   "pricing": "candidate-list",
+   "candidate_limit": 64,
+   "entering_rule": "best-improving",
+   "basis_update": "local",
+   "degeneracy_trigger": 32768,
+   "ratio_test": "early",
+   "initial_basis": "full"
+  },
+  "ratio-closure-warm": {
+   "algorithm": "ratio-closure",
+   "canonicalization": "dual",
+   "rebuild_interval": 256,
+   "transitive_reduction": "off",
+   "node_order": "input",
+   "pricing": "candidate-list",
+   "candidate_limit": 64,
+   "entering_rule": "best-improving",
+   "basis_update": "local",
+   "degeneracy_trigger": 32768,
+   "ratio_test": "early",
+   "initial_basis": "full",
+   "warm_start": "residual"
+  },
+  "ratio-closure-dual": {
+   "algorithm": "ratio-closure",
+   "canonicalization": "dual",
+   "rebuild_interval": 256,
+   "transitive_reduction": "off",
+   "node_order": "input",
+   "pricing": "candidate-list",
+   "candidate_limit": 64,
+   "entering_rule": "best-improving",
+   "basis_update": "local",
+   "degeneracy_trigger": 32768,
+   "ratio_test": "early",
+   "initial_basis": "full",
+   "simplex": "dual"
+  },
+  "ratio-closure-warm-dual": {
+   "algorithm": "ratio-closure",
+   "canonicalization": "dual",
+   "rebuild_interval": 256,
+   "transitive_reduction": "off",
+   "node_order": "input",
+   "pricing": "candidate-list",
+   "candidate_limit": 64,
+   "entering_rule": "best-improving",
+   "basis_update": "local",
+   "degeneracy_trigger": 32768,
+   "ratio_test": "early",
+   "initial_basis": "full",
+   "warm_start": "residual",
+   "simplex": "dual"
+  },
+  "dinkelbach": {
+   "algorithm": "dinkelbach"
+  },
+  "parametric": {
+   "algorithm": "parametric"
+  }
+ }
+}

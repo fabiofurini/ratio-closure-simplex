@@ -1,0 +1,56 @@
+\section{Maximum closure and its linear program}\label{sec:closure}
+
+A \emph{closure} of a directed graph is a set of vertices containing all successors
+of its members; with the arc convention of this project, \(i \to j\) meaning
+``\(i\) requires \(j\)'', a closure is a set closed under prerequisites. The
+maximum-weight closure problem is solved by a minimum cut in a network with
+infinite-capacity arcs on the precedence relation, a reduction due to
+\citet{Picard1976} and, in the selection form, to \citet{Rhys1970} and
+\citet{Balinski1970}; \citet{JohnsonNiemi1983} and \citet{Gale1957} belong to
+the same early line. The polyhedral fact that makes the reduction work --- that
+the constraint matrix of the closure inequalities is an interval-free network
+matrix, so the natural LP relaxation is integral --- is what allows this project
+to work with the LP relaxation and still speak about closures.
+
+\citet{PicardQueyranne1980} characterise the structure of \emph{all} minimum
+cuts of a network, and \citet{PicardQueyranne1982} survey the applications of
+minimum cuts to combinatorial problems, including closure. Both are used here
+for a specific technical point rather than for background: the distinction
+between the minimal and the maximal source side of a minimum cut, which is what
+the canonical convention on tied ratios needs, is theirs.
+
+On the algorithmic side, \citet{Hochbaum2001} revisits minimum cut and maximum
+flow specifically in closure graphs, \citet{HochbaumChen2000} compare
+implementations on the open-pit instance of the problem, and
+\citet{Hochbaum2008} gives the pseudoflow algorithm, which is the method a
+serious flow-based competitor would use today. \citet{UnderwoodTolwinski1998}
+is worth singling out: they solve the ultimate pit problem with a network flow
+algorithm derived from the \emph{dual}, and relate its steps to those of
+Lerchs--Grossmann, so the idea of attacking maximum closure through dual
+information is itself old. \citet{AmankwahEtAl2014} extend Picard's reduction
+to the multi-period case on a time-expanded graph, and \citet{MeagherEtAl2014}
+review the design of pushbacks, which is where the sequence of nested closures
+produced by the canonical decomposition is actually consumed. \citet{AhujaEtAl1993} and
+\citet{Schrijver2003} are the standard references for the surrounding network
+flow and combinatorial optimisation material.
+
+A generalisation worth recording, because it places the closure problem inside a
+larger family rather than beside it: \citet{HochbaumQueyranne2003} minimise a
+convex cost over a closed set, which specialises to maximum closure on one side
+and to isotonic regression on the other. The same family is visited from the
+other end by the maximum density subgraph, which is the ratio objective of
+\cref{sec:ratio} without any precedence structure at all --- solved by flow in
+\citet{Goldberg1984}, given its linear program by \citet{Charikar2000}, and
+treated as one parametric cut by \citet{Hochbaum2024}.
+
+Not everything in this line is a flow algorithm, and the exception matters
+enough to have its own place: the algorithm of \citet{LerchsGrossmann1965}
+maintains a \emph{forest} and pivots on it. It is discussed in \cref{sec:lg},
+next to the recent forest-structured work, because that is where it does its
+damage.
+
+\paragraph{What this costs the claim.} Everything about the closure model, its
+LP relaxation, its integrality and its solution by minimum cut is classical.
+Nothing in \FS{} may be presented as new at this level, and the project's own
+documents say so: the mathematical contract states the model and attributes it,
+and the tutorial recalls the reduction only to fix notation.

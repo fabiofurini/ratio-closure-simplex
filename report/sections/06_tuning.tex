@@ -1,0 +1,38 @@
+\section{Tuning}
+\label{sec:tuning}
+
+\subsection{Search space and protocol}
+
+Only parameters the solver actually implements take part in the search:
+pricing scheme and its block size or candidate limit, entering rule, forest
+update mode with its rebuild interval and fraction, canonicalisation,
+degeneracy trigger, vertex ordering of the condensation, transitive reduction and
+the initial basis. Conditional parameters are sampled only when their guard
+holds, so a candidate never carries a block size it cannot use, and the
+constraint that Bland's rule requires full pricing mirrors the solver's own
+validation. Numerical tolerances are deliberately excluded: relaxing them would
+buy time by solving a different problem.
+
+Candidates are drawn by reproducible random search from a fixed seed, after a
+small list of a-priori plausible configurations. Each candidate is evaluated on
+a deterministic subsample of the training manifest under a fixed per-run limit,
+and ranked lexicographically by number of incorrect results, number of instances
+solved and verified within the limits, PAR-2 time, and peak memory. Every
+attempt, including rejected ones and the reason for rejection, is appended to a
+history file, so an interrupted search resumes without repeating work and the
+total cost of tuning --- not only the cost of the winning configuration --- is
+recorded.
+
+\generated{table_tuning_forest-v2}
+
+A first search was run before the parameters that turn out to matter existed in
+the solver, and its attempts differed by less than three per cent: it is recorded
+in \file{experiments/tuning/} but it selected nothing and is not reported here.
+The search shown above is the one whose winner was frozen.
+
+\subsection{Frozen configuration}
+
+The configuration selected on training and validation data is written to
+\file{configs/frozen/} together with its date, the split it was chosen on, the
+search space and the rationale, and only then is the test manifest measured. The
+test set is never used to adjust a default.

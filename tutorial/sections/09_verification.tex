@@ -1,0 +1,99 @@
+\section{What has been checked, and how to review this draft}\label{sec:verification}
+
+\subsection{Independent exact checks}
+The companion script \texttt{tools/verify/verify\_tutorial.py} uses Python's
+rational arithmetic and does not depend on a commercial LP solver. It
+implements the formulas in this draft as a pedagogical checker, not as the
+planned high-performance solver. At each visited basis it independently
+assembles $A_{\Bset}$ and solves
+\[
+ A_{\Bset}z_{\Bset}=b,\qquad
+ A_{\Bset}d_{\Bset}=-A_q
+\]
+by rational Gaussian elimination. It compares every nonbasic candidate's
+direction and reduced cost with the forest formulas, checks the exchanged
+basis and verifies the final ratio dual.
+It also solves the revised simplex multiplier system
+$\mat{A}_{\Bset}^T\vecg{\pi}=\vect{g}_{\Bset}$ independently at every visited basis and compares
+its solution with the forest multipliers. At each pivot, it solves
+$\mat{A}_{\Bset}^T\vecg{\eta}=\vect{e}_r$ for the leaving position and checks every
+nonbasic coefficient of the resulting pivot row against the forest direction.
+
+Separately, exhaustive enumeration lists all closures on the small instance,
+computes exact maximum ratios and maximal ties, and checks the complete
+canonical sequence. For the LP value it enumerates capacity intersections
+of pairs of closure points in the weight--profit plane; this independent
+oracle does not restrict those pairs to the sequence found by the \FS{}.
+
+\input{../build/tutorial/generated/verification_stats.tex}
+The supplied deterministic check suite contains \VerifiedInstances{} instances:
+the eight-node example, four explicit edge cases, and 32 seeded small random
+DAGs with profits of either sign and positive integer weights. It checks
+\VerifiedBases{} bases and \VerifiedDirections{} candidate directions.
+The additional revised simplex comparisons check \VerifiedMultipliers{}
+multiplier systems and \VerifiedPivotRows{} pivot rows.
+The eight-node graph has 36 closures. Its first oracle takes eight pivots,
+six at zero step, and its capacity-4 LP value is 7.
+Both numerical certificates displayed in the main text are verified by
+the checker or its returned forest certificate.
+
+These counts describe a finite review suite, not comprehensive testing of
+an optimized implementation, not a statistical experiment, and not evidence
+of a runtime advantage. The seed and hashes of the fixture and verification
+script are saved with the generated results.
+
+\subsection{Rebuilding the tables and PDF}
+From the project root, run
+\begin{quote}\ttfamily
+python3 tools/build\_tutorial.py
+\end{quote}
+The command reruns the exact checks, regenerates numerical tables and forest
+figures, and compiles this document. The single output PDF is
+\begin{quote}\ttfamily\small
+build/tutorial/forest\_simplex\_tutorial.pdf
+\end{quote}
+The generated verification record is
+\begin{quote}\ttfamily\small
+build/tutorial/generated/verification.json
+\end{quote}
+All intermediate TeX files remain under \texttt{build/tutorial}. The source
+instance, shared notation and bibliography each have one authoritative file.
+No original project source is altered or required during this rebuild.
+
+\subsection{Suggested order for mathematical review}
+The following checkpoints identify concrete places where an error would
+affect the proposed general algorithm:
+\begin{enumerate}
+\item Check the prerequisite direction in \eqref{eq:lpprec} and the
+parent--child sign in \eqref{eq:sign}.
+\item Check the converse as well as the forward implication of the basis
+characterization, \cref{thm:basis}.
+\item Check that the normalization correction in \eqref{eq:direction}
+preserves every other nonbasic variable.
+\item Check the sign of \eqref{eq:rc-edge}, especially when a child points
+to its parent in a zero tree.
+\item Check the inclusion of decreasing nonforest slacks in the ratio test.
+\item Follow pivots 7 and 8, including the unchanged objective at pivot 8.
+\item Check the sign convention in the forest dual certificate and distinguish
+it from the capacitated LP dual.
+\item Check that merging raw ties yields the maximal, possibly disconnected,
+canonical block.
+\item Check the stop at nonpositive ratios for the capacity-inequality LP.
+\end{enumerate}
+
+\subsection{Work remaining after this review version}
+The exact-reference derivation above is accompanied by proofs and finite
+checks. The following tasks remain open as project deliverables:
+\begin{itemize}
+\item external mathematical review and comparison with existing forest,
+network-simplex and closure algorithms to determine the actual novelty;
+\item a C++ implementation with linear-memory data structures;
+\item verified local updates, alternate pricing and warm starts;
+\item numerical stress tests beyond the exact small-DAG checker;
+\item competitive backend comparisons, parameter tuning and reproducible
+runtime/memory experiments;
+\item extension beyond the declared positive-weight, single-capacity model.
+\end{itemize}
+In particular, this document supplies no invented benchmark results and makes
+no claim that the eventual optimized solver is faster than parametric flow
+or a general LP solver.

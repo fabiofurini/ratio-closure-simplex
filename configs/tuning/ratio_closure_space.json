@@ -1,0 +1,217 @@
+{
+  "name": "forest-v2",
+  "task": "solve",
+  "capacity": "instance",
+  "base": {
+    "algorithm": "ratio-closure"
+  },
+  "parameters": {
+    "pricing": {
+      "values": [
+        "full",
+        "partial",
+        "candidate-list"
+      ]
+    },
+    "entering_rule": {
+      "values": [
+        "bland",
+        "first-improving",
+        "best-improving"
+      ]
+    },
+    "basis_update": {
+      "values": [
+        "full",
+        "local",
+        "adaptive"
+      ]
+    },
+    "canonicalization": {
+      "values": [
+        "sequential",
+        "dual"
+      ]
+    },
+    "pricing_block_size": {
+      "values": [
+        64,
+        256,
+        1024,
+        4096
+      ],
+      "requires": {
+        "pricing": [
+          "partial"
+        ]
+      }
+    },
+    "candidate_limit": {
+      "values": [
+        16,
+        64,
+        256
+      ],
+      "requires": {
+        "pricing": [
+          "candidate-list"
+        ]
+      }
+    },
+    "rebuild_interval": {
+      "values": [
+        0,
+        64,
+        256,
+        4096
+      ]
+    },
+    "rebuild_fraction": {
+      "values": [
+        0.1,
+        0.25,
+        0.5
+      ],
+      "requires": {
+        "basis_update": [
+          "adaptive"
+        ]
+      }
+    },
+    "degeneracy_trigger": {
+      "values": [
+        8,
+        32,
+        128,
+        1024,
+        32768,
+        1000000
+      ]
+    },
+    "transitive_reduction": {
+      "values": [
+        "off",
+        "on"
+      ]
+    },
+    "node_order": {
+      "values": [
+        "input",
+        "topological"
+      ]
+    },
+    "initial_basis": {
+      "values": [
+        "sink",
+        "closure",
+        "full"
+      ]
+    },
+    "initial_seeds": {
+      "values": [
+        1,
+        8,
+        32
+      ],
+      "requires": {
+        "initial_basis": [
+          "closure"
+        ]
+      }
+    },
+    "ratio_test": {
+      "values": [
+        "full",
+        "restricted",
+        "early"
+      ]
+    },
+    "simplex": {
+      "values": [
+        "primal",
+        "dual"
+      ]
+    },
+    "dual_leaving": {
+      "values": [
+        "first",
+        "largest-tree"
+      ],
+      "requires": {
+        "simplex": [
+          "dual"
+        ]
+      }
+    }
+  },
+  "constraints": [
+    {
+      "if": {
+        "entering_rule": [
+          "bland"
+        ]
+      },
+      "then": {
+        "pricing": [
+          "full"
+        ]
+      }
+    }
+  ],
+  "seeded_candidates": [
+    {
+      "algorithm": "ratio-closure",
+      "canonicalization": "dual",
+      "rebuild_interval": 256,
+      "transitive_reduction": "off",
+      "node_order": "input",
+      "pricing": "full",
+      "entering_rule": "bland",
+      "basis_update": "local",
+      "degeneracy_trigger": 32,
+      "ratio_test": "full",
+      "initial_basis": "sink"
+    },
+    {
+      "algorithm": "ratio-closure",
+      "canonicalization": "dual",
+      "rebuild_interval": 256,
+      "transitive_reduction": "off",
+      "node_order": "input",
+      "pricing": "full",
+      "entering_rule": "best-improving",
+      "basis_update": "local",
+      "degeneracy_trigger": 32768,
+      "ratio_test": "early",
+      "initial_basis": "full"
+    },
+    {
+      "algorithm": "ratio-closure",
+      "canonicalization": "dual",
+      "rebuild_interval": 256,
+      "transitive_reduction": "off",
+      "node_order": "input",
+      "pricing": "candidate-list",
+      "candidate_limit": 64,
+      "entering_rule": "best-improving",
+      "basis_update": "local",
+      "degeneracy_trigger": 32768,
+      "ratio_test": "early",
+      "initial_basis": "full"
+    },
+    {
+      "algorithm": "ratio-closure",
+      "canonicalization": "dual",
+      "rebuild_interval": 256,
+      "transitive_reduction": "off",
+      "node_order": "input",
+      "pricing": "full",
+      "entering_rule": "best-improving",
+      "basis_update": "adaptive",
+      "rebuild_fraction": 0.5,
+      "degeneracy_trigger": 32768,
+      "ratio_test": "early",
+      "initial_basis": "sink"
+    }
+  ]
+}

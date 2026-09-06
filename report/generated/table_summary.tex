@@ -1,0 +1,18 @@
+\begin{table}[tbp]
+\centering
+\caption{Headline of the frozen test set. \emph{solved} counts the instances finished and independently verified within the limit; \emph{median} and \emph{worst} are wall-clock seconds over those; \emph{PAR-2} sums the times and charges twice the time limit for each unsolved instance, so lower is better and a single time-out costs a lot; \emph{MiB} is the largest peak resident memory observed.}
+\label{tab:summary}
+\small
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{lrrrrr}
+\toprule
+configuration & solved & median & worst & PAR-2 & MiB \\
+\midrule
+dinkelbach & 40/46 & 0.234 & 23.383 & 447 & 364 \\
+forest-reference & 27/46 & 0.332 & 29.433 & 1242 & 320 \\
+forest-tuned & 36/46 & 0.142 & 24.711 & 653 & 320 \\
+parametric & 46/46 & 0.057 & 26.362 & 47 & 384 \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\end{table}

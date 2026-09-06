@@ -1,0 +1,42 @@
+\section{Closure and min-cut as comparison tools}\label{app:flow}
+
+This appendix records the alternative closure oracle only to locate the
+\FSC{} within the existing framework. Maximum closure admits
+a minimum-cut representation \citep{Picard1976}; parametric maximum flow
+and ratio-closure applications are treated by \citet{GalloEtAl1989}. The
+graph-based predecessor of both is \citet{LerchsGrossmann1965}, whose
+normalized tree is a forest with branch aggregates rather than a flow;
+\citet{Hochbaum2001} recovers a flow from that tree in linear time and gives a
+parametric variant with the cost of a single run, which makes it a comparison
+tool on the ratio task as well.
+These are comparison tools, not subroutines required by
+\cref{alg:forest,alg:outer}.
+
+For a fixed real parameter $\lambda$, assign vertex value
+$a_i=p_i-\lambda w_i$. Add source s and sink t, capacities
+\[
+ c_{si}=\max\{a_i,0\},\qquad
+ c_{it}=\max\{-a_i,0\},
+\]
+and a precedence-arc capacity $H>\sum_i\max\{a_i,0\}$.
+Every minimum cut has a source-side vertex set C that is a closure, and its
+capacity is
+\[
+ \sum_i\max\{a_i,0\}-[p(C)-\lambda w(C)].
+\]
+Thus minimizing the cut maximizes the penalized closure objective.
+For a fixed $\lambda$, this construction works with either sign of the
+parameter. A linear parametric implementation can use a different
+normalization on a specified interval, as explained in the supplied manuscript.
+
+At a breakpoint, the closure maximizing the penalized objective need not be
+unique. In a residual network of a maximum flow, source-reachable vertices
+give the \emph{minimal} source side. The complement of vertices that can
+reach t gives the \emph{maximal} source side. A canonical comparison must use
+the latter convention. For a ratio root, the empty closure can also tie at
+value zero, so an implementation must preserve or recover a nonempty ratio
+maximizer.
+
+The planned experiments will compare methods on the same task: one ratio,
+one capacity, or the full positive path. The worst-case bounds of parametric
+flow cannot be used as a bound for the number of \FS{} pivots.

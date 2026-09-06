@@ -1,0 +1,1038 @@
+{
+ "split": "train",
+ "seed": 20260906,
+ "shares": "50,25,25",
+ "count": 103,
+ "instances": [
+  {
+   "name": "gen_bilevel_density0.02_n200_uniform_neg30_r0",
+   "path": "data/generated/gen_bilevel_density0.02_n200_uniform_neg30_r0.json",
+   "sha256": "b03193a282ee2691b5d427524190d9280e5dba860163c80ea2180e0d92bb7b23",
+   "nodes": 200,
+   "arcs": 208,
+   "capacity": 269.75,
+   "family": "bilevel",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_bilevel_density0.02_n200_uniform_neg30_r1",
+   "path": "data/generated/gen_bilevel_density0.02_n200_uniform_neg30_r1.json",
+   "sha256": "cbe7807c6fdd70106e58ef948f46c5d9032b4ef4b4360f9f7fc230ccc30f547c",
+   "nodes": 200,
+   "arcs": 190,
+   "capacity": 263.5,
+   "family": "bilevel",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_bilevel_density0.02_n200_uniform_neg30_r2",
+   "path": "data/generated/gen_bilevel_density0.02_n200_uniform_neg30_r2.json",
+   "sha256": "164862b8d4d60f51a7f72b4faecfa453fde263321936493f9d67c2e96fdfab8d",
+   "nodes": 200,
+   "arcs": 223,
+   "capacity": 241.0,
+   "family": "bilevel",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_bilevel_density0.02_n8000_uniform_neg30_r0",
+   "path": "data/generated/gen_bilevel_density0.02_n8000_uniform_neg30_r0.json",
+   "sha256": "e16d25c9e3ed51e7bcf361147e276768cd20e4aec57ffc44496cca765739df19",
+   "nodes": 8000,
+   "arcs": 320049,
+   "capacity": 11013.0,
+   "family": "bilevel",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_bilevel_density0.02_n8000_uniform_neg30_r1",
+   "path": "data/generated/gen_bilevel_density0.02_n8000_uniform_neg30_r1.json",
+   "sha256": "8898eb1b6e0e6f0c4552fd57615f37d5d9dd8ab515f22e8d52eb9433451a6fbd",
+   "nodes": 8000,
+   "arcs": 319691,
+   "capacity": 11087.75,
+   "family": "bilevel",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_bilevel_density0.02_n8000_uniform_neg30_r2",
+   "path": "data/generated/gen_bilevel_density0.02_n8000_uniform_neg30_r2.json",
+   "sha256": "2e4d05977a7ee2b8c22b292230bb9ba187ed0d34273e4553aa8cc8f154c82218",
+   "nodes": 8000,
+   "arcs": 320402,
+   "capacity": 9758.25,
+   "family": "bilevel",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_chain_plain_n20000_uniform_neg0_r0",
+   "path": "data/generated/gen_chain_plain_n20000_uniform_neg0_r0.json",
+   "sha256": "be0f22bca99c18b5c2dd8a0ed8d1d0cd8568a99c51b20e343f36984602efcc40",
+   "nodes": 20000,
+   "arcs": 19999,
+   "capacity": 27653.75,
+   "family": "chain",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_chain_plain_n20000_uniform_neg0_r1",
+   "path": "data/generated/gen_chain_plain_n20000_uniform_neg0_r1.json",
+   "sha256": "23b28d94bc2d8641c5bce55167c88ea731b8eb10612d0a48ce3274501cf51c82",
+   "nodes": 20000,
+   "arcs": 19999,
+   "capacity": 27556.25,
+   "family": "chain",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_chain_plain_n20000_uniform_neg0_r2",
+   "path": "data/generated/gen_chain_plain_n20000_uniform_neg0_r2.json",
+   "sha256": "dfbed0cbc3b1b91dbe0b3e33ce5a769c8aedcdb162cdccbf4f20331e7adee639",
+   "nodes": 20000,
+   "arcs": 19999,
+   "capacity": 24504.5,
+   "family": "chain",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_chain_plain_n2000_uniform_neg0_r0",
+   "path": "data/generated/gen_chain_plain_n2000_uniform_neg0_r0.json",
+   "sha256": "cc7100d22be824f4744e7d35c960bc007930ec5f67aa9e579c90094385b7bf34",
+   "nodes": 2000,
+   "arcs": 1999,
+   "capacity": 2723.0,
+   "family": "chain",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_chain_plain_n2000_uniform_neg0_r1",
+   "path": "data/generated/gen_chain_plain_n2000_uniform_neg0_r1.json",
+   "sha256": "57ef749185a1397125f36ca7f07afcf76e9b8e0836bdb3c2a4204db3fa7ad061",
+   "nodes": 2000,
+   "arcs": 1999,
+   "capacity": 2771.5,
+   "family": "chain",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_chain_plain_n2000_uniform_neg0_r2",
+   "path": "data/generated/gen_chain_plain_n2000_uniform_neg0_r2.json",
+   "sha256": "29ba2fb96471a864cbd1520a0301fcac0dfad7192bd502d93eac368542ef0861",
+   "nodes": 2000,
+   "arcs": 1999,
+   "capacity": 2416.25,
+   "family": "chain",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_chain_plain_n200_uniform_neg30_r0",
+   "path": "data/generated/gen_chain_plain_n200_uniform_neg30_r0.json",
+   "sha256": "9383f1361b92a1eb7fac67b3fdc2ca9c3190bc5df77eaa04c692f380a1636962",
+   "nodes": 200,
+   "arcs": 199,
+   "capacity": 272.5,
+   "family": "chain",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_chain_plain_n200_uniform_neg30_r1",
+   "path": "data/generated/gen_chain_plain_n200_uniform_neg30_r1.json",
+   "sha256": "d7c33fd6e547b28253deadc3ba2da28120d9ad88ea491bf0e75a26266eb7b660",
+   "nodes": 200,
+   "arcs": 199,
+   "capacity": 266.0,
+   "family": "chain",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_chain_plain_n200_uniform_neg30_r2",
+   "path": "data/generated/gen_chain_plain_n200_uniform_neg30_r2.json",
+   "sha256": "c44d09e3ac3f6f7c9bda53c544494729c0ec36701c6d0dd11eaaded94af1ba8a",
+   "nodes": 200,
+   "arcs": 199,
+   "capacity": 240.75,
+   "family": "chain",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_cyclic_components10_n20000_uniform_neg30_r0",
+   "path": "data/generated/gen_cyclic_components10_n20000_uniform_neg30_r0.json",
+   "sha256": "8763cd43a8c51d667de5fac4d82057630999b7d11b46fff9e9e3846410efb027",
+   "nodes": 20000,
+   "arcs": 20009,
+   "capacity": 27393.75,
+   "family": "cyclic",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_cyclic_components10_n20000_uniform_neg30_r1",
+   "path": "data/generated/gen_cyclic_components10_n20000_uniform_neg30_r1.json",
+   "sha256": "76ea17980d31e41a159ca63850871cb63fa70558ac61fe12dcea67b61d979364",
+   "nodes": 20000,
+   "arcs": 20009,
+   "capacity": 27309.75,
+   "family": "cyclic",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_cyclic_components10_n20000_uniform_neg30_r2",
+   "path": "data/generated/gen_cyclic_components10_n20000_uniform_neg30_r2.json",
+   "sha256": "ac64e4e07f2e8117f6f41f8235e318b53c27ae16f4dc70e13a5d044e7f0ab18c",
+   "nodes": 20000,
+   "arcs": 20009,
+   "capacity": 24414.0,
+   "family": "cyclic",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_dense_density0.1_n200_uniform_neg30_r0",
+   "path": "data/generated/gen_dense_density0.1_n200_uniform_neg30_r0.json",
+   "sha256": "5f8f385eb32ea46316ad284c97bdd40bf75ef16738f84a339358682dffe38ad6",
+   "nodes": 200,
+   "arcs": 1984,
+   "capacity": 282.0,
+   "family": "dense",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_dense_density0.1_n200_uniform_neg30_r1",
+   "path": "data/generated/gen_dense_density0.1_n200_uniform_neg30_r1.json",
+   "sha256": "d07192e1fdc6cd9777c70b79d472ef2f910c4d832dfaa7b22003d4e478ddedc1",
+   "nodes": 200,
+   "arcs": 1980,
+   "capacity": 271.75,
+   "family": "dense",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_dense_density0.1_n200_uniform_neg30_r2",
+   "path": "data/generated/gen_dense_density0.1_n200_uniform_neg30_r2.json",
+   "sha256": "5f5c22da7882a4574234accdb987e07697cb29c2bacdab0cc4d2081c31f0945d",
+   "nodes": 200,
+   "arcs": 1968,
+   "capacity": 240.75,
+   "family": "dense",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_diamonds_module4_n20000_uniform_neg30_r0",
+   "path": "data/generated/gen_diamonds_module4_n20000_uniform_neg30_r0.json",
+   "sha256": "2aade66faf65d1d1d94180f6e72e08e5fbb1cf97b5330f6fc64740c9dde47726",
+   "nodes": 20000,
+   "arcs": 24994,
+   "capacity": 27682.0,
+   "family": "diamonds",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_diamonds_module4_n20000_uniform_neg30_r1",
+   "path": "data/generated/gen_diamonds_module4_n20000_uniform_neg30_r1.json",
+   "sha256": "98baae3bc5fe6706113d70b53a01f6a49e9d9caff0cda906fbe9a4c5c4192089",
+   "nodes": 20000,
+   "arcs": 24994,
+   "capacity": 27482.25,
+   "family": "diamonds",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_diamonds_module4_n20000_uniform_neg30_r2",
+   "path": "data/generated/gen_diamonds_module4_n20000_uniform_neg30_r2.json",
+   "sha256": "cc268a8792c6c014b2b5363c515619355761fbbdf08d1c1eeb9a6d41789b935b",
+   "nodes": 20000,
+   "arcs": 24994,
+   "capacity": 24458.0,
+   "family": "diamonds",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_diamonds_module4_n200_uniform_neg30_r0",
+   "path": "data/generated/gen_diamonds_module4_n200_uniform_neg30_r0.json",
+   "sha256": "cfc6667fc5f445909f99950cb45df701a47479ac23660be86eb34f09c808aa08",
+   "nodes": 200,
+   "arcs": 244,
+   "capacity": 297.25,
+   "family": "diamonds",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_diamonds_module4_n200_uniform_neg30_r1",
+   "path": "data/generated/gen_diamonds_module4_n200_uniform_neg30_r1.json",
+   "sha256": "282b0922b486d1230c988484a11716d85820888949bb413955c3872cd66e0466",
+   "nodes": 200,
+   "arcs": 244,
+   "capacity": 295.25,
+   "family": "diamonds",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_diamonds_module4_n200_uniform_neg30_r2",
+   "path": "data/generated/gen_diamonds_module4_n200_uniform_neg30_r2.json",
+   "sha256": "1807b234239ecd947ca314e8d9f2bcadf0606e07d082346b149dc2446da7a6eb",
+   "nodes": 200,
+   "arcs": 244,
+   "capacity": 238.75,
+   "family": "diamonds",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_disconnected_components64_n20000_uniform_neg30_r0",
+   "path": "data/generated/gen_disconnected_components64_n20000_uniform_neg30_r0.json",
+   "sha256": "826775a50cb6f845ad1a83ee16d0d1c524f9db9911a0e5970c2f1a365b730ba9",
+   "nodes": 20000,
+   "arcs": 19935,
+   "capacity": 27483.25,
+   "family": "disconnected",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_disconnected_components64_n20000_uniform_neg30_r1",
+   "path": "data/generated/gen_disconnected_components64_n20000_uniform_neg30_r1.json",
+   "sha256": "ee1cb87def95aa3062ddee2fb296c9e98eb5e1bd89b3b5dac539c9eb0a8a985e",
+   "nodes": 20000,
+   "arcs": 19935,
+   "capacity": 27460.0,
+   "family": "disconnected",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_disconnected_components64_n20000_uniform_neg30_r2",
+   "path": "data/generated/gen_disconnected_components64_n20000_uniform_neg30_r2.json",
+   "sha256": "dca6c6cca37c7fccbe457f3d68e852786e0fcf4bf48f2ec90df32876992aa3e6",
+   "nodes": 20000,
+   "arcs": 19935,
+   "capacity": 24472.0,
+   "family": "disconnected",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_disconnected_components64_n2000_uniform_neg30_r0",
+   "path": "data/generated/gen_disconnected_components64_n2000_uniform_neg30_r0.json",
+   "sha256": "76816d852423a98605668b6851fa3814758a7a8c7a77de5c782551febdc8ad2a",
+   "nodes": 2000,
+   "arcs": 1935,
+   "capacity": 2795.0,
+   "family": "disconnected",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_disconnected_components64_n2000_uniform_neg30_r1",
+   "path": "data/generated/gen_disconnected_components64_n2000_uniform_neg30_r1.json",
+   "sha256": "0442426d1b09de671908265255c5387a3352fe9bbb941648502791e7dd15003f",
+   "nodes": 2000,
+   "arcs": 1935,
+   "capacity": 2750.75,
+   "family": "disconnected",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_disconnected_components64_n2000_uniform_neg30_r2",
+   "path": "data/generated/gen_disconnected_components64_n2000_uniform_neg30_r2.json",
+   "sha256": "2f69388ed8a24504f28958c8823611a2583d929252f427d9274c1ace564fb2c6",
+   "nodes": 2000,
+   "arcs": 1935,
+   "capacity": 2433.5,
+   "family": "disconnected",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_disconnected_components6_n200_uniform_neg30_r0",
+   "path": "data/generated/gen_disconnected_components6_n200_uniform_neg30_r0.json",
+   "sha256": "50da83da27e4d7456ee68c7111eed461e55529bb020ce40d3c345d3be21a8716",
+   "nodes": 200,
+   "arcs": 193,
+   "capacity": 263.75,
+   "family": "disconnected",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_disconnected_components6_n200_uniform_neg30_r1",
+   "path": "data/generated/gen_disconnected_components6_n200_uniform_neg30_r1.json",
+   "sha256": "e62368dc2f33d277abf9cf1fb271e8d6d69c111676dcce91a1e0b58cb5af3c97",
+   "nodes": 200,
+   "arcs": 193,
+   "capacity": 256.0,
+   "family": "disconnected",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_disconnected_components6_n200_uniform_neg30_r2",
+   "path": "data/generated/gen_disconnected_components6_n200_uniform_neg30_r2.json",
+   "sha256": "a75f0e55158de942fb9f9e02c96c0c67b147e70b8972a28c40b4dfa85be5d519",
+   "nodes": 200,
+   "arcs": 193,
+   "capacity": 248.25,
+   "family": "disconnected",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_empty_plain_n20000_uniform_neg30_r0",
+   "path": "data/generated/gen_empty_plain_n20000_uniform_neg30_r0.json",
+   "sha256": "ca964fe67d5eecf18200cae9db430c896d3d23b6172ebe830190917cabf949ac",
+   "nodes": 20000,
+   "arcs": 0,
+   "capacity": 27417.75,
+   "family": "empty",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_empty_plain_n20000_uniform_neg30_r1",
+   "path": "data/generated/gen_empty_plain_n20000_uniform_neg30_r1.json",
+   "sha256": "b7a3954aad480bf4288793f1fb9fc2c52dead38ba2e81f07bf508a8d0f1a0505",
+   "nodes": 20000,
+   "arcs": 0,
+   "capacity": 27501.75,
+   "family": "empty",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_empty_plain_n20000_uniform_neg30_r2",
+   "path": "data/generated/gen_empty_plain_n20000_uniform_neg30_r2.json",
+   "sha256": "3908de5e7dd4b93d4ec5db7c6b7a201a78395113fbb1feaa014bb2a64ff685a9",
+   "nodes": 20000,
+   "arcs": 0,
+   "capacity": 24344.5,
+   "family": "empty",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_empty_plain_n2000_uniform_neg0_r0",
+   "path": "data/generated/gen_empty_plain_n2000_uniform_neg0_r0.json",
+   "sha256": "fce8b2e16e5172c5214c49b13511265eb9eea0ea0a6f7e19955dadf04c930dc2",
+   "nodes": 2000,
+   "arcs": 0,
+   "capacity": 2783.0,
+   "family": "empty",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_empty_plain_n2000_uniform_neg0_r1",
+   "path": "data/generated/gen_empty_plain_n2000_uniform_neg0_r1.json",
+   "sha256": "a962e4a1d1f1b4822c247696ffd4402e2031c822ec8f05ba3ef67c15371c8dca",
+   "nodes": 2000,
+   "arcs": 0,
+   "capacity": 2758.0,
+   "family": "empty",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_empty_plain_n2000_uniform_neg0_r2",
+   "path": "data/generated/gen_empty_plain_n2000_uniform_neg0_r2.json",
+   "sha256": "ce1245a9ac3bc0c94b80cb426aaa9e7340047d8e10ea7f2a2b9961cff8a5136b",
+   "nodes": 2000,
+   "arcs": 0,
+   "capacity": 2450.5,
+   "family": "empty",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_empty_plain_n200_uniform_neg30_r0",
+   "path": "data/generated/gen_empty_plain_n200_uniform_neg30_r0.json",
+   "sha256": "906e998cb0f51643c9080a0153249f6aa3b3d96ba8b8e2f0816cf3073815f027",
+   "nodes": 200,
+   "arcs": 0,
+   "capacity": 256.75,
+   "family": "empty",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_empty_plain_n200_uniform_neg30_r1",
+   "path": "data/generated/gen_empty_plain_n200_uniform_neg30_r1.json",
+   "sha256": "5acfa8ce1a15d01ab632c60df20a22f78daedfe5ede75df0e5b0c5b11af5133c",
+   "nodes": 200,
+   "arcs": 0,
+   "capacity": 273.25,
+   "family": "empty",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_empty_plain_n200_uniform_neg30_r2",
+   "path": "data/generated/gen_empty_plain_n200_uniform_neg30_r2.json",
+   "sha256": "cae070ab253641944f51a27c311d814524f38337dfb726ef8f04adb3b0985bae",
+   "nodes": 200,
+   "arcs": 0,
+   "capacity": 238.75,
+   "family": "empty",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_forest_components8_n20000_heterogeneous_neg30_r0",
+   "path": "data/generated/gen_forest_components8_n20000_heterogeneous_neg30_r0.json",
+   "sha256": "b710c1996456a74095c91e515f2f6b82fc86155f27c2a03cdc7e7e1554d11e60",
+   "nodes": 20000,
+   "arcs": 19991,
+   "capacity": 2217397.25,
+   "family": "forest",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_forest_components8_n20000_heterogeneous_neg30_r1",
+   "path": "data/generated/gen_forest_components8_n20000_heterogeneous_neg30_r1.json",
+   "sha256": "d9530f238d0e5bbedbf3836d12572da4a4ac3cbad00095960c2623febdaaf97c",
+   "nodes": 20000,
+   "arcs": 19991,
+   "capacity": 2109169.75,
+   "family": "forest",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_forest_components8_n20000_heterogeneous_neg30_r2",
+   "path": "data/generated/gen_forest_components8_n20000_heterogeneous_neg30_r2.json",
+   "sha256": "6d70d9858f2e8346335472859ed12682f6f9253c84f256079ff7929c9a34393c",
+   "nodes": 20000,
+   "arcs": 19991,
+   "capacity": 1264152.0,
+   "family": "forest",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_forest_components8_n2000_uniform_neg30_r0",
+   "path": "data/generated/gen_forest_components8_n2000_uniform_neg30_r0.json",
+   "sha256": "6d9c1d8824cac689d509dc70cdb1cc20d7bfd7f6cf1b9fef11827996638f1141",
+   "nodes": 2000,
+   "arcs": 1991,
+   "capacity": 2728.5,
+   "family": "forest",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_forest_components8_n2000_uniform_neg30_r1",
+   "path": "data/generated/gen_forest_components8_n2000_uniform_neg30_r1.json",
+   "sha256": "321ed09e3b674cab7e983ea46d37de5c95673758351ed4acfd02f96a2a88f4d5",
+   "nodes": 2000,
+   "arcs": 1991,
+   "capacity": 2781.75,
+   "family": "forest",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_forest_components8_n2000_uniform_neg30_r2",
+   "path": "data/generated/gen_forest_components8_n2000_uniform_neg30_r2.json",
+   "sha256": "71165abbbefc2ada51fbcc2688be9b58272e1e947e2e0a480e05da55f3e2753c",
+   "nodes": 2000,
+   "arcs": 1991,
+   "capacity": 2419.25,
+   "family": "forest",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_forest_components8_n200_uniform_neg30_r0",
+   "path": "data/generated/gen_forest_components8_n200_uniform_neg30_r0.json",
+   "sha256": "439d68e1f9b499706b8902119d0d2bd5c43d9570550558b3aa8caac95de349ba",
+   "nodes": 200,
+   "arcs": 191,
+   "capacity": 257.25,
+   "family": "forest",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_forest_components8_n200_uniform_neg30_r1",
+   "path": "data/generated/gen_forest_components8_n200_uniform_neg30_r1.json",
+   "sha256": "48a0fc8dfe0462efb326bf1782d523ed8b217efbd09f47390c2d44c6d8446c20",
+   "nodes": 200,
+   "arcs": 191,
+   "capacity": 259.75,
+   "family": "forest",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_forest_components8_n200_uniform_neg30_r2",
+   "path": "data/generated/gen_forest_components8_n200_uniform_neg30_r2.json",
+   "sha256": "963d461df4c25a78907d9f0cab05c571294915773c6120818cb85835e8a5e290",
+   "nodes": 200,
+   "arcs": 191,
+   "capacity": 237.0,
+   "family": "forest",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_layered_levels8-density0.05_n2000_uniform_neg30_r0",
+   "path": "data/generated/gen_layered_levels8-density0.05_n2000_uniform_neg30_r0.json",
+   "sha256": "a8431ff0856f9b0b7110f257576ea40e8e79b644796d5171398c0b33c0844cc1",
+   "nodes": 2000,
+   "arcs": 21972,
+   "capacity": 2798.75,
+   "family": "layered",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_layered_levels8-density0.05_n2000_uniform_neg30_r1",
+   "path": "data/generated/gen_layered_levels8-density0.05_n2000_uniform_neg30_r1.json",
+   "sha256": "09a8621a73db4e355bdb0b15f75e34bbb15b836ceb2e8ccbace8beba7f52acc6",
+   "nodes": 2000,
+   "arcs": 21723,
+   "capacity": 2716.75,
+   "family": "layered",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_layered_levels8-density0.05_n2000_uniform_neg30_r2",
+   "path": "data/generated/gen_layered_levels8-density0.05_n2000_uniform_neg30_r2.json",
+   "sha256": "323c7dcd242146b757f18c7830d4b4f307ea4d02eca21ddf09c44e9d73aa61d2",
+   "nodes": 2000,
+   "arcs": 21866,
+   "capacity": 2480.25,
+   "family": "layered",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_layered_levels8-density0.05_n2000_uniform_neg60_r0",
+   "path": "data/generated/gen_layered_levels8-density0.05_n2000_uniform_neg60_r0.json",
+   "sha256": "80b1e65861a21d81cf4f10b96f0719fcce128716412c617d319f364776a1b839",
+   "nodes": 2000,
+   "arcs": 21734,
+   "capacity": 2755.0,
+   "family": "layered",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_layered_levels8-density0.05_n2000_uniform_neg60_r1",
+   "path": "data/generated/gen_layered_levels8-density0.05_n2000_uniform_neg60_r1.json",
+   "sha256": "a34886f7fe40acbc0a074a906c40c1cf228d0263c0bc8f9e22849e2920bc9f90",
+   "nodes": 2000,
+   "arcs": 22013,
+   "capacity": 2785.75,
+   "family": "layered",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_layered_levels8-density0.05_n2000_uniform_neg60_r2",
+   "path": "data/generated/gen_layered_levels8-density0.05_n2000_uniform_neg60_r2.json",
+   "sha256": "d18fa0f0f1d660deba660714dd0b45adddddccd21d72a19bd92f5338813904b1",
+   "nodes": 2000,
+   "arcs": 21874,
+   "capacity": 2440.25,
+   "family": "layered",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_layered_levels8-density0.05_n200_uniform_neg0_r0",
+   "path": "data/generated/gen_layered_levels8-density0.05_n200_uniform_neg0_r0.json",
+   "sha256": "a7abb3388358918df8f1639db26d73b860ee95635e114a4e353796262281dee4",
+   "nodes": 200,
+   "arcs": 275,
+   "capacity": 264.5,
+   "family": "layered",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_layered_levels8-density0.05_n200_uniform_neg0_r1",
+   "path": "data/generated/gen_layered_levels8-density0.05_n200_uniform_neg0_r1.json",
+   "sha256": "a34b6c55712853890b29b1f2ce6b51eb6952ed691c6e8e821b92760c8df74f7a",
+   "nodes": 200,
+   "arcs": 291,
+   "capacity": 261.25,
+   "family": "layered",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_layered_levels8-density0.05_n200_uniform_neg0_r2",
+   "path": "data/generated/gen_layered_levels8-density0.05_n200_uniform_neg0_r2.json",
+   "sha256": "91627b0389c15e241c61bcb38405a39958a794f73912f7d208c62bde1fa79663",
+   "nodes": 200,
+   "arcs": 241,
+   "capacity": 247.75,
+   "family": "layered",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_layered_levels8-density0.05_n200_uniform_neg30_r0",
+   "path": "data/generated/gen_layered_levels8-density0.05_n200_uniform_neg30_r0.json",
+   "sha256": "d0d5931e16868a0a2bc4585d6cabaf6dc9e5fc1ebcfb5acbac5d082fc17680d8",
+   "nodes": 200,
+   "arcs": 308,
+   "capacity": 286.5,
+   "family": "layered",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_layered_levels8-density0.05_n200_uniform_neg30_r1",
+   "path": "data/generated/gen_layered_levels8-density0.05_n200_uniform_neg30_r1.json",
+   "sha256": "4b83b663f8c1a07ddecc0f37aa06b3a32ad19cf6036aa12dd8969ec919b7392b",
+   "nodes": 200,
+   "arcs": 281,
+   "capacity": 265.5,
+   "family": "layered",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_layered_levels8-density0.05_n200_uniform_neg30_r2",
+   "path": "data/generated/gen_layered_levels8-density0.05_n200_uniform_neg30_r2.json",
+   "sha256": "acec72ccf17d295fafac2b36423aede125b947f89e7da835f1962b9cbe12108d",
+   "nodes": 200,
+   "arcs": 268,
+   "capacity": 253.0,
+   "family": "layered",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_layered_levels8-density0.05_n8000_uniform_neg0_r0",
+   "path": "data/generated/gen_layered_levels8-density0.05_n8000_uniform_neg0_r0.json",
+   "sha256": "d4c7519b1e0f315ec3813e7309b4980735383cac81c790d6f9c718765adb764c",
+   "nodes": 8000,
+   "arcs": 350018,
+   "capacity": 10981.75,
+   "family": "layered",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_layered_levels8-density0.05_n8000_uniform_neg0_r1",
+   "path": "data/generated/gen_layered_levels8-density0.05_n8000_uniform_neg0_r1.json",
+   "sha256": "75fa1e662e1fa3659e523efc57b7d104fc53f92c86e340259902054088162b2c",
+   "nodes": 8000,
+   "arcs": 350057,
+   "capacity": 10954.5,
+   "family": "layered",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_layered_levels8-density0.05_n8000_uniform_neg0_r2",
+   "path": "data/generated/gen_layered_levels8-density0.05_n8000_uniform_neg0_r2.json",
+   "sha256": "26054b1362545f33074a34683924bcfe97c88a25c5f0eb11e761104d226b7e35",
+   "nodes": 8000,
+   "arcs": 349132,
+   "capacity": 9778.25,
+   "family": "layered",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_layered_levels8-density0.05_n8000_uniform_neg30_r0",
+   "path": "data/generated/gen_layered_levels8-density0.05_n8000_uniform_neg30_r0.json",
+   "sha256": "5344a18b18becf507b7ee360eb4107d4e50636169efc86157f6fe72b5e8ab7a8",
+   "nodes": 8000,
+   "arcs": 349827,
+   "capacity": 10952.75,
+   "family": "layered",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_layered_levels8-density0.05_n8000_uniform_neg30_r1",
+   "path": "data/generated/gen_layered_levels8-density0.05_n8000_uniform_neg30_r1.json",
+   "sha256": "8eeb2a1b54d5686b99f143e480c774ced2fa6a22d7ba5b39c1fb17168c50a84a",
+   "nodes": 8000,
+   "arcs": 349398,
+   "capacity": 11068.75,
+   "family": "layered",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_layered_levels8-density0.05_n8000_uniform_neg30_r2",
+   "path": "data/generated/gen_layered_levels8-density0.05_n8000_uniform_neg30_r2.json",
+   "sha256": "d7b4a23088387a7a9349ece3a1a56b133cfab5138bc71672688129fe2f88bb91",
+   "nodes": 8000,
+   "arcs": 349976,
+   "capacity": 9821.75,
+   "family": "layered",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_sparse_degree3_n20000_uniform_neg30_r0",
+   "path": "data/generated/gen_sparse_degree3_n20000_uniform_neg30_r0.json",
+   "sha256": "ddbf6fbbbcad0c986a5872181b04ee88907a56ff9f49139bd3c3330812bb5ca5",
+   "nodes": 20000,
+   "arcs": 59964,
+   "capacity": 27512.75,
+   "family": "sparse",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_sparse_degree3_n20000_uniform_neg30_r1",
+   "path": "data/generated/gen_sparse_degree3_n20000_uniform_neg30_r1.json",
+   "sha256": "c1505363c8d452cf7ae69c34e04b665202ef64280fa4bbac30de41be304f981a",
+   "nodes": 20000,
+   "arcs": 59968,
+   "capacity": 27602.5,
+   "family": "sparse",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_sparse_degree3_n20000_uniform_neg30_r2",
+   "path": "data/generated/gen_sparse_degree3_n20000_uniform_neg30_r2.json",
+   "sha256": "8c7cc3224f992afc5c832f2fa39208d48219bf1b8ba7d809c47ab71e52447b2e",
+   "nodes": 20000,
+   "arcs": 59964,
+   "capacity": 24509.75,
+   "family": "sparse",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_sparse_degree3_n200_uniform_neg30_r0",
+   "path": "data/generated/gen_sparse_degree3_n200_uniform_neg30_r0.json",
+   "sha256": "a8655527fc19a20359a38d30251f9dfb3fc3ece763125bab8bf4908235863eef",
+   "nodes": 200,
+   "arcs": 582,
+   "capacity": 280.5,
+   "family": "sparse",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_sparse_degree3_n200_uniform_neg30_r1",
+   "path": "data/generated/gen_sparse_degree3_n200_uniform_neg30_r1.json",
+   "sha256": "0f9c4ffe03d1e140d8013f64977af98f577bdb477c7dc2ccf78a5d20e9b16ce4",
+   "nodes": 200,
+   "arcs": 582,
+   "capacity": 281.75,
+   "family": "sparse",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_sparse_degree3_n200_uniform_neg30_r2",
+   "path": "data/generated/gen_sparse_degree3_n200_uniform_neg30_r2.json",
+   "sha256": "0e53dc22d852d8a8a155a6276610516072761f83c3a46d43a75904b3ac07e76a",
+   "nodes": 200,
+   "arcs": 579,
+   "capacity": 241.75,
+   "family": "sparse",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_sparse_degree8_n2000_uniform_neg30_r0",
+   "path": "data/generated/gen_sparse_degree8_n2000_uniform_neg30_r0.json",
+   "sha256": "b985e03489516dd065c589ddc2a742cb0d42c5d6751657cff3bb25df8d5902ff",
+   "nodes": 2000,
+   "arcs": 15817,
+   "capacity": 2765.25,
+   "family": "sparse",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_sparse_degree8_n2000_uniform_neg30_r1",
+   "path": "data/generated/gen_sparse_degree8_n2000_uniform_neg30_r1.json",
+   "sha256": "8f558189a88e114c261377115fd996733e165f0c2672934e26f2f6df59464bbb",
+   "nodes": 2000,
+   "arcs": 15805,
+   "capacity": 2724.5,
+   "family": "sparse",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_sparse_degree8_n2000_uniform_neg30_r2",
+   "path": "data/generated/gen_sparse_degree8_n2000_uniform_neg30_r2.json",
+   "sha256": "7ea978823077a990a70f3913ed4be0095af08e551cd52392c3edaa6ad9a6dfa2",
+   "nodes": 2000,
+   "arcs": 15787,
+   "capacity": 2439.5,
+   "family": "sparse",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_sparse_degree8_n8000_uniform_neg30_r0",
+   "path": "data/generated/gen_sparse_degree8_n8000_uniform_neg30_r0.json",
+   "sha256": "294e771e6322ef03cb76074c3d98fa13a43764f73cccbd1097de2fc8e80ce911",
+   "nodes": 8000,
+   "arcs": 63774,
+   "capacity": 11016.75,
+   "family": "sparse",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_sparse_degree8_n8000_uniform_neg30_r1",
+   "path": "data/generated/gen_sparse_degree8_n8000_uniform_neg30_r1.json",
+   "sha256": "e53dcb11465dfd61f571eb4cecff4cdd9f4542d764604994619daee627bbf8cb",
+   "nodes": 8000,
+   "arcs": 63777,
+   "capacity": 11032.25,
+   "family": "sparse",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_sparse_degree8_n8000_uniform_neg30_r2",
+   "path": "data/generated/gen_sparse_degree8_n8000_uniform_neg30_r2.json",
+   "sha256": "c7f34e9c268e59818cc20ad06d6b86a2919afd65ae2c4b47fc60ff99850fe7d3",
+   "nodes": 8000,
+   "arcs": 63768,
+   "capacity": 9800.0,
+   "family": "sparse",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_transitive_degree2-extra3.0_n2000_uniform_neg30_r0",
+   "path": "data/generated/gen_transitive_degree2-extra3.0_n2000_uniform_neg30_r0.json",
+   "sha256": "0d1568793b2918c1a2f07502c54b5a1eb160459ad27d264f03919d701a5eabf4",
+   "nodes": 2000,
+   "arcs": 15972,
+   "capacity": 2763.25,
+   "family": "transitive",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_transitive_degree2-extra3.0_n2000_uniform_neg30_r1",
+   "path": "data/generated/gen_transitive_degree2-extra3.0_n2000_uniform_neg30_r1.json",
+   "sha256": "63a4443e28d8cba0ef3e71db0d4e269ca9bfb7813a3c1c1d506b291392c9a495",
+   "nodes": 2000,
+   "arcs": 15968,
+   "capacity": 2773.5,
+   "family": "transitive",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_transitive_degree2-extra3.0_n2000_uniform_neg30_r2",
+   "path": "data/generated/gen_transitive_degree2-extra3.0_n2000_uniform_neg30_r2.json",
+   "sha256": "a7f3b804551e566370149780836a9dd948f560046c73b7baed56ddad54255470",
+   "nodes": 2000,
+   "arcs": 15956,
+   "capacity": 2451.0,
+   "family": "transitive",
+   "origin": "generated"
+  },
+  {
+   "name": "minelib_marvin",
+   "path": "data/processed/minelib_marvin.json",
+   "sha256": "f58b50b64e40e827ccc73f0737b9e24f929e1d5947bf681f4660d5dabe6ab858",
+   "nodes": 53271,
+   "arcs": 650631,
+   "capacity": 1200000000.0,
+   "family": "minelib-derived",
+   "origin": "DATA/MINELIB/INSTANCES.zip"
+  },
+  {
+   "name": "minelib_p4hd",
+   "path": "data/processed/minelib_p4hd.json",
+   "sha256": "f715ae950e026cec0da961946d87e2e9ccd069f33c672fefe315e735c9254721",
+   "nodes": 40947,
+   "arcs": 738609,
+   "capacity": 525000000.0,
+   "family": "minelib-derived",
+   "origin": "DATA/MINELIB/INSTANCES.zip"
+  },
+  {
+   "name": "minelib_sm2",
+   "path": "data/processed/minelib_sm2.json",
+   "sha256": "b7364ca51a8913b3d1df2712e9b9fccc8dab1873411da831f6632526c32547bc",
+   "nodes": 99014,
+   "arcs": 96642,
+   "capacity": 360000000.0,
+   "family": "minelib-derived",
+   "origin": "DATA/MINELIB/INSTANCES.zip"
+  },
+  {
+   "name": "minelib_zuck_small",
+   "path": "data/processed/minelib_zuck_small.json",
+   "sha256": "c944870c72f12ad4336c34e0935e6430e346c95672321075a5682af72d235056",
+   "nodes": 9400,
+   "arcs": 145640,
+   "capacity": 1200000000.0,
+   "family": "minelib-derived",
+   "origin": "DATA/MINELIB/INSTANCES.zip"
+  },
+  {
+   "name": "pckp_B_981_1688",
+   "path": "data/processed/pckp_B_981_1688.json",
+   "sha256": "46a0deb7e356af88af985c98fceff588683132cd9b5240e2724a688d024e666c",
+   "nodes": 981,
+   "arcs": 1688,
+   "capacity": 800.0,
+   "family": "pckp-historical",
+   "origin": "DATA/INSTANCES/PCKP_BB/instances"
+  },
+  {
+   "name": "pckp_C_1336_2382",
+   "path": "data/processed/pckp_C_1336_2382.json",
+   "sha256": "1ee2e306742ce95abf1213c5048dbbec2dff3085d7616154eb7547a22897996b",
+   "nodes": 1336,
+   "arcs": 2382,
+   "capacity": 900.0,
+   "family": "pckp-historical",
+   "origin": "DATA/INSTANCES/PCKP_BB/instances"
+  },
+  {
+   "name": "pckp_D_1790_3130",
+   "path": "data/processed/pckp_D_1790_3130.json",
+   "sha256": "b709fbe687848db3d86ed5036c349d1cc47ebc8ea1e3a68c7908c999bd41f776",
+   "nodes": 1790,
+   "arcs": 3130,
+   "capacity": 3000.0,
+   "family": "pckp-historical",
+   "origin": "DATA/INSTANCES/PCKP_BB/instances"
+  },
+  {
+   "name": "pckp_E_1790_3130",
+   "path": "data/processed/pckp_E_1790_3130.json",
+   "sha256": "3a57c6ded1d9293e552c4c447151f1638f7d1755a5682409dfaf9d5aa0dd6a25",
+   "nodes": 1790,
+   "arcs": 3130,
+   "capacity": 3000.0,
+   "family": "pckp-historical",
+   "origin": "DATA/INSTANCES/PCKP_BB/instances"
+  },
+  {
+   "name": "pckp_L_349_2101",
+   "path": "data/processed/pckp_L_349_2101.json",
+   "sha256": "133b20b4048f61a8ba6dcb1a3e972eb62d8f29d7d3b064b5f5ea8e8912a00d00",
+   "nodes": 349,
+   "arcs": 2101,
+   "capacity": 100000000.0,
+   "family": "pckp-historical",
+   "origin": "DATA/INSTANCES/PCKP_BB/instances"
+  },
+  {
+   "name": "pckp_Q_3428_19555",
+   "path": "data/processed/pckp_Q_3428_19555.json",
+   "sha256": "f1d3b0bce13553c9d90fc41fba05398fa2a89ad0425e6d2b18f6e12b643269b6",
+   "nodes": 3428,
+   "arcs": 19555,
+   "capacity": 800000.0,
+   "family": "pckp-historical",
+   "origin": "DATA/INSTANCES/PCKP_BB/instances"
+  },
+  {
+   "name": "pckp_R_4281_24452",
+   "path": "data/processed/pckp_R_4281_24452.json",
+   "sha256": "251f7935ca24aa40f63d6384e34c8e7f753d7ac1f7b6362862ef4b98deae4936",
+   "nodes": 4281,
+   "arcs": 24452,
+   "capacity": 1500000.0,
+   "family": "pckp-historical",
+   "origin": "DATA/INSTANCES/PCKP_BB/instances"
+  },
+  {
+   "name": "pckp_S_5624_36504",
+   "path": "data/processed/pckp_S_5624_36504.json",
+   "sha256": "b182bf69a02c3a632b50a3dce86299368f49ee59343c9bd8a3a244c30826d121",
+   "nodes": 5624,
+   "arcs": 36504,
+   "capacity": 50000000.0,
+   "family": "pckp-historical",
+   "origin": "DATA/INSTANCES/PCKP_BB/instances"
+  },
+  {
+   "name": "pckp_T_6271_42080",
+   "path": "data/processed/pckp_T_6271_42080.json",
+   "sha256": "7f1a97f2896c9642a7c7a216b9a48c6d590d8607e4ac96b4f81305b8d84f222d",
+   "nodes": 6271,
+   "arcs": 42080,
+   "capacity": 1500000.0,
+   "family": "pckp-historical",
+   "origin": "DATA/INSTANCES/PCKP_BB/instances"
+  },
+  {
+   "name": "pckp_U_6494_48626",
+   "path": "data/processed/pckp_U_6494_48626.json",
+   "sha256": "8cb7075ea29a8c9db854c14676b59ac47a53e3948ce46b547f07bfd0104f929c",
+   "nodes": 6494,
+   "arcs": 48626,
+   "capacity": 120000000.0,
+   "family": "pckp-historical",
+   "origin": "DATA/INSTANCES/PCKP_BB/instances"
+  },
+  {
+   "name": "pckp_V_10001_63944",
+   "path": "data/processed/pckp_V_10001_63944.json",
+   "sha256": "52b2cd5e20f2d65091a6cd80aa2446a8bddf68e690be966ff19d2aba1e3325eb",
+   "nodes": 10001,
+   "arcs": 63944,
+   "capacity": 1500000.0,
+   "family": "pckp-historical",
+   "origin": "DATA/INSTANCES/PCKP_BB/instances"
+  },
+  {
+   "name": "pckp_W_11757_83218",
+   "path": "data/processed/pckp_W_11757_83218.json",
+   "sha256": "d355888ec12dbc9057ee17cdf05f4dea14483f8067954531a83697ca0ad769d3",
+   "nodes": 11757,
+   "arcs": 83218,
+   "capacity": 3000000.0,
+   "family": "pckp-historical",
+   "origin": "DATA/INSTANCES/PCKP_BB/instances"
+  }
+ ]
+}

@@ -1,0 +1,28 @@
+\section{Reproducibility}
+\label{sec:reproducibility}
+
+Every artefact in this report is derived from files stored in the project.
+\file{tools/report/analyze.py} first checks each campaign manifest for
+completeness --- planned runs against stored runs, for the build the manifest
+describes --- and refuses to emit tables for a campaign that fails the check. It
+then writes the tables and figure data used here, the per-run CSV files in
+\file{experiments/analysis/}, and \texttt{provenance.json} recording, for each
+campaign, the build fingerprint, the run counts, the status histogram and a hash
+of the run records.
+
+A run is identified by instance content hash, task, capacity mode, resolved
+configuration, build source hash and replica index. A finished run is never
+overwritten and never recomputed: a different build or configuration produces a
+different identifier. Interrupting a campaign and restarting it resumes from the
+stored state.
+
+The commands that rebuild the whole chain --- environment, instance import and
+generation, frozen splits, campaigns, tuning, analysis and this document --- are
+listed in \file{docs/reproducibility.md}. A reduced reproduction that repeats
+one significant comparison in a few minutes is available as
+\file{configs/suites/smoke.json}.
+
+The historical material was read, never modified: archives were expanded into a
+temporary directory outside the project, and
+\file{provenance/original\_manifest.sha256} records size and SHA-256 of every
+original file used, in a form that \texttt{sha256sum --check} accepts.

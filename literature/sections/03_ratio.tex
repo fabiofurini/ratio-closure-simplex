@@ -1,0 +1,83 @@
+\section{The ratio objective}\label{sec:ratio}
+
+Two classical devices remove a ratio from an objective. \citet{CharnesCooper1962}
+rescale a linear fractional program into a linear one by normalising the
+denominator, which is exactly the transformation that turns
+\(\max p(S)/w(S)\) into the program with \(\sum_i w_i y_i = 1\) that \FS{}
+solves. \citet{Dinkelbach1967} instead treats the ratio parametrically, solving
+\(\max\{p(S) - \lambda w(S)\}\) and updating \(\lambda\) by Newton's method;
+applied to closures, each iterate is a maximum-closure problem and therefore a
+minimum cut. This project implements the second as one of its reference
+backends.
+
+Maximum-ratio closure --- maximum-density or maximum-mean closed set, depending
+on the community --- is therefore classical in both readings, and the
+equivalence between the fractional point of view and the level-set argument
+(\(y = \int \chi^{C_t}\,dt\), each \(C_t\) a closure) is the standard device
+relating fractional closure points to closures. The tutorial of this project
+proves it in that form and attributes it there.
+
+\subsection{The LP class, stated precisely}\label{sec:class}
+
+Since the positioning turns on which linear program is being specialised to, it
+is worth naming the class rather than the application. The program is
+\begin{equation}\label{eq:class}
+  \max\ \sum_{i \in R} p_i y_i
+  \quad\text{s.t.}\quad
+  \sum_{i \in R} w_i y_i = 1,
+  \qquad y_i - y_j \le 0 \ \ \forall (i,j) \in A[R],
+  \qquad \vect{y} \ge 0,
+\end{equation}
+with $\vect{w} > 0$, $\vect{p}$ of arbitrary sign and no upper bounds. Three equivalent
+readings of the same class:
+
+\begin{enumerate}[label=(\alph*),leftmargin=*]
+\item \textbf{One budget row over a homogeneous difference system.} The
+      constraints $y_i - y_j \le 0$ form a system of homogeneous difference
+      inequalities on a DAG; a single dense equality row with positive
+      coefficients is added.
+\item \textbf{The base of an order cone.} The set $\{\vect{y} \ge 0 : y_i \le y_j\}$ is
+      the cone of nonnegative order-preserving vectors on the poset, whose
+      extreme rays are the characteristic vectors of the nonempty closed sets;
+      the equality slices it into the polytope whose vertices are
+      $\chi^C / w(C)$. Optimising over it therefore returns
+      $\max_C p(C)/w(C)$, which is why the transformation of
+      \citet{CharnesCooper1962} is exact here. The polytope is the cone analogue
+      of Stanley's order polytope, whose vertices are the characteristic vectors
+      of the filters of the poset \citep{Stanley1986}.
+\item \textbf{Transposed incidence plus one dense row.} Each difference
+      constraint has a $+1$ and a $-1$ in the columns of two vertex variables, so
+      the matrix is the \emph{transpose} of a digraph incidence matrix, with one
+      dense row appended and a right-hand side that is zero on the network part.
+\end{enumerate}
+
+Reading (c) matters for \cref{sec:forests} and was stated loosely in an earlier
+draft. In the side-constrained network flow literature the variables are arcs
+and the rows are vertices; here the variables are vertices and the rows are arcs. The
+two are linear programming duals of one another --- the dual of
+\eqref{eq:class} is $\min \beta$ subject to $w_i\beta + \divg_i(\vecg{\alpha}) \ge p_i$,
+$\vecg{\alpha} \ge 0$, a flow-like system with one scalar --- so the algebra transports
+between them, but pricing on one side corresponds to the ratio test on the other
+and the roles are not interchangeable without care. This is the same duality
+\citet{UnderwoodTolwinski1998} exploit when they attack the ultimate pit problem
+through the dual. It also places \eqref{eq:class} in the same structural family
+as isotonic regression and total variation on a graph, which are difference
+systems on vertex variables too --- and that is why \citet{Yang2026} is closer
+prior art than the network-simplex-with-a-side-row line, not further.
+
+\paragraph{The one non-generic modelling choice.} Replacing the equality
+\(\sum_i w_i y_i = 1\) by an inequality adds the origin to the feasible set and
+returns value zero whenever every nonempty closure has negative profit. With
+nonnegative profits this is immaterial. Here it is not: profits carry either
+sign, a profitable vertex may require loss-making prerequisites, and the outer
+decomposition calls the oracle on residual graphs whose profits deteriorate, so
+the last calls typically have a negative optimal ratio and the decomposition
+still needs the \emph{best nonempty} closure at each of them. The equality is
+deliberate and is argued as such --- but it is a modelling choice inside a
+classical transformation, not a contribution.
+
+\paragraph{Recent work on the ratio side.} \citet{Hochbaum2024} gives an
+incremental parametric cut method for ratio problems of this family; it is the
+most recent point of comparison found for the oracle itself and is in
+\file{literature/papers/}. It is a competitor to the Dinkelbach backend, not to
+\FSC{}'s basis machinery, and it should be cited where the oracle is discussed.

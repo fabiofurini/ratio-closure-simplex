@@ -1,0 +1,116 @@
+\section{The ratio oracle and its normalization}\label{sec:ratio}
+
+Suppose a closed prefix $M$ has already been selected. Put
+$R=\Vset\setminus M$ and retain only arcs whose two endpoints lie in $R$.
+A set $S\subseteq R$ is a closure in this residual graph if and only if
+$M\cup S$ is a closure in the original graph. Arcs from $R$ to $M$ already
+have their prerequisites satisfied. The next subproblem is
+\begin{equation}\label{eq:ratio}
+ \rho^*(R)=\max\left\{\frac{p(S)}{w(S)}:
+              \emptyset\ne S\subseteq R,\ S\text{ a residual closure}\right\}.
+\end{equation}
+We now work on one nonempty residual graph, suppress the superscript $R$,
+and use $n,m$ for its size.
+
+\subsection{Normalization removes the quotient}
+The \FS{} solves the following LP:
+\begin{equation}\label{eq:normalized}
+\begin{aligned}
+\max\quad &\sum_i p_i y_i\\
+\text{s.t.}\quad &\sum_i w_i y_i=1,\\
+&y_i-y_j\le0 &&(i,j)\in\Aset,\\
+&y_i\ge0 &&i\in\Vset.
+\end{aligned}
+\end{equation}
+These $y_i$ are normalized variables. They have \emph{no upper bound of one}.
+For a nonempty closure $S$, the vector $\vect{y}=\ind^S/w(S)$ is feasible and has
+objective $\varrho(S)$. Its coordinates can exceed one if $w(S)<1$.
+
+\begin{theorem}[Exact ratio normalization]\label{thm:normalization}
+The feasible set of \eqref{eq:normalized} is nonempty and compact. Its
+optimal value is \eqref{eq:ratio}, including when this value is negative.
+\end{theorem}
+\begin{proof}
+The full vertex set is a nonempty closure. Positivity of the weights implies
+$0\le y_i\le1/w_i$, so the feasible set is bounded and closed.
+For any feasible $y$, define $C_t=\{i:y_i\ge t\}$ for $t>0$.
+Each $C_t$ is a closure, and the finite step function representation gives
+\[
+ y=\int_0^\infty\ind^{C_t}\,dt,\qquad
+ 1=\int_0^\infty w(C_t)\,dt,\qquad
+ \vect{p}^T\vect{y}=\int_0^\infty p(C_t)\,dt.
+\]
+For every nonempty $C_t$, $p(C_t)\le\rho^*w(C_t)$; for an empty set both
+sides vanish. Integrating proves $\vect{p}^T\vect{y}\le\rho^*$. Conversely,
+$\ind^S/w(S)$ attains the ratio of any maximizing closure.
+\end{proof}
+
+\subsection{The class of linear program this is}\label{sec:class}
+Three equivalent readings of \eqref{eq:normalized} fix its place among linear
+programs, and each is used later.
+\begin{enumerate}[label=(\alph*),leftmargin=*]
+\item \textbf{One budget row over a homogeneous difference system.} The
+      inequalities $y_i-y_j\le0$ are homogeneous difference constraints on a
+      digraph; one dense equality row with positive coefficients is added.
+\item \textbf{The base of an order cone.} The set $\{\vect{y}\ge0:y_i\le y_j\}$
+      is the cone of nonnegative order-preserving vectors on the poset, whose
+      extreme rays are the characteristic vectors of the nonempty closures; the
+      equality slices that cone into the polytope with vertices $\ind^C/w(C)$.
+      Optimizing over it therefore returns $\max_C\varrho(C)$, which is
+      \cref{thm:normalization} read geometrically. It is the cone analogue of
+      Stanley's order polytope, whose vertices are the characteristic vectors of
+      the filters of the poset \citep{Stanley1986}.
+\item \textbf{Transposed incidence plus one dense row.} Each difference
+      constraint carries a $+1$ and a $-1$ in the columns of two vertex
+      variables, so the matrix is the \emph{transpose} of a digraph incidence
+      matrix with one dense row appended, and the right-hand side vanishes on
+      the network part. This is $\mat{A}$ in \eqref{eq:standardmatrix} below.
+\end{enumerate}
+Reading (c) is worth keeping in mind. In the side-constrained network flow
+literature the variables are arcs and the rows are vertices, and here it is the
+other way round; the two formulations are linear programming duals of one
+another, so the algebra transports between them, but pricing on one side
+corresponds to the ratio test on the other. The same duality places
+\eqref{eq:normalized} in the structural family of isotonic regression and of
+total variation on a graph, which are difference systems on vertex variables as
+well --- which is why \citet{Yang2026} is close prior art.
+
+An inequality $\vect{w}^T\vect{y}\le1$ would allow $y=0$ and return zero when every
+nonempty closure has negative profit. The equality in
+\eqref{eq:normalized} is therefore deliberate. The outer capacitated LP
+may choose nothing, but the ratio oracle must still identify the best
+\emph{nonempty} closure.
+
+\subsection{Standard form and the ratio dual}
+Introduce $s_{ij}=y_j-y_i\ge0$. The standard form is
+\begin{equation}\label{eq:standard}
+ \vect{w}^T\vect{y}=1,\qquad y_i-y_j+s_{ij}=0\ ((i,j)\in\Aset),
+ \qquad(y,s)\ge0.
+\end{equation}
+There are $n+m$ variables and $m+1$ independent equations: the slack
+columns contain an identity matrix, and the normalization row is independent
+of the arc rows. A basis has $m+1$ variables and its complement has $n-1$.
+With $\mat{D}$ denoting the arc-by-vertex matrix with row $\vect{e}_i^T-\vect{e}_j^T$, write
+\begin{equation}\label{eq:standardmatrix}
+ \mat{A}=\begin{pmatrix}\vect{w}^T&0\\\mat{D}&\mat{I}_m\end{pmatrix},\qquad
+ \vect{b}=(1,0,\ldots,0)^T,\qquad \vect{g}=(\vect{p},0).
+\end{equation}
+This matrix is used for independent checking, not stored densely by the
+proposed efficient implementation.
+
+The dual is
+\begin{equation}\label{eq:ratio-dual}
+\begin{aligned}
+\min\quad &\beta\\
+\text{s.t.}\quad &w_i\beta+\divg_i(\alpha)\ge p_i &&i\in\Vset,\\
+&\alpha_{ij}\ge0 &&(i,j)\in\Aset,\qquad \beta\in\Rset.
+\end{aligned}
+\end{equation}
+Here $\beta$ is free because normalization is an equality. For any closure
+$S$, summing the inequalities gives
+\[
+ p(S)\le\beta w(S)+\sum_{i\in S}\divg_i(\alpha)\le\beta w(S).
+\]
+The last inequality holds because no arc leaves a closure and nonnegative
+flow may enter it. Thus a feasible dual vector provides a direct certificate
+of an upper bound on every closure ratio.

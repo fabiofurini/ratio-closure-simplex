@@ -1,0 +1,85 @@
+\section{The full canonical decomposition}\label{sec:canonical}
+
+Every campaign in \cref{sec:results} answers a single capacity: the solver walks
+the canonical sequence only as far as the capacity requires. This section asks
+the other question --- produce the \emph{entire} sequence of closure layers,
+task \texttt{full-path} --- because that is the object the method is designed to
+deliver, and because it is the setting in which a basis, unlike a flow state,
+could in principle be carried from one residual to the next.
+
+The suite is \file{configs/suites/canonical\_path.json}: twelve instances across
+the generated families, one historical PCKP instance and one MineLib instance,
+two replicas, a sixty-second limit.
+
+The same canonical sequence, restricted to precedence graphs that are directed
+forests, is the subject of the companion work \citep{DoseEtAl2026}, whose
+aggregation algorithms reach $\mathcal{O}(n\log n)$ and whose implementation is
+public at \url{https://github.com/fabiofurini/parametric-closure-forests}. What
+this report calls a canonical block is a \emph{closure layer} there, and the
+per-vertex bound computed here is their \emph{threshold} of a vertex. The
+comparison below is on general DAGs, where those algorithms do not apply.
+
+\generated{table_canonical_path}
+
+\generated{table_canonical_path_speedup}
+
+\paragraph{Restarting each oracle cold.} With every residual oracle rebuilt
+from the empty basis --- configurations \texttt{ratio-closure-tuned} and
+\texttt{ratio-closure-dual} --- the method is not competitive. The parametric
+backend is faster on every instance but the arc-free graph, the median ratio is
+a factor of twelve, and on a layered DAG with $n = 2000$ it is a factor of
+$859$. The oracle count is exactly what the design predicts, one per closure
+layer, and the parametric backend uses about two flow computations per layer.
+The difference is inside the oracle: each one costs tens to hundreds of
+thousands of pivots, of which between $98\%$ and $100\%$ are degenerate.
+
+\paragraph{Restarting each oracle from the previous final basis.} The extracted
+block \emph{is} the positive component, that is one tree of the basis forest;
+the other trees survive untouched and stay anchored at zero. Reusing that forest
+is what \texttt{--warm-start residual} does, and the correctness condition is a
+single test: since the values are $1/w(T)$ on the positive tree $T$ and zero
+elsewhere, an active arc leaving $T$ would violate feasibility, so $T$ must be
+closed in the residual. The best closed surviving tree is chosen; if none is
+closed the oracle falls back to a cold restart. The check costs $\mathcal{O}(m)$
+per oracle and is verified at every pivot in the acceptance suite.
+
+The effect is on the pivot count, which is where the time was:
+
+\begin{center}
+\begin{tabular}{@{}lrrr@{}}
+\toprule
+instance & cold pivots & warm pivots & factor \\
+\midrule
+\texttt{gen\_disconnected\_components6\_n2000} & 251{,}780 & 3{,}080 & $81.7\times$ \\
+\texttt{gen\_sparse\_degree3\_n2000}           &  89{,}468 & 6{,}108 & $14.6\times$ \\
+\texttt{gen\_transitive\_degree2-extra3.0\_n2000} & 166{,}730 & 13{,}225 & $12.6\times$ \\
+\texttt{pckp\_A\_972\_1661}                    &   8{,}503 & 1{,}056 & $8.1\times$ \\
+\texttt{minelib\_newman1}                      &  48{,}974 & 6{,}915 & $7.1\times$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The decomposition produced is identical block by block, and the objective of
+\texttt{solve} is unchanged to nine decimals.
+
+\paragraph{The ranking, with the warm restart in.} On the ten instances every
+configuration solves within the limit, the warm primal is $3.1$ times faster
+than the cold one in total time and overtakes Dinkelbach, which the cold
+configuration did not. The simplex now wins three of the ten instances --- the
+chain and the disconnected families, where the sequence has many layers, and the
+cyclic one --- against one out of twelve before. The parametric backend still
+wins the remaining seven and is $3.4$ times faster in total, so the conclusion
+of this report is unchanged in direction and changed in size: the gap is no
+longer one to two orders of magnitude but a factor of three, and it is closed
+entirely on the families with the longest sequences.
+
+\paragraph{What this does and does not settle.} It settles that the cold
+sequential decomposition was leaving most of its work on the table, and that the
+structure of the method --- a basis, not a flow --- is what recovers it. It does
+not settle the comparison against parametric flow, which still wins on the
+majority of instances and in total time. Two things are now worth measuring and
+are not measured here: the frozen configuration was tuned on \texttt{solve} and
+never on \texttt{full-path}, and a paired ablation on this task puts
+\texttt{initial\_basis=sink} $1.21$ times ahead of it; and the degeneracy that
+dominated the cold oracles is reduced, not removed, so the anti-cycling regime
+deserves its own tuning on this task.

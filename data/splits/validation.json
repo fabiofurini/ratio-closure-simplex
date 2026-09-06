@@ -1,0 +1,538 @@
+{
+ "split": "validation",
+ "seed": 20260906,
+ "shares": "50,25,25",
+ "count": 53,
+ "instances": [
+  {
+   "name": "gen_bilevel_density0.02_n2000_uniform_neg30_r0",
+   "path": "data/generated/gen_bilevel_density0.02_n2000_uniform_neg30_r0.json",
+   "sha256": "0a8d6597281f8373f5b5d053362b90105efb02e1e71cab55b210d1adfbc87be9",
+   "nodes": 2000,
+   "arcs": 19943,
+   "capacity": 2764.25,
+   "family": "bilevel",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_bilevel_density0.02_n2000_uniform_neg30_r1",
+   "path": "data/generated/gen_bilevel_density0.02_n2000_uniform_neg30_r1.json",
+   "sha256": "d7108202daa9124d5de7d9377919dbc0f3ca210e7ea8f299d7bbe691d6923a26",
+   "nodes": 2000,
+   "arcs": 19761,
+   "capacity": 2803.75,
+   "family": "bilevel",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_bilevel_density0.02_n2000_uniform_neg30_r2",
+   "path": "data/generated/gen_bilevel_density0.02_n2000_uniform_neg30_r2.json",
+   "sha256": "62ce1b446117e44841d23975b425d44e269724e1fe25c679f412ee2d0064d816",
+   "nodes": 2000,
+   "arcs": 19699,
+   "capacity": 2457.75,
+   "family": "bilevel",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_chain_plain_n20000_uniform_neg30_r0",
+   "path": "data/generated/gen_chain_plain_n20000_uniform_neg30_r0.json",
+   "sha256": "1bbc3a9efb5e6da8631e8a0e37879215f0f7f746f658dc096f85bf25dde7f749",
+   "nodes": 20000,
+   "arcs": 19999,
+   "capacity": 27462.5,
+   "family": "chain",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_chain_plain_n20000_uniform_neg30_r1",
+   "path": "data/generated/gen_chain_plain_n20000_uniform_neg30_r1.json",
+   "sha256": "4772a005abbc6df8b3776a07d722faab29d672841c8d7d531c4eaa6cfa4efd85",
+   "nodes": 20000,
+   "arcs": 19999,
+   "capacity": 27410.25,
+   "family": "chain",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_chain_plain_n20000_uniform_neg30_r2",
+   "path": "data/generated/gen_chain_plain_n20000_uniform_neg30_r2.json",
+   "sha256": "a83efd83a63ecaa2d6e72455910129a24a2fa3f8228cc80fc131465342534545",
+   "nodes": 20000,
+   "arcs": 19999,
+   "capacity": 24632.25,
+   "family": "chain",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_chain_plain_n2000_uniform_neg30_r0",
+   "path": "data/generated/gen_chain_plain_n2000_uniform_neg30_r0.json",
+   "sha256": "24b519dbe2874823630864dcfee5e11cedf443892d43fd14ba00bd55c2593e27",
+   "nodes": 2000,
+   "arcs": 1999,
+   "capacity": 2769.5,
+   "family": "chain",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_chain_plain_n2000_uniform_neg30_r1",
+   "path": "data/generated/gen_chain_plain_n2000_uniform_neg30_r1.json",
+   "sha256": "532bc50cccf0a2fadc7721ed0e0ec5e0eb03be1efb4c8907da2f40f920baa1a2",
+   "nodes": 2000,
+   "arcs": 1999,
+   "capacity": 2701.0,
+   "family": "chain",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_chain_plain_n2000_uniform_neg30_r2",
+   "path": "data/generated/gen_chain_plain_n2000_uniform_neg30_r2.json",
+   "sha256": "8c156ca393d219f3f0433f24b598ef3ddf6e2745f7e19a805f6b08342b64e703",
+   "nodes": 2000,
+   "arcs": 1999,
+   "capacity": 2461.75,
+   "family": "chain",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_dense_density0.1_n2000_uniform_neg30_r0",
+   "path": "data/generated/gen_dense_density0.1_n2000_uniform_neg30_r0.json",
+   "sha256": "9e07e0f41240295cdf5285cf9bbfdb268b23b1507a8753f7cd43b63e0f15cf23",
+   "nodes": 2000,
+   "arcs": 200024,
+   "capacity": 2783.0,
+   "family": "dense",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_dense_density0.1_n2000_uniform_neg30_r1",
+   "path": "data/generated/gen_dense_density0.1_n2000_uniform_neg30_r1.json",
+   "sha256": "0e4882319f9b221606966da9687fce265e5c50c8b832eae5de7a4369f5c03241",
+   "nodes": 2000,
+   "arcs": 199506,
+   "capacity": 2807.25,
+   "family": "dense",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_dense_density0.1_n2000_uniform_neg30_r2",
+   "path": "data/generated/gen_dense_density0.1_n2000_uniform_neg30_r2.json",
+   "sha256": "34c4b308b313882d1f25f7c5af8f5d6bb4d10e84223a41fd02ec47662c9a79b2",
+   "nodes": 2000,
+   "arcs": 200313,
+   "capacity": 2438.75,
+   "family": "dense",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_disconnected_components6_n2000_uniform_neg30_r0",
+   "path": "data/generated/gen_disconnected_components6_n2000_uniform_neg30_r0.json",
+   "sha256": "66b6c3b18dce9f7bf7f5193769ac2ee6fcccc28023d6b2d06e9064f83c38de96",
+   "nodes": 2000,
+   "arcs": 1993,
+   "capacity": 2795.0,
+   "family": "disconnected",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_disconnected_components6_n2000_uniform_neg30_r1",
+   "path": "data/generated/gen_disconnected_components6_n2000_uniform_neg30_r1.json",
+   "sha256": "02c270a898e3bae487e8f812eb7f3ddf5e0a812234614f58ea5caa0713ba742f",
+   "nodes": 2000,
+   "arcs": 1993,
+   "capacity": 2750.75,
+   "family": "disconnected",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_disconnected_components6_n2000_uniform_neg30_r2",
+   "path": "data/generated/gen_disconnected_components6_n2000_uniform_neg30_r2.json",
+   "sha256": "a4c575ebf715abd127fe6fd47a24b1d76bcb5a4cdd591f75f51ec96bc1bdf8e1",
+   "nodes": 2000,
+   "arcs": 1993,
+   "capacity": 2433.5,
+   "family": "disconnected",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_empty_plain_n200_uniform_neg0_r0",
+   "path": "data/generated/gen_empty_plain_n200_uniform_neg0_r0.json",
+   "sha256": "bda4803b53ea9f9c95701b0f78d3827aa2092f1968e43c8c6b1bdf334a4c6b87",
+   "nodes": 200,
+   "arcs": 0,
+   "capacity": 262.0,
+   "family": "empty",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_empty_plain_n200_uniform_neg0_r1",
+   "path": "data/generated/gen_empty_plain_n200_uniform_neg0_r1.json",
+   "sha256": "71fcb322001696db442290c0b7dfe079a8f41615799f3aadeb64c0ff491f9ec1",
+   "nodes": 200,
+   "arcs": 0,
+   "capacity": 285.25,
+   "family": "empty",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_empty_plain_n200_uniform_neg0_r2",
+   "path": "data/generated/gen_empty_plain_n200_uniform_neg0_r2.json",
+   "sha256": "3231fedda9c9d411c3cdc8584b286294bc069ee17e588b0d48a808abac7d5f89",
+   "nodes": 200,
+   "arcs": 0,
+   "capacity": 254.75,
+   "family": "empty",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_forest_components8_n20000_uniform_neg30_r0",
+   "path": "data/generated/gen_forest_components8_n20000_uniform_neg30_r0.json",
+   "sha256": "84b687e32503e4924a8ce604802a5d2ef77e8e753e3fa4c5166e4a711541c07a",
+   "nodes": 20000,
+   "arcs": 19991,
+   "capacity": 27521.25,
+   "family": "forest",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_forest_components8_n20000_uniform_neg30_r1",
+   "path": "data/generated/gen_forest_components8_n20000_uniform_neg30_r1.json",
+   "sha256": "e91d69c11ffa77e9de573aec27ee93f8268f3e18d2748cc20c85cbb03aa43297",
+   "nodes": 20000,
+   "arcs": 19991,
+   "capacity": 27360.0,
+   "family": "forest",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_forest_components8_n20000_uniform_neg30_r2",
+   "path": "data/generated/gen_forest_components8_n20000_uniform_neg30_r2.json",
+   "sha256": "5cca6be17e9c91ce096741c99d63c4e9fd014e3c3f70080d5897e92393f77470",
+   "nodes": 20000,
+   "arcs": 19991,
+   "capacity": 24440.75,
+   "family": "forest",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_forest_components8_n200_heterogeneous_neg30_r0",
+   "path": "data/generated/gen_forest_components8_n200_heterogeneous_neg30_r0.json",
+   "sha256": "561d2779837f4a3c57f359d2124b96c194294a8829552bad258679f1b60b5650",
+   "nodes": 200,
+   "arcs": 191,
+   "capacity": 20047.5,
+   "family": "forest",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_forest_components8_n200_heterogeneous_neg30_r1",
+   "path": "data/generated/gen_forest_components8_n200_heterogeneous_neg30_r1.json",
+   "sha256": "4b0a18028ac5447ed2c124ab1387b39a5406f4b4f15c74e71273bfa253fe709c",
+   "nodes": 200,
+   "arcs": 191,
+   "capacity": 19353.25,
+   "family": "forest",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_forest_components8_n200_heterogeneous_neg30_r2",
+   "path": "data/generated/gen_forest_components8_n200_heterogeneous_neg30_r2.json",
+   "sha256": "afcefceebd80406f73eaa5a36d4da6bcb0c8fae45872f776453916c603048187",
+   "nodes": 200,
+   "arcs": 191,
+   "capacity": 15858.25,
+   "family": "forest",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_layered_levels20-density0.02-skip0.005_n2000_dispersed_neg30_r0",
+   "path": "data/generated/gen_layered_levels20-density0.02-skip0.005_n2000_dispersed_neg30_r0.json",
+   "sha256": "be895cfea9ee5376c7328764fdd826e8ff66f3d2fe59fb7cbefce1bc0378b8b5",
+   "nodes": 2000,
+   "arcs": 4997,
+   "capacity": 246357.0,
+   "family": "layered",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_layered_levels20-density0.02-skip0.005_n2000_dispersed_neg30_r1",
+   "path": "data/generated/gen_layered_levels20-density0.02-skip0.005_n2000_dispersed_neg30_r1.json",
+   "sha256": "db8a288d794db5ce050e308adcd57bdf87fd684ac97f8e72304f32de0dc23656",
+   "nodes": 2000,
+   "arcs": 4892,
+   "capacity": 249482.75,
+   "family": "layered",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_layered_levels20-density0.02-skip0.005_n2000_dispersed_neg30_r2",
+   "path": "data/generated/gen_layered_levels20-density0.02-skip0.005_n2000_dispersed_neg30_r2.json",
+   "sha256": "cbd40cb9e4261cabaeb23c52f4da2adfae89d28e5b0f7b8fc9bf71fe90fb3b00",
+   "nodes": 2000,
+   "arcs": 4804,
+   "capacity": 149890.0,
+   "family": "layered",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_layered_levels8-density0.05_n8000_uniform_neg60_r0",
+   "path": "data/generated/gen_layered_levels8-density0.05_n8000_uniform_neg60_r0.json",
+   "sha256": "d29ace5792c5b95eee1132f1755e8c3ac98708f75e9523402d6ccd274a468824",
+   "nodes": 8000,
+   "arcs": 349499,
+   "capacity": 11063.5,
+   "family": "layered",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_layered_levels8-density0.05_n8000_uniform_neg60_r1",
+   "path": "data/generated/gen_layered_levels8-density0.05_n8000_uniform_neg60_r1.json",
+   "sha256": "71f796536022c384a138706ae8c3e2b82a7d04294f564f41bc8f2f56ff3e4c41",
+   "nodes": 8000,
+   "arcs": 350302,
+   "capacity": 10913.0,
+   "family": "layered",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_layered_levels8-density0.05_n8000_uniform_neg60_r2",
+   "path": "data/generated/gen_layered_levels8-density0.05_n8000_uniform_neg60_r2.json",
+   "sha256": "f046e14762ea90cb9e4f00f05d8098cbbdf829a56917a385e6345724136c66b7",
+   "nodes": 8000,
+   "arcs": 350024,
+   "capacity": 9758.25,
+   "family": "layered",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_sparse_degree3_n20000_dispersed_neg30_r0",
+   "path": "data/generated/gen_sparse_degree3_n20000_dispersed_neg30_r0.json",
+   "sha256": "7e50c8328fe87b05e782c03e3d34e296fdc99937000499cdeb3be674992756cd",
+   "nodes": 20000,
+   "arcs": 59966,
+   "capacity": 2491456.0,
+   "family": "sparse",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_sparse_degree3_n20000_dispersed_neg30_r1",
+   "path": "data/generated/gen_sparse_degree3_n20000_dispersed_neg30_r1.json",
+   "sha256": "8e9e84b2c583d87eda0176a5431e2a02f63293cbe6c019397265df66a39db50f",
+   "nodes": 20000,
+   "arcs": 59971,
+   "capacity": 2499808.5,
+   "family": "sparse",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_sparse_degree3_n20000_dispersed_neg30_r2",
+   "path": "data/generated/gen_sparse_degree3_n20000_dispersed_neg30_r2.json",
+   "sha256": "5622f937429caa5ae783b6e6865234614ad9a22c988b6d2ef2a68d48e98811de",
+   "nodes": 20000,
+   "arcs": 59972,
+   "capacity": 1492215.75,
+   "family": "sparse",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_sparse_degree3_n2000_dispersed_neg30_r0",
+   "path": "data/generated/gen_sparse_degree3_n2000_dispersed_neg30_r0.json",
+   "sha256": "07f04a9ab9d9cbc13e8ce55612c8b4558230e60d2774c6af4e662347e9445212",
+   "nodes": 2000,
+   "arcs": 5977,
+   "capacity": 253322.75,
+   "family": "sparse",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_sparse_degree3_n2000_dispersed_neg30_r1",
+   "path": "data/generated/gen_sparse_degree3_n2000_dispersed_neg30_r1.json",
+   "sha256": "bf17aeb5706708f42fba87b787ad283a9945a9f73dc6800bdef411f3a91e5bb1",
+   "nodes": 2000,
+   "arcs": 5967,
+   "capacity": 247928.0,
+   "family": "sparse",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_sparse_degree3_n2000_dispersed_neg30_r2",
+   "path": "data/generated/gen_sparse_degree3_n2000_dispersed_neg30_r2.json",
+   "sha256": "4d3f1bd4ad094c67d209eddde78ab0fab8c9a897d1bca818a659453c9b0d63aa",
+   "nodes": 2000,
+   "arcs": 5975,
+   "capacity": 148615.0,
+   "family": "sparse",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_sparse_degree3_n200_dispersed_neg30_r0",
+   "path": "data/generated/gen_sparse_degree3_n200_dispersed_neg30_r0.json",
+   "sha256": "3a9badafa777fa26bf1330e27008ba32231bc17929b172b3ffb9c9d8ff7efd79",
+   "nodes": 200,
+   "arcs": 583,
+   "capacity": 23311.75,
+   "family": "sparse",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_sparse_degree3_n200_dispersed_neg30_r1",
+   "path": "data/generated/gen_sparse_degree3_n200_dispersed_neg30_r1.json",
+   "sha256": "541ccedff8a50158967570311c5b1577767f45928cd69cb4765476635fee9eb9",
+   "nodes": 200,
+   "arcs": 583,
+   "capacity": 26716.0,
+   "family": "sparse",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_sparse_degree3_n200_dispersed_neg30_r2",
+   "path": "data/generated/gen_sparse_degree3_n200_dispersed_neg30_r2.json",
+   "sha256": "f546cf86f355a7207edd08d8e8c1b88ef3c192e4227a5f7d51034bfb89fee898",
+   "nodes": 200,
+   "arcs": 577,
+   "capacity": 15423.25,
+   "family": "sparse",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_transitive_degree2-extra3.0_n200_uniform_neg30_r0",
+   "path": "data/generated/gen_transitive_degree2-extra3.0_n200_uniform_neg30_r0.json",
+   "sha256": "33cbd14bfad6e7724454048d971e85124dbec38ad0893182878803ffe84e9dae",
+   "nodes": 200,
+   "arcs": 1564,
+   "capacity": 279.25,
+   "family": "transitive",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_transitive_degree2-extra3.0_n200_uniform_neg30_r1",
+   "path": "data/generated/gen_transitive_degree2-extra3.0_n200_uniform_neg30_r1.json",
+   "sha256": "3c7cb76fc3f0c7a71d4290122f137eaf458e89f5b8d50a28ea5ed818eb9b7a76",
+   "nodes": 200,
+   "arcs": 1580,
+   "capacity": 268.5,
+   "family": "transitive",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_transitive_degree2-extra3.0_n200_uniform_neg30_r2",
+   "path": "data/generated/gen_transitive_degree2-extra3.0_n200_uniform_neg30_r2.json",
+   "sha256": "33066f249d9de9269c9ca834dee4cee012e6f7158251f772ba851440607d6445",
+   "nodes": 200,
+   "arcs": 1564,
+   "capacity": 249.0,
+   "family": "transitive",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_transitive_degree2-extra3.0_n8000_uniform_neg30_r0",
+   "path": "data/generated/gen_transitive_degree2-extra3.0_n8000_uniform_neg30_r0.json",
+   "sha256": "97849af8a7ffdce1298da87c28bf8fe5ffe99411bb42be5ec04f845bf3d72604",
+   "nodes": 8000,
+   "arcs": 63960,
+   "capacity": 10976.75,
+   "family": "transitive",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_transitive_degree2-extra3.0_n8000_uniform_neg30_r1",
+   "path": "data/generated/gen_transitive_degree2-extra3.0_n8000_uniform_neg30_r1.json",
+   "sha256": "3bd3e5caea5d7c3287cf905ea7f89ed59dd5d0225bfae0aeab30ccd800430efd",
+   "nodes": 8000,
+   "arcs": 63968,
+   "capacity": 11039.75,
+   "family": "transitive",
+   "origin": "generated"
+  },
+  {
+   "name": "gen_transitive_degree2-extra3.0_n8000_uniform_neg30_r2",
+   "path": "data/generated/gen_transitive_degree2-extra3.0_n8000_uniform_neg30_r2.json",
+   "sha256": "18f86f6c7016dbfd2a6f0e2c765b2bb81fe28ddf50743332f6d8c302daba1350",
+   "nodes": 8000,
+   "arcs": 63908,
+   "capacity": 9813.5,
+   "family": "transitive",
+   "origin": "generated"
+  },
+  {
+   "name": "minelib_w23",
+   "path": "data/processed/minelib_w23.json",
+   "sha256": "3bc984399f158946422e05a03f15e67b1ce47fd14c06d438fee337d446c78ddf",
+   "nodes": 74260,
+   "arcs": 764786,
+   "capacity": 816000000.0,
+   "family": "minelib-derived",
+   "origin": "DATA/MINELIB/INSTANCES.zip"
+  },
+  {
+   "name": "minelib_zuck_large",
+   "path": "data/processed/minelib_zuck_large.json",
+   "sha256": "bbdcc93fdd7b7c8836dcd4b7ae3fcf594de191c9c2346c361c86d59cef471530",
+   "nodes": 96821,
+   "arcs": 1053105,
+   "capacity": 90000000.0,
+   "family": "minelib-derived",
+   "origin": "DATA/MINELIB/INSTANCES.zip"
+  },
+  {
+   "name": "pckp_F_3091_5715",
+   "path": "data/processed/pckp_F_3091_5715.json",
+   "sha256": "3d2c3bab27de0a32790c41a7548759be04c32865a6d840dbba3ab8471c4d6f8a",
+   "nodes": 3091,
+   "arcs": 5715,
+   "capacity": 7000.0,
+   "family": "pckp-historical",
+   "origin": "DATA/INSTANCES/PCKP_BB/instances"
+  },
+  {
+   "name": "pckp_G_3091_5715",
+   "path": "data/processed/pckp_G_3091_5715.json",
+   "sha256": "cb2bbd949bbcfe52dd93b567b6531fc37df62de8705fea042b418103df696961",
+   "nodes": 3091,
+   "arcs": 5715,
+   "capacity": 3000.0,
+   "family": "pckp-historical",
+   "origin": "DATA/INSTANCES/PCKP_BB/instances"
+  },
+  {
+   "name": "pckp_H_3091_5715",
+   "path": "data/processed/pckp_H_3091_5715.json",
+   "sha256": "bedee2782670bb99251bc47e4bf1aafa9b86fdc7677ead0447a49be6d3c71e70",
+   "nodes": 3091,
+   "arcs": 5715,
+   "capacity": 75000.0,
+   "family": "pckp-historical",
+   "origin": "DATA/INSTANCES/PCKP_BB/instances"
+  },
+  {
+   "name": "pckp_I_3091_5715",
+   "path": "data/processed/pckp_I_3091_5715.json",
+   "sha256": "c4dfed51bd3f87b7078297e2b4c9cd4d0efe37c5f82d888edaf16eb0d104e709",
+   "nodes": 3091,
+   "arcs": 5715,
+   "capacity": 10000.0,
+   "family": "pckp-historical",
+   "origin": "DATA/INSTANCES/PCKP_BB/instances"
+  },
+  {
+   "name": "pckp_J_9235_17082",
+   "path": "data/processed/pckp_J_9235_17082.json",
+   "sha256": "b644bc8e62cd3688f7e86d76bbc503ffc5e8ff6df7fd45333dfa555870186898",
+   "nodes": 9235,
+   "arcs": 17082,
+   "capacity": 200.0,
+   "family": "pckp-historical",
+   "origin": "DATA/INSTANCES/PCKP_BB/instances"
+  },
+  {
+   "name": "pckp_M_538_3033",
+   "path": "data/processed/pckp_M_538_3033.json",
+   "sha256": "cb9daef8b29c7cc729289304092084ccb8bcf4bd98d50151e62803780c888a2b",
+   "nodes": 538,
+   "arcs": 3033,
+   "capacity": 6000000.0,
+   "family": "pckp-historical",
+   "origin": "DATA/INSTANCES/PCKP_BB/instances"
+  }
+ ]
+}

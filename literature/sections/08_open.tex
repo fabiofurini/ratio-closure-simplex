@@ -1,0 +1,208 @@
+\section{What has to be settled before claiming}\label{sec:open}
+
+\subsection{The checks this review could not close}
+
+\begin{enumerate}[label=Q\arabic*.,leftmargin=*]
+\item \textbf{Term-by-term comparison with \citet{Yang2026}.} Contribution C2
+      asserts that the closure-specific closed forms are markedly simpler than
+      the general forest-simplex algebra, and C3 asserts that $O(n)$ pricing is
+      available here without the structural overhead of Yang's model. Neither
+      has been verified against the paper's actual formulas. This is the single
+      most load-bearing open item: if Yang's development specialises to
+      something equivalent, C2 and C3 both collapse into ``an instance of a
+      known scheme''.
+\item \textbf{Exact delimitation against \citet{MollakhaniEtAl2026}.} Their
+      abstract settles the direction: the algorithm is motivated by the
+      structure of basic feasible solutions of the simplex method, and it then
+      merges and splits chunks directly on the dependency graph, maintaining a
+      partition ordered by decreasing aggregate ratio rather than an LP basis.
+      That is a departure from the simplex, not a specialisation of it. What
+      remains unchecked is the full text: whether the paper anywhere derives
+      reduced costs, a ratio test or dual multipliers for \eqref{eq:class}, and
+      how far its optimality argument coincides with the pricing argument used
+      here.
+\item \textbf{The network simplex with one side row.} \emph{Closed on the
+      structural question; open only on the term-by-term comparison.}
+      \citet{ChenSaigal1977} and \citet{Caliskan2011} have now been obtained
+      and read. They push this block back to 1977 and settle what it does and
+      does not cover.
+
+      \citet{ChenSaigal1977} treat a capacitated flow problem with $k$
+      arbitrary additional linear rows. Their Proposition 1.1.5 is the
+      structural statement: in any partition of a basis, the square block
+      corresponds naturally to a \emph{spanning tree} of the network, so a basis
+      is a spanning tree plus $k$ further columns, and the subnetwork carried by
+      the basis has rank $n-1$ and nullity $k$. Pivoting, pricing and inversion
+      are then driven by a \emph{working basis} of size $k$ rather than $n+k-1$.
+      \citet{Caliskan2011} is the case $k=1$ made explicit on maximum flow with
+      a budget row: a basis is the two subtrees rooted at $s$ and $t$, the arc
+      $(t,s)$, and \emph{one} further arc closing a fundamental cycle, with his
+      Lemma~1 recording that the net cost around that cycle cannot vanish, which
+      is the rank condition the side row imposes.
+
+      Two consequences. First, R7 in \cref{sec:retracted} is confirmed and can
+      now be cited precisely instead of being called textbook: tree-plus-$k$
+      bases, a working basis of the size of the side rows, and a specialised
+      pricing built on them are due to 1977, not to 2017. Second, the phrase
+      ``to the best of our knowledge'' in \cref{sec:positioning} survives, for a
+      reason \cref{sec:ratio} already states: this whole block works on the
+      node--arc incidence matrix with variables on \emph{arcs}, where a basis is
+      a spanning tree, while \eqref{eq:class} carries variables on
+      \emph{vertices} and difference constraints on arcs --- the
+      \emph{transposed} incidence matrix --- where a basis is a forest with
+      anchored roots and not a spanning tree of the same graph. The paradigm is
+      theirs; the specialisation to the transposed structure is not in any of
+      the three papers.
+
+      What remains open is narrower and is the same check as Q1:
+      \citet{HolzhauserEtAl2017}, the closest of the block, has been obtained
+      but not read term by term, so the claim that the closure-specific closed
+      forms are simpler than the generic working-basis algebra is still asserted
+      rather than demonstrated for that paper.
+\item \textbf{Formal separation from the normalized tree.} This is now as
+      load-bearing as Q1. A normalized tree of \citet{LerchsGrossmann1965} and
+      an \FS{} basis are, on inspection, the same object read twice: forest
+      plus root, aggregates per branch, a sign test per branch, one arc in and
+      one root arc out. What has to be written down is the exact statement of
+      the correspondence and of where it breaks --- presumably that a normalized
+      tree is not a basis of the ratio LP, that it carries no ratio test and no
+      dual multiplier, and that the parametric Lerchs--Grossmann of
+      \citet{Hochbaum2001} walks breakpoints rather than performing simplex
+      pivots on the normalised program. If instead the correspondence turns out
+      to be exact, then \FS{} is a reinterpretation of a 1965 algorithm, which
+      is a publishable observation but a completely different paper from the one
+      currently drafted.
+\item \textbf{Prior art on the equality normalisation.} \emph{Closed, and it
+      is a precedent.} \citet{CharnesCooper1962} has now been obtained and
+      read. Their Theorem~2 reduces a linear fractional program to the ordinary
+      linear program
+      \[
+        \max\ c^{\mathsf T}y + \alpha t
+        \quad\text{s.t.}\quad
+        Ay - bt \le 0,\qquad
+        d^{\mathsf T}y + \beta t = 1,\qquad y,t \ge 0,
+      \]
+      in which the normalisation is an \emph{equality} and the constant is
+      exactly $1$. The program \eqref{eq:class} that \FS{} solves is the
+      homogeneous case $\alpha = \beta = 0$, $d = w$, of that transformation.
+      The deliberate choice of an equality is therefore not a modelling
+      contribution of this project; it is the 1962 construction, and
+      \cref{sec:ratio} already cited it as such.
+
+      Their treatment of sign is worth recording because it is \emph{not} ours.
+      Charnes and Cooper require $\operatorname{sgn}(\gamma) =
+      \operatorname{sgn}(d^{\mathsf T}x^\ast + \beta)$ and therefore solve two
+      linear programs, the second obtained by negating $(c,\alpha)$ and
+      $(d,\beta)$ --- ``a change in sign in the functional and in one
+      constraint''. Here the weights are positive, so the denominator is
+      positive on the whole feasible cone and only their first program is ever
+      needed, while a negative \emph{numerator} is representable inside it.
+      That is an observation about the instance class, not a device, and it
+      should not be presented as one.
+\end{enumerate}
+
+\subsection{The computational axis}
+
+The project's own experimental evidence does not support a performance claim.
+On the frozen test bed the max-flow backends --- parametric decomposition and
+Dinkelbach --- solve more instances, and solve them faster, than \FS{} in every
+configuration tried; the numbers are in the experimental report and are not
+reproduced here, because they are being re-measured on a quiet machine and this
+document must not carry a second, drifting copy of them. The qualitative
+finding is stable across every campaign run so far and is unlikely to move: the
+dominant cost is degeneracy, the primal spends the overwhelming majority of its
+pivots on zero steps, and the dual removes the degeneracy without buying a
+comparable speedup, trading null steps for small ones.
+
+The consequence for positioning is that the work is, today, a
+\emph{specialisation} paper and not a \emph{performance} paper, and the three
+experiments that could change that have not been run:
+
+\begin{enumerate}[label=E\arabic*.,leftmargin=*]
+\item \textbf{Single ratio oracle.} \FS{} against a spanning-forest
+      linearization implementation adapted to the first-chunk task, against a
+      static min-cut/root search, and against a general LP solver.
+\item \textbf{Full decomposition path.} Repeated residual oracles against
+      spanning-forest linearization, against parametric max-flow
+      \citep{GalloEtAl1989}, against the parametric Lerchs--Grossmann of
+      \citet{Hochbaum2001}, and against a mining-style implementation
+      \citep{ByunDimitrakopoulos2013} where available.
+\item \textbf{Sequences of related instances.} Vertex deletions, forced
+      inclusions and exclusions, residual prefix removal, small profit and
+      weight perturbations, arc additions and removals --- comparing forest
+      basis reuse against pseudoflow warm start, against parametric state
+      reuse, and against cold restart.
+\end{enumerate}
+
+E2 was the natural place to look for an advantage, and it has now been measured
+on the full canonical sequence rather than on a single capacity. The result is
+negative and the reason is instructive, so both are recorded here.
+
+The task \texttt{full-path} was run on twelve instances spanning the generated
+families, a historical PCKP instance and a MineLib instance, comparing the tuned
+primal, the dual, Dinkelbach and the parametric decomposition, two replicas
+each, under a sixty-second limit. The parametric backend is fastest on eleven of
+the twelve; the dual wins only on the arc-free graph, where there is nothing to
+pivot on. The margin is not marginal: the median ratio between the tuned primal
+and the parametric backend is a factor of twelve, and on a layered DAG with $n =
+2000$ it is a factor of $859$ --- sixty seconds against seven hundredths. On the
+largest instance tried, a sparse DAG with $n = 20{,}000$, the tuned primal, the
+dual and Dinkelbach all exhaust the limit while the parametric backend finishes
+the whole sequence in $3.6$ seconds.
+
+The diagnosis matters more than the ranking. The oracle count is exactly what
+the design predicts --- one ratio oracle per closure layer, the same count
+Dinkelbach pays --- and the parametric backend uses about two flow computations
+per layer. The difference is entirely inside the oracle: each one costs tens to
+hundreds of thousands of pivots, of which between $98\%$ and $100\%$ are
+degenerate. On the layered instance the primal spends $768{,}639$ pivots, essentially
+all of them zero steps, to produce a sequence the parametric backend obtains
+with a few hundred flow computations.
+
+The warm start was then implemented and measured, and it recovers most of that
+cost. The extracted block \emph{is} the positive component, that is one tree of
+the basis forest, so the other trees survive untouched and stay anchored: the
+next oracle can reuse that forest instead of rebuilding from the empty basis.
+The condition that was missing from the project's earlier decision is a single
+one and is checked rather than proved: the values are $1/w(T)$ on the positive
+tree $T$ and zero elsewhere, so an active arc leaving $T$ would violate
+feasibility and $T$ must be closed in the residual. The best closed surviving
+tree is chosen, and if none is closed the oracle restarts cold. The check costs
+$\mathcal{O}(m)$ per oracle.
+
+The effect is on the pivot count, which is where the time was: $251{,}780$
+pivots become $3{,}080$ on a disconnected DAG, $89{,}468$ become $6{,}108$ on a
+sparse one, $48{,}974$ become $6{,}915$ on \texttt{minelib\_newman1}. The
+decomposition produced is identical block by block and the objective of a
+capacity query is unchanged to nine decimals. In wall time the warm primal is
+$3.1$ times faster than the cold one, overtakes Dinkelbach, and wins three of
+the ten instances every configuration solves --- the families whose canonical
+sequence is longest --- against one of twelve before.
+
+This changes the size of the gap, not its direction. The parametric backend
+still wins the other seven instances and is $3.4$ times faster in total, so the
+positioning of \cref{sec:positioning} stands: this is a specialisation paper,
+not a performance paper. What has changed is that the axis is no longer
+hypothetical. The degeneracy is reduced, not removed, and two measurements are
+still owed: the frozen configuration was tuned on single-capacity solves and
+never on the full decomposition --- a paired ablation on this task puts a sink
+initial basis $1.21$ times ahead of it --- and the anti-cycling regime has never
+been tuned for this task at all.
+
+An end-to-end
+branch-and-cut comparison comes after that, not before, and must not be used as
+the first piece of evidence.
+
+\subsection{Honest summary}
+
+For the forest structure, the basic-solution characterisation, the merge/split
+pivots, the sign test on branch aggregates, maximum-ratio closure, the canonical
+decomposition and the incidence-matrix-plus-side-row paradigm, \FS{} is not new
+--- and the forest itself is not new since 1965, not since 2025. What may be new is
+the specialisation of the ordinary simplex, primal and dual, to this particular
+linear program, the closed forms that specialisation produces, and the use of it
+to drive the entire canonical sequence of blocks rather than the first ---
+and that is a narrow claim which \cref{sec:positioning} states narrowly, and
+which Q1, Q2 and Q4 have to close before it is made in public --- Q3 and Q5
+having been closed by the readings recorded above, both of them against the
+claim rather than for it.

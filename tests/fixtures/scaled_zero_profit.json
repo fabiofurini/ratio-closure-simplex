@@ -1,0 +1,14 @@
+{
+  "format_version": 1,
+  "id": "scaled_zero_profit",
+  "node_ids": [0, 1, 2],
+  "profit": [7, -3, -4],
+  "weight": ["1/1000000000000", "2/1000000000000", "3/1000000000000"],
+  "arcs": [[0, 1], [1, 2], [2, 0]],
+  "capacity": "6/1000000000000",
+  "metadata": {
+    "regression": "Zero aggregate profit must remain zero under scaling; cyclic variables are equal.",
+    "expected_ratio": 0,
+    "expected_lp": 0
+  }
+}

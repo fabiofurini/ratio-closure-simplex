@@ -1,0 +1,63 @@
+\section{The residual decomposition and its parametric reading}\label{sec:parametric}
+
+Repeatedly extracting a maximum-ratio set and continuing on the residual is not
+a device of this project. It is the decomposition of \citet{Sidney1975} for
+precedence-constrained single-machine scheduling, developed in the sequencing
+literature by \citet{Lawler1978} and surveyed by \citet{CorreaSchulz2005};
+\citet{MargotEtAl2003} give the version closest to the ratio reading used here:
+an in-depth study of an LP relaxation of a precedence-constrained problem whose
+algorithmic core is a parametric extension of Sidney's decomposition, obtained
+by essentially solving a parametric minimum-cut problem.
+
+The vocabulary of this document follows \citet{DoseEtAl2026}, the companion work
+of this project, which studies the same canonical object on a precedence graph
+that is a directed forest. What is called a \emph{canonical block} here is a
+\emph{closure layer} there; the canonical decomposition is their \emph{optimal
+sequence of closure layers}; the ratio $\lambda_r$ of a block is a
+\emph{breakpoint} of $u(\lambda)$; and the per-vertex bound this project
+computes is their \emph{threshold} of a vertex --- the same quantity, not an
+analogy. Their scalar $\lambda$, parametrising the weights as $p_i - \lambda
+w_i$, is the $\rho$ of the ratio oracle here, which is also the reduced cost
+$b_i = p_i - \rho w_i$ of \cref{sec:lg}. The two works do not overlap on
+content: they give aggregation algorithms specialised to forests, reaching
+$\mathcal{O}(n\log n)$, whereas the precedence graph here is an arbitrary DAG
+and the method is the simplex. The sequence produced is the same object, so the
+two are directly comparable on instances that happen to be forests --- and on
+those instances their bound is the one to beat.
+The same object appears from the flow side as the sequence of nested minimum
+cuts of a parametric network: \citet{EisnerSeverance1976} give the
+divide-and-conquer scheme that computes all breakpoints with a number of
+maximum-flow computations proportional to their number, and
+\citet{GalloEtAl1989} give the parametric maximum-flow algorithm that computes
+the whole path in the time of a single flow computation for monotone
+parametrisations. \citet{Topkis1978} supplies the lattice/submodularity view
+that makes the nesting structural rather than incidental.
+\citet{PicardSmith2004} apply exactly this to open-pit contours, and
+\citet{Eppstein2018} gives the modern complexity treatment of the parametric
+closure problem.
+
+This project implements the Eisner--Severance scheme as its \texttt{parametric}
+backend, and its experimental report is explicit that the implementation is a
+divide-and-conquer decomposition with independent maximum flows, without the
+amortised flow reuse of \citet{GalloEtAl1989}.
+
+\paragraph{What this costs the claim.} The existence of the canonical
+decomposition, its nesting, the strictly decreasing ratios, the interpolation
+between two consecutive prefixes that yields the LP value at a given capacity,
+and the solution of the whole path by parametric flow, are all established. The
+project's mathematical contract already presents them as such. A claim of
+novelty at this level would be simply wrong, and the earlier drafts were right
+to drop it.
+
+\citet{NemeschEtAl2025} survey exact and approximation algorithms for
+linear-parametric optimisation and place the closure case inside the general
+picture; it is the reference to consult before asserting that any parametric
+technique used here is unusual.
+
+\paragraph{What survives here.} Only one thing, and it is small: the convention
+that resolves ties. When several closures attain the maximum ratio, the
+canonical block is their union, which on the flow side is the \emph{maximal}
+source side of a minimum cut rather than the minimal one
+\citep{PicardQueyranne1980,PicardQueyranne1982}. This project implements both
+conventions and verifies that they agree; that is careful engineering on a known
+structure, not a new result.

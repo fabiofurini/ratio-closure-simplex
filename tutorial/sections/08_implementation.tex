@@ -1,0 +1,254 @@
+\section{Efficient implementation: what the derivation permits}\label{sec:implementation}
+
+The exact reference algorithm is fully specified above. This section describes
+the implementable baseline, and then the three refinements that measurement
+showed to matter. The baseline is not a straw man: it is the configuration the
+solver still offers as its verifiable reference, and every refinement below is a
+separate option so that its effect can be measured in isolation.
+
+\subsection{A linear-memory reference organization}
+Store the original directed graph in contiguous endpoint and adjacency arrays,
+with incoming and outgoing access. Store the forest separately through parent,
+parent-edge, root and child information. Maintain the nonbasic vertex/slack
+sets and a mapping between variable IDs and their positions in basic lists.
+Traverse trees iteratively, so a long chain cannot exhaust the call stack.
+
+A postorder traversal computes $p(D_e)$ and $w(D_e)$ for every forest edge.
+Component totals provide root reduced costs. Only $n-1$ nonbasic variables
+need pricing. After selecting an entry, mark its subtree or tree, form
+\eqref{eq:direction}, and scan all arcs for decreasing basic slacks.
+Rebuild the forest metadata after the exchange. This deliberately simple
+version provides a reliable reference before local updates are introduced.
+
+\subsection{Specialized operations in one iteration}
+The forest supplies specialized operations for entering-variable selection,
+the pivot column, the leaving-variable test, and the basis exchange.
+Table~\ref{tab:operation-costs} separates these costs for the full-rebuild
+reference organization. In particular, the $O(n)$ pricing bound is independent
+of graph density; the complete direction and ratio test also inspect arcs.
+
+\begin{table}[htbp]
+\centering\small
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{p{.29\linewidth}p{.49\linewidth}l}
+\toprule
+Operation & Forest calculation & Cost\\
+\midrule
+Subtree aggregates & Postorder sums of profits and weights & $O(n)$\\
+One reduced cost & Signed aggregate difference, sums available & $O(1)$\\
+Full pricing and entry & Scan the $n-1$ nonbasic candidates & $O(n)$\\
+Pivot direction on vertices & Mark a tree/subtree; normalize its motion & $O(n)$\\
+Pivot direction on slacks & Head-minus-tail vertex directions & $O(m)$\\
+Ratio test and exit & Scan decreasing basic vertex/slack variables & $O(n+m)$\\
+Chosen pivot row, if needed & Evaluate its $n-1$ nonbasic coefficients from forest membership and aggregates & $O(n)$\\
+Basis exchange and rebuild & Exchange edge/root membership; rebuild metadata & $O(n+m)$\\
+\bottomrule
+\end{tabular}
+\caption{Arithmetic costs with the current forest available and reusable
+arrays. Constant-time coordinate evaluation assumes the required sums and
+membership information have been computed.}\label{tab:operation-costs}
+\end{table}
+
+\begin{proposition}[Arithmetic cost of the full-rebuild variant]
+\label{prop:cost}
+Using adjacency lists and reusable arrays, one full rebuild, complete pricing,
+direction computation, full ratio test and exchange can be performed in
+$O(n+m)$ arithmetic operations and $O(n+m)$ storage. An oracle performing
+K pivots costs $O((K+1)(n+m))$ arithmetic operations.
+\end{proposition}
+\begin{proof}
+Forest construction and traversals touch $O(n+m)$ stored entries. Subtree
+sums and pricing touch $O(n)$ entries, since a forest has fewer than n edges.
+Constructing vertex directions is linear in n, and evaluating all slack
+directions and blockers is linear in m. Updating membership and rebuilding
+the adjacency information is linear as well. Arrays store only vertices, arcs,
+membership, aggregates and temporary vectors.
+\end{proof}
+This is an arithmetic-operation bound, not a bit-complexity bound for growing
+rational numbers. Nor does it bound K polynomially. The exact checker
+deliberately builds dense matrices and therefore does \emph{not} implement
+the memory bound in \cref{prop:cost}.
+For residual calls indexed by r, the analogous total is
+\[
+ O\!\left(\sum_r(K_r+1)(n_r+m_r)\right),
+\]
+when residual graphs are rebuilt linearly at each call. The number of calls
+is at most the original n; no parametric-flow complexity bound is being
+transferred to the \FS{}.
+
+\subsection{Variants to implement and tune}
+\begin{table}[htbp]
+\centering\small
+\begin{tabular}{p{.22\linewidth}p{.32\linewidth}p{.35\linewidth}}
+\toprule
+Parameter family & Candidate variants & Invariant to preserve\\
+\midrule
+Pricing & Full scan; blocked scan; candidate list & A full check before claiming no improving entry\\
+Entering rule & Bland; first or best improving & A documented anti-cycling policy for each alternative\\
+Forest update & Full; local; adaptive rebuild & Same mathematical basis and direction as a full reconstruction\\
+Rebuild trigger & Pivot interval; changed-tree fraction; residual threshold & Recover accuracy without silently changing the problem\\
+Initial basis & Sink singleton; closure of a promising seed; best undirected component & Primal feasibility: the positive component must be closed in the residual\\
+Ratio test & Full scan; restricted to boundary-crossing arcs; stop at the first zero step & Same step, and the same leaving variable whenever Bland's rule is active\\
+Residual start & Fresh sink basis; validated warm start & Primal feasibility on the new residual graph\\
+Vertex order & Input; topological; seeded & Identical certified objective and canonical decomposition\\
+\bottomrule
+\end{tabular}
+\caption{Tuning choices of the implementation. Every row is an explicit
+parameter, so an ablation can switch off one refinement at a time.}
+\end{table}
+Reducing the number of visited vertices or tested candidates is useful only if
+it reduces total runtime at the required accuracy. The profiler separates
+pricing, directions, ratio tests, exchange, rebuilds and canonicalization. The
+measured ranking of these choices is reported in the experimental report, not
+here; the one result worth repeating is that the entering rule barely moves the
+outcome while the treatment of degeneracy moves it by factors.
+
+\paragraph{A caution about termination.}
+First-improving or best-improving pricing is not automatically Bland's rule.
+Switching to a finite rule permanently after a documented trigger, or using
+a separately justified lexicographic implementation, are possible safeguards.
+An informal fallback that repeatedly switches back to an unproved rule does
+not inherit the finite-pivot theorem without additional reasoning. The
+reasoning is supplied in \cref{prop:episodes} below, because a permanent switch
+turns out to be expensive.
+
+\subsection{Degeneracy is the dominant cost}\label{sec:degeneracy-cost}
+
+In a basis the vertex values are constant on the positive component and zero on
+every other tree. A step is therefore blocked at length zero whenever the
+blocking variable is one of the many already at zero: a vertex of the entering
+subtree whose direction component is negative, or a precedence slack between two
+vertices that are both at zero. Degeneracy is not incidental here; it is what the
+precedence structure produces.
+
+The effect is large enough to reorganize the implementation around it. On
+applied instances more than $99\%$ of the pivots of an oracle have zero step; on
+a family with no arcs at all, where no slack can block, the share is zero. Three
+consequences follow, and each was measured.
+
+\paragraph{The anti-cycling fallback must not become the operating rule.}
+A permanent switch to Bland's rule after a run of degenerate pivots engages
+immediately and never releases, because the run never ends: every entering rule
+then collapses onto Bland within the first oracle. Releasing the fallback at the
+first pivot with a positive step, and placing the trigger far away, keeps the
+improving rule without giving up finiteness.
+
+\begin{proposition}[Finiteness with a released fallback]\label{prop:episodes}
+Suppose the solver uses an arbitrary entering rule, switches to Bland's rule
+after a fixed number of consecutive zero-step pivots, and returns to the
+original rule at the first pivot with a positive step. Then the oracle performs
+finitely many pivots.
+\end{proposition}
+\begin{proof}
+Call an \emph{episode} a maximal run of iterations during which Bland's rule is
+active. Within an episode every pivot has zero step, so the basic solution never
+changes, and the iterations of the episode are exactly the iterations of Bland's
+rule applied to the linear program from the basis at which the episode began;
+by the finite-pivot theorem for Bland's rule the episode cannot cycle and must
+end. An episode ends only with a pivot of positive step, which strictly
+increases the objective of the normalized subproblem. Since there are finitely
+many bases, hence finitely many objective values, only finitely many episodes
+can occur. Between episodes only finitely many pivots are possible for the same
+reason.
+\end{proof}
+
+\paragraph{The ratio test need not scan every arc.} By
+\eqref{eq:direction} the direction is $+\sigma$ on the entering subtree,
+$-\kappa$ on the positive component and zero elsewhere. An arc whose two
+endpoints lie outside both sets therefore has zero direction difference and
+cannot block. It suffices to scan the arcs incident to the entering subtree,
+together with the arcs that cross the boundary of the positive component; and
+since the positive component is closed, such an arc has its tail outside it, so
+scanning the outgoing arcs of the vertices outside the positive component completes
+the cover.
+
+\paragraph{A zero step is the minimum, so the scan may stop at the first one.}
+No step is negative, so the first blocking variable attaining zero already
+determines the step. The shortcut must be suspended while Bland's rule is
+active, since that rule requires the smallest index among ties. This is the
+technique the group's 2023 prototype implemented as an explicit feasibility
+check during the forest traversal, and it is the single largest saving in the
+ratio test: on one oracle of a mining instance with $1060$ vertices the arcs
+examined fall from $1\,110\,883$ to $184$, at an unchanged number of pivots.
+
+\subsection{The dual side}\label{sec:dual}
+
+Primal degeneracy and dual degeneracy are different defects, and on this problem
+they are wildly asymmetric. Primal degeneracy is a per-pivot phenomenon: more
+than $99\%$ of the pivots of an oracle have zero step. The only source of dual
+degeneracy is a tie between ratios, which is a per-block phenomenon: on a
+generated instance of two thousand vertices, ties affect $123$ of $267$ blocks. Even
+if every tie produced one degenerate dual pivot, that is a hundred against half a
+million. The dual is therefore the natural method here, which is also what the
+classical guidance says: use the dual when the primal is heavily degenerate.
+
+Two structural facts make the dual unusually simple on this problem.
+
+\begin{proposition}[Primal infeasibility is combinatorial]\label{prop:dual-shape}
+In any basis of the normalised subproblem, the vertex variables satisfy $y\ge 0$.
+Every primal infeasibility is a precedence slack $s_{ij}=y_j-y_i<0$, that is an
+arc leaving the positive component $P$; and the basis is primal feasible exactly
+when $P$ is closed.
+\end{proposition}
+\begin{proof}
+The basic solution takes the value $1/w(P)$ on $P$ and zero on every other tree,
+so $y\ge0$ always. For an arc $(i,j)$, $s_{ij}=y_j-y_i$ is negative only when
+$y_i>y_j$, which forces $i\in P$ and $j\notin P$. Conversely if $P$ is closed no
+arc leaves it, all such slacks vanish or are positive, and the basis is feasible.
+\end{proof}
+
+Choosing the leaving variable is therefore a search for an unsatisfied
+prerequisite, with no numerical scan, and the stopping rule is that $P$ is
+closed. The starting basis is dual feasible by construction: make every vertex its
+own tree and let $P$ be the vertex of maximum ratio; the reduced cost of any other
+vertex $k$ is then $w_k(p_k/w_k-\rho)\le0$, and there are no forest edges yet. It
+costs $O(n)$, and it is essentially forced: a singleton start is dual feasible
+only for the maximum-ratio vertex.
+
+The row of the leaving slack is as local as the primal direction. Entering a
+nonbasic $q$ by one unit moves every vertex by
+$\sigma_q\ind[u\in S_q]-\kappa_q\ind[u\in P]$, so the row of the slack of
+$(t,h)$ is nonzero only for the root of each endpoint's tree, for the forest
+edges on the two paths to their roots, and through the rank-one term $\kappa_q$
+when exactly one endpoint lies in $P$. It costs $O(n+\mathrm{depth})$.
+
+\paragraph{What the measurement says.} The dual removes the degeneracy it was
+predicted to remove --- the share of zero-step pivots falls from above $99\%$ to
+between $0\%$ and $21\%$ --- but the gain in time is between $1.1$ and $2.7$,
+not the two orders of magnitude a naive extrapolation would suggest. The reason
+is worth recording: the primal performs about half a million pivots of which only
+some fifteen hundred move the objective, while the dual performs three hundred
+thousand of which most do. It has traded many null steps for many tiny ones.
+Choosing the leaving arc by structural criteria rather than by smallest index
+--- most attractive head, largest tree, most negative reduced cost --- was tried
+and does not help, because every violated slack has the same value $-1/w(P)$ and
+there is nothing for a most-infeasible rule to discriminate.
+
+\paragraph{What remains.} With those three changes the ratio test is no longer
+the bottleneck. Pricing and forest rebuilding are: on a layered DAG with dense
+connections between levels they account for roughly a third and a half of the
+solver's time respectively, because both are $\Theta$ of the touched part of the
+graph at every pivot while the pivot itself changes very little. Incremental
+pricing, updated only on the components a degenerate pivot touches, and updates
+confined to the modified paths, are the natural next steps; neither is
+implemented here.
+
+\subsection{Numerical checks and output contracts}
+Floating-point implementations must use declared absolute and relative
+tolerances, inspect primal and dual residuals in the original units, and
+reconstruct values when incremental updates drift. Near-equal ratios require
+particular care: approximate merging must not be mistaken for an exact tie.
+On integer/rational review cases, exact comparisons provide a useful check.
+
+The intended outputs are: ratio and connected support for an oracle;
+canonical blocks and breakpoints for a path computation; a feasible x and
+validated bound/certificate for a capacity solve. Time, iteration or numerical
+limits must produce distinct states rather than an ``optimal'' label.
+Optional internal checks can vary with configuration, but final verification
+remains mandatory for results used in a scientific comparison.
+
+Once the positive path is known, finding a capacity's split block costs
+$O(\log k)$ with cumulative weights. Returning only the objective or a compact
+block description can be correspondingly cheap. Materializing all n vertex
+coordinates still costs $O(n)$. The many-capacity experiment must include the
+initial path computation and distinguish these output requirements.

@@ -1,0 +1,25 @@
+\begin{table}[tbp]
+\centering
+\caption{Campaign ablation: share of the solver's own measured time per phase, summed over the verified runs of each configuration.}
+\label{tab:ablation-breakdown}
+\small
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{lrrrrrrr}
+\toprule
+configuration & runs & prep. & pricing & direction & ratio & update & certif. \\
+\midrule
+bland-entering & 44 & 0.0 & 31.7 & 6.5 & 33.3 & 25.7 & 0.0 \\
+close-degeneracy-trigger & 44 & 0.0 & 31.1 & 6.4 & 29.6 & 29.9 & 0.0 \\
+forest-tuned & 62 & 0.1 & 5.2 & 12.3 & 12.6 & 63.1 & 0.0 \\
+full-pricing & 56 & 0.1 & 40.7 & 8.9 & 14.9 & 32.0 & 0.0 \\
+no-early-ratio-test & 56 & 0.0 & 3.3 & 6.4 & 53.0 & 33.4 & 0.0 \\
+no-local-update & 60 & 0.0 & 2.2 & 5.1 & 5.5 & 84.7 & 0.0 \\
+no-restricted-ratio-test & 54 & 0.0 & 3.2 & 5.9 & 58.5 & 29.2 & 0.0 \\
+sequential-canonicalization & 62 & 0.1 & 5.4 & 12.5 & 12.4 & 62.7 & 0.0 \\
+sink-initial-basis & 60 & 0.1 & 6.2 & 13.3 & 13.5 & 60.8 & 0.0 \\
+with-transitive-reduction & 62 & 0.1 & 6.6 & 13.2 & 10.6 & 61.2 & 0.0 \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\par\vspace{2pt}\footnotesize Percentages of the solver's internal accounting; the flow backends spend their time outside these ratio-closure phases and therefore show near-zero shares.
+\end{table}

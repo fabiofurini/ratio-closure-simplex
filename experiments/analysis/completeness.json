@@ -1,0 +1,80 @@
+{
+ "ablation": {
+  "planned": 620,
+  "stored": 620,
+  "complete": true,
+  "verified": 560,
+  "statuses": {
+   "optimal": 560,
+   "time_limit": 60
+  }
+ },
+ "canonical_path": {
+  "planned": 144,
+  "stored": 144,
+  "complete": true,
+  "verified": 130,
+  "statuses": {
+   "optimal": 130,
+   "time_limit": 14
+  }
+ },
+ "capacities": {
+  "planned": 372,
+  "stored": 372,
+  "complete": true,
+  "verified": 372,
+  "statuses": {
+   "optimal": 372
+  }
+ },
+ "dual": {
+  "planned": 248,
+  "stored": 248,
+  "complete": true,
+  "verified": 234,
+  "statuses": {
+   "optimal": 234,
+   "time_limit": 14
+  }
+ },
+ "main": {
+  "planned": 552,
+  "stored": 552,
+  "complete": true,
+  "verified": 447,
+  "statuses": {
+   "optimal": 447,
+   "time_limit": 105
+  }
+ },
+ "pilot": {
+  "planned": 48,
+  "stored": 48,
+  "complete": true,
+  "verified": 40,
+  "statuses": {
+   "optimal": 40,
+   "time_limit": 8
+  }
+ },
+ "scalability": {
+  "planned": 612,
+  "stored": 612,
+  "complete": true,
+  "verified": 518,
+  "statuses": {
+   "optimal": 518,
+   "time_limit": 94
+  }
+ },
+ "smoke": {
+  "planned": 16,
+  "stored": 16,
+  "complete": true,
+  "verified": 16,
+  "statuses": {
+   "optimal": 16
+  }
+ }
+}

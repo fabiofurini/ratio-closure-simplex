@@ -1,0 +1,148 @@
+\section{Algorithms whose state is a forest}\label{sec:forests}
+
+This is the section that decides the claim. Four bodies of work sit between
+\FSC{} and any statement of the form ``an algorithm whose state is a forest on
+the precedence graph''. The first of them is sixty years old and comes from
+mining, which is where this project's own instances come from; it was missing
+from the earlier drafts of this review, and it is the most uncomfortable of the
+four.
+
+\subsection{Normalized trees: Lerchs--Grossmann, 1965}\label{sec:lg}
+
+\citet{LerchsGrossmann1965} solve maximum closure with a graph algorithm, not
+with a flow algorithm, and the object it maintains is a forest. In the exposition
+of \citet{Hochbaum2001}, from which the following is taken verbatim in substance:
+the algorithm maintains a spanning tree rooted at an added vertex $r$ in the
+extended graph, called a \emph{normalized tree}; each branch $T_q$ hanging from
+the root carries its \emph{mass} $M_q = b(T_q)$, the sum of the vertex weights it
+contains; a downward arc is \emph{strong} if the mass it supports is positive;
+the tree is normalized when its only strong arcs are the ones adjacent to $r$;
+and, dropping the root arcs, Hochbaum writes that ``we also refer to the forest
+$(V, A_T)$ in $G$ as a normalized tree''. The invariant is that the union of the
+strong branches is a maximum closed set of the forest, and the weight of the
+strong vertices bounds the maximum closure value from above.
+
+An iteration is a pivot in everything but the name. Quoting \citet{Hochbaum2001}
+again: a \emph{merger} consists of ``adding an arc $(s,w)$ from a strong branch
+$S$ to a weak branch $W$ and removing the arc from the root of the branch $S$ to
+the root $r$'', after which the branch hangs from the strong vertex $s$ and the
+supported masses are updated. One arc enters, one arc leaves, one component
+loses its root, and the aggregates on the affected path are recomputed.
+\citet{ZhaoKim1992} is a variant that differs in how the blocks are regrouped
+after a violation, which is the split side of the same operation, and
+\citet{GianniniEtAl1991} is the flow-based implementation that competed with it.
+
+Two further facts from \citet{Hochbaum2001} matter here. First, the normalized
+tree carries enough information to construct a feasible flow in linear time, so
+the primal--dual correspondence between the forest state and a flow certificate
+is known. Second, he gives a parametric version of the Lerchs--Grossmann
+algorithm with the same complexity as a single run --- which makes it a
+\emph{competitor} on the task \FS{} performs, not merely an antecedent.
+\citet{PicardSmith2004} close the loop on the objective as well: they compute
+intermediate open-pit contours maximising a benefit--cost ratio by parametric
+maximum flow.
+
+\paragraph{What this costs the claim.} A great deal, and more than the recent
+work does. The correspondence with \FS{} is not thematic but term by term: a
+branch aggregate $b(T_q)$ against the reduced cost $p(T) - \rho\,w(T)$; a strong
+arc against a positive reduced cost; the union of the strong branches against
+the support of the current basic solution; a merger against an entering arc with
+its leaving root arc. Setting $b_i = p_i - \rho w_i$ makes the Lerchs--Grossmann
+strong/weak test literally the sign of the \FS{} reduced cost. So the forest
+state, the branch aggregates, the sign test on an aggregate and the merge
+operation are not new relative to the 2025--2026 work: they are not new relative
+to 1965. What Lerchs--Grossmann do \emph{not} do is run a simplex --- there is no
+basis in the LP sense, no ratio test, no dual multiplier as an LP object --- and
+they solve the closure problem at fixed weights rather than the ratio LP.
+That distinction is now the whole of the surviving claim, and
+\cref{sec:open}~Q5 says what has to be proved to keep it.
+
+\subsection{Network simplex with a side constraint}
+
+That a basis of a network LP is a spanning tree, that adding a side row makes it
+a spanning structure plus one extra element, and that pivots are described as
+operations on that structure, is textbook material
+\citep{AhujaEtAl1993,Schrijver2003}. The paradigm ``simplex on an incidence
+matrix with one side row'' is therefore not available as a contribution, and any
+formulation that suggests otherwise must be rewritten.
+
+The specific case of one side row has its own line. \citet{ChenSaigal1977} give
+a revised simplex variant for capacitated network flow with additional linear
+constraints in which the working basis has the size of the side system rather
+than of the network. \citet{Caliskan2011} specialises the network simplex to
+the constrained maximum flow problem. \citet{HolzhauserEtAl2017} give a fully
+combinatorial network simplex for the budget-constrained minimum cost flow
+problem, with two kinds of vertex potentials, three kinds of reduced costs,
+optimality criteria proved directly on the network and an explicit anti-cycling
+treatment. These are the right block to read, but they are one
+transposition away from \eqref{eq:class}: their variables are arcs and their
+rows are vertices, whereas here the variables are vertices and the rows are arcs
+(\cref{sec:class}(c)). The two formulations are linear programming duals, so the
+machinery transports and the differences have to be argued rather than assumed
+(\cref{sec:open}, Q3) --- but the resemblance is a duality, not an identity, and
+an earlier draft overstated it.
+
+\subsection{Yang: a specialised simplex on rooted spanning forests}
+
+\citet{Yang2026} gives, for budget-constrained total-variation-regularised
+linear programs on graphs, a characterisation of basic solutions in terms of
+rooted spanning forests with orientation, an interpretation of the simplex
+method as operations on those forests, and an accelerated implementation
+compared against a commercial solver. The abstract states the first two points
+directly. Total variation on a graph is a difference system on vertex variables
+with a budget row, so his program and \eqref{eq:class} are in the same
+structural family, and not merely in the same spirit: this is the closest match
+in formulation type among all the work reviewed here.
+
+The overlap with \FS{} is substantial and was underestimated in an earlier
+draft. Yang's setting has a budget row and a graph-structured constraint matrix;
+when the budget slack is nonbasic he obtains a component without a root, which
+plays the role of the rootless positive component here; he writes the basic
+variables explicitly in terms of the nonbasic ones, derives reduced costs for
+root and edge variables, states optimality in terms of tree and subtree shifts,
+reads pivots as merges, splits and shifts, uses blocking edges, and updates
+subtree aggregates locally.
+
+Consequently the following claim, made in an earlier draft, is withdrawn: that
+no work carries revised-simplex algebra to this level of explicitness on a
+forest structure. Yang does exactly that, on a different linear program.
+
+\subsection{Wuille and the spanning-forest linearization line}
+
+\citet{Wuille2025} sets up, for Bitcoin transaction cluster linearization, the
+program \(\max \sum_i f_i t_i\) subject to \(\sum_i s_i t_i = 1\), the dependency
+inequalities and \(t \ge 0\): the same normalised program \FS{} solves, up to
+orientation convention and application. The post states that the method
+maintains \(n-1\) free variables, that the active dependencies form a spanning
+forest, that within every chunk there is at most one free vertex variable, that
+all chunks except one contain such a variable and are therefore excluded, and it
+describes the pivot operations as merging and splitting chunks. These were
+verified against the post itself.
+
+\citet{MollakhaniEtAl2026} formalise that reading: the paper presents the
+equivalent linear programming formulation and develops the Spanning Forest
+Linearization algorithm, motivated, in the authors' words, by structural
+properties of basic feasible solutions of the simplex method represented through
+spanning forests. It then leaves the exact simplex: it stops maintaining the
+identity of the root and a single distinguished included component, compares
+chunks locally, and optimises the linearization directly.
+
+This is the closest antecedent in absolute terms, and it removes several items
+from the candidate contribution list: the normalised program itself, the count
+of \(n-1\) nonbasic variables, the forest of tight slacks, the ``at most one
+free vertex variable per component'', the single positive component, the
+connectivity of the support, and the four qualitative pivot effects. None of
+these may be presented as new.
+
+\subsection{What the four leave open}
+
+Lerchs--Grossmann maintain a forest on the closure graph and test the sign of
+branch aggregates, but do not run a simplex and do not solve the ratio LP.
+\citet{Yang2026} develops the exact simplex, but for a different program. Wuille
+and Mollakhani et al.\ work on the same program, but leave the exact simplex in
+favour of a direct linearization algorithm. \citet{HolzhauserEtAl2017} develops a
+combinatorial simplex for a network with one side row, but on minimum cost flow.
+The intersection of all four --- the ordinary primal simplex, developed exactly,
+on the maximum-ratio closure program --- is where whatever remains of the
+contribution has to live, and \cref{sec:positioning} states how little that is
+and what would have to be shown to make it stand.

@@ -1,0 +1,45 @@
+\section{Validation}
+\label{sec:validation}
+
+\generated{table_validation}
+
+Correctness is established at three levels, each with a calculation independent
+of the solver being checked.
+
+\paragraph{Exhaustive rational oracle.} For small instances the acceptance suite
+enumerates every subset, keeps the closures, and computes with exact fractions
+the maximum ratio, \emph{all} its maximisers and their canonical union, then
+repeats on the residual to obtain the whole sequence. The LP value is obtained
+independently from the convex hull of the points $(w(C),p(C))$, including pairs
+of closures straddling the capacity, without assuming that the two are nested.
+The solver must reproduce the same blocks, the same ratios and the same LP
+values.
+
+\paragraph{Basis algebra in exact arithmetic.} For traced runs the suite
+rebuilds, in exact arithmetic, the explicit basis matrix of every pivot and
+recomputes the basic values, the direction, the reduced cost, the ratio-test
+step, the leaving variable and the pivot coefficient. It requires that all four
+structural pivot types --- vertex or slack entering against vertex or slack leaving
+--- actually occur.
+
+\paragraph{Independent LP solver.} The same instances are handed to HiGHS
+through SciPy as a plain LP with one variable per vertex and one row per arc. Only
+the optimal value is compared: the optimal vector need not be unique.
+
+\paragraph{Cross-backend agreement.} The Dinkelbach and parametric backends
+produce their own certificates from their own flows, and are required to return
+the same canonical blocks and the same LP values as \FS{}. Because they share
+no code with the pivot loop, an error in the forest engine cannot be masked by an
+identical error in its verifier.
+
+\paragraph{Metamorphic checks.} Permuting vertex identifiers and arc order,
+duplicating precedence rows, adding transitively redundant arcs, adding an
+isolated negative vertex, scaling profits, and scaling weights and capacity
+together all leave the value and the canonical blocks where they should be.
+Condensing an artificial strongly connected component must agree with the
+equivalent aggregated vertex.
+
+\paragraph{Per-run verification.} Beyond the suite, every run of every campaign
+is re-checked by a separate \texttt{pclp verify} process that reloads the
+instance and the saved result and validates the certificate without
+re-optimising. The analysis counts only runs that pass this second check.
