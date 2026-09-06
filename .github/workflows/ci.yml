@@ -32,7 +32,7 @@ jobs:
         # rotation with the invariants verified at every pivot.
         run: ctest --test-dir build/release --output-on-failure
 
-      - name: Reproduce the CI campaign
+      - name: Run a campaign end to end
         run: |
           python3 tools/benchmark/run.py configs/suites/ci.json --root /tmp/runs
           python3 - <<'PY'
@@ -40,5 +40,5 @@ jobs:
           m = json.load(open('/tmp/runs/ci/manifest.json'))
           bad = [k for k, v in m['records'].items() if not v.get('verified')]
           assert not bad, f"unverified runs: {bad}"
-          print(f"ci: {len(m['records'])} runs, all verified")
+          print(f"{len(m['records'])} runs, all verified")
           PY
