@@ -4,8 +4,8 @@
  "task": "solve",
  "capacity": "instance",
  "replicas": 2,
- "time_limit": 30,
- "wall_limit": 300,
+ "time_limit": 15,
+ "wall_limit": 60,
  "instances": {
   "index": [
    "data/splits/validation.json"

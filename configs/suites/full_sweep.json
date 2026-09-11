@@ -1,37 +1,18 @@
 {
- "campaign": "smoke",
- "note": "Reduced reproduction: one significant comparison on four instances, meant to be runnable in a few minutes from a fresh build directory.",
+ "campaign": "full_sweep",
  "task": "solve",
  "capacity": "instance",
+ "note": "Every instance in the library, generated and imported, at its own capacity. One replica and a fifteen-second limit: the point is coverage across all thirteen families and both origins, not dispersion.",
  "replicas": 1,
- "time_limit": 15,
- "wall_limit": 60,
+ "time_limit": 10,
+ "wall_limit": 120,
  "instances": {
   "index": [
    "data/generated/index.json",
    "data/processed/index.json"
-  ],
-  "names": [
-   "gen_chain_plain_n2000_uniform_neg30_r0",
-   "gen_layered_levels8-density0.05_n200_uniform_neg30_r0",
-   "pckp_L_349_2101",
-   "minelib_newman1"
   ]
  },
  "configurations": {
-  "ratio-closure-reference": {
-   "algorithm": "ratio-closure",
-   "basis_update": "full",
-   "pricing": "full",
-   "entering_rule": "bland",
-   "canonicalization": "sequential",
-   "ratio_test": "full",
-   "initial_basis": "sink",
-   "degeneracy_trigger": 32,
-   "rebuild_interval": 256,
-   "transitive_reduction": "off",
-   "node_order": "input"
-  },
   "ratio-closure-tuned": {
    "algorithm": "ratio-closure",
    "canonicalization": "dual",
@@ -45,6 +26,21 @@
    "degeneracy_trigger": 32768,
    "ratio_test": "early",
    "initial_basis": "full"
+  },
+  "ratio-closure-warm": {
+   "algorithm": "ratio-closure",
+   "canonicalization": "dual",
+   "rebuild_interval": 256,
+   "transitive_reduction": "off",
+   "node_order": "input",
+   "pricing": "candidate-list",
+   "candidate_limit": 64,
+   "entering_rule": "best-improving",
+   "basis_update": "local",
+   "degeneracy_trigger": 32768,
+   "ratio_test": "early",
+   "initial_basis": "full",
+   "warm_start": "residual"
   },
   "dinkelbach": {
    "algorithm": "dinkelbach"

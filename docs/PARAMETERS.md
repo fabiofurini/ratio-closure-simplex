@@ -24,7 +24,7 @@ build/pclp full-path --instance <file> --config configs/frozen/ratio-closure-tun
 | Option | Values | Default | What it selects |
 |---|---|---|---|
 | `--pricing` | `full`, `partial`, `candidate-list` | `full` | every partial scheme ends with a global scan before optimality is declared |
-| `--entering-rule` | `bland`, `first-improving`, `best-improving` | `bland` | `bland` requires full pricing |
+| `--entering-rule` | `bland`, `first-improving`, `best-improving`, `highest-ratio` | `bland` | `bland` requires full pricing. `highest-ratio` ranks the eligible candidates by the ratio of the block of mass the pivot would move rather than by reduced cost; eligibility stays the reduced-cost test, so optimality is unchanged. Measured slower than `best-improving` on every configuration tried and kept as an explicit option, not a recommendation |
 | `--pricing-block-size` | integer > 0 | 64 | size of the block scanned, with `partial` |
 | `--candidate-limit` | integer > 0 | 32 | length of the candidate list, with `candidate-list` |
 | `--ratio-test` | `full`, `restricted`, `early` | `full` | scan every non-forest arc; only those that can block; or stop at the first blocker with a zero step |

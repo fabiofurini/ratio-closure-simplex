@@ -3,8 +3,8 @@
  "task": "full-path",
  "note": "E2: decomposizione canonica completa, tutti i blocchi. Confronta il riavvio a freddo di ogni oracolo con il riavvio a caldo dalla base finale del precedente.",
  "replicas": 2,
- "time_limit": 60,
- "wall_limit": 300,
+ "time_limit": 15,
+ "wall_limit": 60,
  "instances": {
   "index": [
    "data/generated/index.json",

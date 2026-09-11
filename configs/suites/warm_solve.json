@@ -1,19 +1,18 @@
 {
- "campaign": "dual",
- "note": "Primal against dual on the same task and the same instances. The dual is a separate campaign because it needs a build that carries it: mixing it into an earlier campaign would change that campaign's build fingerprint.",
+ "campaign": "warm_solve",
  "task": "solve",
  "capacity": "instance",
- "replicas": 2,
+ "note": "Does the residual warm start help on a single-capacity solve, where the decomposition is walked only as far as the capacity requires? Same instances as the main campaign, one replica, an eight-second limit so that the campaign fits in under an hour.",
+ "replicas": 1,
  "time_limit": 15,
  "wall_limit": 60,
  "instances": {
   "index": [
-   "data/splits/validation.json"
-  ],
-  "max_nodes": 2000
+   "data/splits/test.json"
+  ]
  },
  "configurations": {
-  "ratio-closure-primal": {
+  "ratio-closure-tuned": {
    "algorithm": "ratio-closure",
    "canonicalization": "dual",
    "rebuild_interval": 256,
@@ -27,7 +26,7 @@
    "ratio_test": "early",
    "initial_basis": "full"
   },
-  "ratio-closure-dual": {
+  "ratio-closure-warm": {
    "algorithm": "ratio-closure",
    "canonicalization": "dual",
    "rebuild_interval": 256,
@@ -40,23 +39,10 @@
    "degeneracy_trigger": 32768,
    "ratio_test": "early",
    "initial_basis": "full",
-   "simplex": "dual"
+   "warm_start": "residual"
   },
-  "ratio-closure-dual-largest-tree": {
-   "algorithm": "ratio-closure",
-   "canonicalization": "dual",
-   "rebuild_interval": 256,
-   "transitive_reduction": "off",
-   "node_order": "input",
-   "pricing": "candidate-list",
-   "candidate_limit": 64,
-   "entering_rule": "best-improving",
-   "basis_update": "local",
-   "degeneracy_trigger": 32768,
-   "ratio_test": "early",
-   "initial_basis": "full",
-   "simplex": "dual",
-   "dual_leaving": "largest-tree"
+  "dinkelbach": {
+   "algorithm": "dinkelbach"
   },
   "parametric": {
    "algorithm": "parametric"

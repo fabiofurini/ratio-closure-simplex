@@ -16,7 +16,7 @@ void validate(const Options& o) {
   auto one=[](const std::string& v,std::initializer_list<const char*> values){for(auto x:values)if(v==x)return true;return false;};
   if(!one(o.algorithm,{"ratio-closure","closure-simplex","forest","dinkelbach","parametric"}))throw std::invalid_argument("algorithm must be ratio-closure (short form closure-simplex, legacy spelling forest), dinkelbach or parametric");
   if(!one(o.basis_update,{"full","local","adaptive"})||!one(o.pricing,{"full","partial","candidate-list"})||
-     !one(o.entering_rule,{"bland","first-improving","best-improving"}))throw std::invalid_argument("unsupported basis-update/pricing/entering option");
+     !one(o.entering_rule,{"bland","first-improving","best-improving","highest-ratio"}))throw std::invalid_argument("unsupported basis-update/pricing/entering option");
   if(o.entering_rule=="bland"&&o.pricing!="full")throw std::invalid_argument("Bland entering requires full pricing");
   if(o.canonicalization!="sequential"&&o.canonicalization!="dual")throw std::invalid_argument("canonicalization must be sequential or dual");
   if(!one(o.node_order,{"input","topological","seeded"}))throw std::invalid_argument("node_order must be input, topological or seeded");
@@ -214,16 +214,38 @@ Real Engine::reduced(Index q) const {
   Real sign=a.head==c?1:-1;
   return sign*(subp[c]-rho*subw[c]);
 }
+// Ratio of the block of mass the pivot would move, which is the same block whose
+// reduced cost `reduced` returns.  `reduced` gives p(block) - rho*w(block); this
+// gives p(block)/w(block), the quantity the objective itself follows.  Imported
+// from the 2024 prototype, where it is the `highest_ratio` entering rule.
+Real Engine::block_ratio(Index q) const {
+  Real p,w;
+  if(q<n){Index r=root[q];p=subp[r];w=subw[r];}
+  else {
+    Index e=q-n;auto a=g.arcs[e];
+    Index c=parent_edge[a.tail]==e?a.tail:a.head;
+    if(a.head==c){p=subp[c];w=subw[c];}
+    // The other orientation moves the complement of the subtree inside its tree.
+    else{Index r=root[c];p=subp[r]-subp[c];w=subw[r]-subw[c];}
+  }
+  if(!(w>0))return -std::numeric_limits<Real>::infinity();
+  return p/w;
+}
 Index Engine::price() {
   auto begin=Clock::now();
   Index chosen=none;Real best=0;
+  const bool by_ratio=!bland&&opt.entering_rule=="highest-ratio";
   auto consider=[&](Index q){
     ++stats.candidates_examined;
     Real rc=reduced(q);
     Index r=q<n?root[q]:(parent_edge[g.arcs[q-n].tail]==q-n?g.arcs[q-n].tail:g.arcs[q-n].head);
     Real tol=opt.optimality_abs_tol+opt.optimality_rel_tol*std::max(std::fabs(subp[r]),std::fabs(rho*subw[r]));
-    if(rc>tol&&(chosen==none||((bland||opt.entering_rule=="first-improving")?q<chosen:rc>best))){
-      chosen=q;best=rc;
+    // Eligibility stays the reduced-cost test: the ratio only ranks the
+    // candidates that are already improving, so optimality is unchanged.
+    if(rc<=tol)return;
+    Real score=by_ratio?block_ratio(q):rc;
+    if(chosen==none||((bland||opt.entering_rule=="first-improving")?q<chosen:score>best)){
+      chosen=q;best=score;
     }
   };
   if(!bland&&opt.pricing=="candidate-list") {

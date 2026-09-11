@@ -44,6 +44,7 @@ class Engine {
   void rebuild(bool full);
   void gather(Index variable);
   Real reduced(Index variable) const;
+  Real block_ratio(Index variable) const;
   Index price();
   void check(bool feasible = true);
 };

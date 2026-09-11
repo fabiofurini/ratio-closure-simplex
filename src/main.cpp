@@ -16,7 +16,7 @@ int main(int argc,char** argv){
         <<"  --capacity C | --capacities JSON_ARRAY   --config FILE   --output FILE\n"
         <<"  --algorithm ratio-closure|closure-simplex|dinkelbach|parametric\n"
         <<"  --basis-update full|local|adaptive      --pricing full|partial|candidate-list\n"
-        <<"  --entering-rule bland|first-improving|best-improving\n"
+        <<"  --entering-rule bland|first-improving|best-improving|highest-ratio\n"
         <<"  --initial-basis sink|closure|full        --initial-seeds K\n"
         <<"  --ratio-test full|restricted|early       --degeneracy-trigger N\n"
         <<"  --warm-start off|residual              (decomposizione canonica)\n"

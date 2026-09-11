@@ -70,6 +70,24 @@ if(PCLP_BUILD_LEGACY AND EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/legacy/forest2023/s
   target_compile_options(pclp_legacy PRIVATE -w)
 endif()
 
+# The 2024 prototype is the later state of the same code: it walks the whole
+# macroitem sequence instead of stopping at one oracle.  Both are kept, and both
+# are measured.  Unlike the 2023 one it needs LEMON, because the historical
+# instance struct gained a ListGraph member; the vendored copy in third_party is
+# header-only for everything this path touches.
+if(PCLP_BUILD_LEGACY AND EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/legacy/forest2024/src/Forest.cpp"
+                     AND EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/third_party/lemon/include/lemon/config.h")
+  add_executable(pclp_legacy2024 legacy/forest2024/legacy_main.cpp
+    legacy/forest2024/src/Forest.cpp legacy/forest2024/src/Graph_v4.cpp)
+  set_target_properties(pclp_legacy2024 PROPERTIES OUTPUT_NAME pclp_legacy2024)
+  target_include_directories(pclp_legacy2024 PRIVATE legacy/forest2024 third_party
+    third_party/lemon/include)
+  target_link_libraries(pclp_legacy2024 PRIVATE
+    "${CMAKE_CURRENT_SOURCE_DIR}/third_party/lemon/lib/libemon.a")
+  set_target_properties(pclp_legacy2024 PROPERTIES CXX_STANDARD 17 CXX_STANDARD_REQUIRED ON)
+  target_compile_options(pclp_legacy2024 PRIVATE -w)
+endif()
+
 include(CTest)
 if(BUILD_TESTING)
 find_package(Python3 REQUIRED COMPONENTS Interpreter)
